@@ -1,0 +1,79 @@
+.image {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 16px;
+}
+.title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #343a40;
+}
+.cardright,
+.cardleft {
+  width: 413px;
+  padding: 40px;
+  border-radius: 20px;
+}
+.cardleft > .title {
+  margin-bottom: 124px;
+}
+.cardright > .title {
+  margin-bottom: 12px;
+}
+.cardleft {
+  margin-top: 80px;
+  background-color: #e4e6ff;
+}
+.cardright {
+  margin-bottom: 80px;
+  background-color: #f3ecfe;
+  color: #660ff2;
+}
+.cardright p,
+.cardleft p {
+  color: #495057;
+}
+.cardright > p {
+  margin-bottom: 64px;
+}
+.textup {
+  margin-bottom: 8px;
+}
+.cardlist {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.wrap {
+  position: relative;
+  width: 97px;
+  font-size: 12px;
+}
+.wrap > p {
+  margin-bottom: 28px;
+}
+.arrowup,
+.arrowbottom {
+  width: 51px;
+  height: 51px;
+  position: absolute;
+}
+.arrowup {
+  bottom: -22px;
+  right: -51px;
+}
+.arrowbottom {
+  transform: rotate(180deg);
+  bottom: 36px;
+  left: -60px;
+}
+.wrapdown {
+  position: absolute;
+  width: 140px;
+  font-size: 12px;
+  bottom: -90px;
+  right: -170px;
+}
+.form {
+  position: relative;
+}
