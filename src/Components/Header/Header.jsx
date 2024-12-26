@@ -3,7 +3,7 @@ import sprite from "../../sprite.svg";
 import styles from "./header.module.css";
 import FormHeader from "../Form-header/Form-header";
 
-const Header = () => {
+const Header = ({ onFormSubmit }) => {
   return (
     <header className={styles.header}>
       <nav>
@@ -13,7 +13,7 @@ const Header = () => {
           </svg>
         </a>
       </nav>
-      <FormHeader hidden="hidden" />
+      <FormHeader hidden="hidden" handleFormSubmit={onFormSubmit} />
       <ul className="hidden">
         <li>
           <a>Log in</a>

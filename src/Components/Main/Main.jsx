@@ -1,14 +1,17 @@
 import React from "react";
-import sprite from "../../sprite.svg";
-import styles from "./Main.module.css";
 import Hero from "../Hero/Hero";
 import CardSection from "../Card-section/Card-section";
+import IdiomsList from "../IdiomsList/IdiomsList";
 
-const Main = () => {
+const Main = ({ idioms, onFormSubmit }) => {
   return (
     <main>
-      <Hero />
-      <CardSection />
+      <Hero onFormSubmit={onFormSubmit} />
+      <p>
+        {idioms.idiom} - {idioms.language}
+      </p>
+      <CardSection onFormSubmit={onFormSubmit} />
+      {/* <IdiomsList idioms={idioms} /> */}
     </main>
   );
 };

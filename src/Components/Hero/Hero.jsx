@@ -3,7 +3,7 @@ import sprite from "../../sprite.svg";
 import styles from "./Hero.module.css";
 import FormHero from "../Form-hero/Form-hero";
 
-const Hero = () => {
+const Hero = ({ onFormSubmit }) => {
   return (
     <section className={styles.hero}>
       <h1 className="visually-hidden">Idiomo</h1>
@@ -21,7 +21,7 @@ const Hero = () => {
         <use xlinkHref={`${sprite}#idiomo`} />
       </svg>
       <div>
-        <FormHero />
+        <FormHero onFormSubmit={onFormSubmit} />
         <p className={styles.text}>
           More than 10k idioms are available on this language
         </p>
