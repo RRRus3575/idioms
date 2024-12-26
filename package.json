@@ -10,10 +10,13 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^4.2.4"
   },
+  "homepage": "https://RRRus3575.github.io/idioms",
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -34,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^6.2.0",
     "svg-sprite-loader": "^6.0.11"
   }
 }
