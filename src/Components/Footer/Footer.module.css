@@ -1,0 +1,25 @@
+.logo {
+    width: 80px;
+    height: 28px;
+    margin-right: 283px;
+  }
+  .footer{
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    color: #6C757D;
+    font-size: 12px;
+    border-top: 1px solid #ced4da;
+
+  }
+  .footer a {
+    color: inherit;
+  }
+  .wrap{
+    display: flex
+  }
+  .wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }

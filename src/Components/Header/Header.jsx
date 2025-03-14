@@ -1,6 +1,6 @@
 import React from "react";
 import sprite from "../../sprite.svg";
-import styles from "./header.module.css";
+import styles from "./Header.module.css";
 import FormHeader from "../Form-header/Form-header";
 
 const Header = ({ onFormSubmit }) => {

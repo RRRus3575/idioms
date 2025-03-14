@@ -1,21 +1,18 @@
-import React, { useState } from "react";
-import Main from "./Components/Main/Main";
-import Header from "./Components/Header/Header";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./Pages/HomePage";
 
 function App() {
-  const [idioms, setIdioms] = useState([]);
-
-  const handleFormSubmit = (data) => {
-    console.log("Submitted Data:", data);
-    setIdioms((prev) => [...prev, data]);
-  };
-
-  return (
-    <div className="App">
-      <Header onFormSubmit={handleFormSubmit} />
-      <Main idioms={idioms} onFormSubmit={handleFormSubmit} />
-    </div>
-  );
+  return(
+    <Routes>
+        <Route path="/" element={<HomePage />} />
+      {/* <Route path="/catalog" element={<CatalogPage />} />
+      <Route path="/catalog/:id" element={<CamperDetailsPage />} /> */}
+    </Routes>
+      
+    
+    
+  )
 }
 
 export default App;
