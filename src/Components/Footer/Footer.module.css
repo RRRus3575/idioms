@@ -1,5 +1,4 @@
 .logo {
-    width: 80px;
     height: 28px;
     margin-right: 283px;
   }
@@ -16,7 +15,14 @@
     color: inherit;
   }
   .wrap{
-    display: flex
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    
+    
+  }
+  .wrap ul{
+    flex-shrink: 0;
   }
   .wrapper{
     display: flex;

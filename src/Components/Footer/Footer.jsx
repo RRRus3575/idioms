@@ -11,13 +11,13 @@ const Footer = () => {
             <use xlinkHref={`${sprite}#logo`} />
           </svg>
         </a>
-        <ul className={styles.wrpper}>
+        <ul className={styles.wrapper}>
             <li><a href="#">Privacy Policy</a></li>
             <li><a href="#">Terms of use </a></li>
         </ul>
         </div>
            
-        <div className={styles.wrpper}>
+        <div className={styles.wrapper}>
             <p>All rights reserved</p>
             <p>Copyright 2024 - Aris Team. </p>
         </div>

@@ -19,7 +19,7 @@ const FormHeader = ({ handleFormSubmit }) => {
   return (
     <form className={styles.headerForm}>
       <label className={styles.inputLabel}>
-        <svg className={styles.search} width="12px" height="12px">
+        <svg className={styles.search} width="16px" height="16px">
           <use xlinkHref={`${sprite}#find`} />
         </svg>
         <input
