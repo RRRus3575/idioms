@@ -6,7 +6,7 @@ import FormHeader from "../Form-header/Form-header";
 
 const Header = ({ onFormSubmit }) => {
   const [isActive, setIsActive] = useState(false);
- 
+
 
 
   return (
@@ -20,13 +20,13 @@ const Header = ({ onFormSubmit }) => {
       </nav>
       <button onClick={()=>{
         setIsActive(true)
-      }} className={`${styles.button} ${!isActive ? styles.active : `${styles.disactive} visually-hidden`}`}
+      }} className={`${styles.button} ${!isActive ? styles.active : styles.disactive}`}
       >
       <svg className={styles.search} width="16px" height="16px">
           <use xlinkHref={`${sprite}#find`} />
         </svg>
       </button>
-      <div className={`${styles.button} ${!isActive ? `${styles.disactive} visually-hidden`  : styles.active}`}
+      <div className={!isActive ? styles.disactive : styles.active}
 >
       <FormHeader hidden="hidden" handleFormSubmit={onFormSubmit} />
       </div>
