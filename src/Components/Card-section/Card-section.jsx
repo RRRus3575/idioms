@@ -1,11 +1,11 @@
 import React from "react";
 import sprite from "../../sprite.svg";
-import FormHeader from "../Form-header/Form-header";
+import FormCards from "../FormCards/FormCards";
 import style from "./Card-section.module.css";
 
 const CardSection = () => {
   return (
-    <section>
+    <section className={style.section}>
       <h2 className="visually-hidden">Idioms Hub</h2>
       <div>
         <ul className={style.cardlist}>
@@ -21,7 +21,7 @@ const CardSection = () => {
           </li>
           <li className={style.cardright}>
             <svg className={style.image}>
-              <use xlinkHref={`${sprite}#find`} />
+              <use xlinkHref={`${sprite}#find`} /> 
             </svg>
             <h3 className={style.title}>Search idioms</h3>
             <p>
@@ -35,7 +35,7 @@ const CardSection = () => {
                   <use xlinkHref={`${sprite}#drop`} />
                 </svg>
               </div>
-              <FormHeader />
+              <FormCards />
               <div className={style.wrapdown}>
                 <p>select the language of idiom here and search the result</p>
                 <svg className={style.arrowbottom}>

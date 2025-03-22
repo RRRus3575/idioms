@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import sprite from "../../sprite.svg";
-import styles from "./form.module.css";
+import styles from "./Form-hero.module.css";
+import { useMediaQuery } from "react-responsive";
 
 const FormHero = ({ onFormSubmit }) => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,8 @@ const FormHero = ({ onFormSubmit }) => {
     }));
   };
 
+const isMobile = useMediaQuery({ maxWidth: 750 });
+
   const handleSubmit = (event) => {
     event.preventDefault(); // Предотвращаем перезагрузку страницы
     onFormSubmit(formData); // Передаём данные в родительский компонент
@@ -29,19 +32,19 @@ const FormHero = ({ onFormSubmit }) => {
           <use xlinkHref={`${sprite}#find`} />
         </svg>
         <input
-          name="idiom" // Указываем имя для обновления состояния
-          value={formData.idiom} // Привязываем значение из состояния
-          onChange={handleChange} // Обрабатываем изменения
-          placeholder="Tap idiom here"
+          name="idiom" 
+          value={formData.idiom} 
+          onChange={handleChange} 
+          placeholder= {isMobile ? "Tap idiom" : "Tap idiom here"}
           className={styles.input}
         />
       </label>
-      <div className="form-select">
+      <div className={styles.formselect}>
         <select
           className={styles.select}
-          name="language" // Указываем имя для обновления состояния
-          value={formData.language} // Привязываем значение из состояния
-          onChange={handleChange} // Обрабатываем изменения
+          name="language" 
+          value={formData.language} 
+          onChange={handleChange} 
         >
           <option value="english" className={styles.option}>
             English
@@ -55,7 +58,11 @@ const FormHero = ({ onFormSubmit }) => {
         </svg>
       </div>
       <button type="submit" className={styles.button}>
-        Search
+         {isMobile ? 
+          <svg width="16px" height="16px">
+          <use xlinkHref={`${sprite}#find`} />
+        </svg>         
+          : "Search"}
       </button>
     </form>
   );

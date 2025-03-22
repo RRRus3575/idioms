@@ -1,7 +1,10 @@
 .heroForm {
   display: flex;
 }
-
+.formselect {
+  position: relative;
+  display: flex;
+}
 .search {
   position: absolute;
   top: 50%;
@@ -11,7 +14,7 @@
 }
 
 .input {
-  width: 355px;
+  width: 53vw;
   padding-left: 39px;
   border-radius: 8px 0 0 8px;
 }
@@ -38,7 +41,12 @@
   -moz-appearance: none;
   -webkit-appearance: none;
 }
-
+.option:first-of-type{
+  border-radius: 8px 8px 0 0;
+}
+.option:last-of-type{
+  border-radius: 0 0 8px 8px;
+}
 .icon {
   position: absolute;
   right: 10px;
@@ -50,11 +58,28 @@
   z-index: 3;
 }
 .button {
-  width: 149px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
   height: 44px;
-  margin-left: 16px;
+  margin-left: 12px;
   border-radius: 80px;
-  background-color: #660ff2;
-  color: #fff;
-  border: none;
+    background-color: #660ff2;
+    color: #fff;
+    border: none;
+
 }
+@media (min-width: 750px){
+  .input {
+    width: 355px;
+  }
+  .button {
+    width: 149px;
+    padding: 14px  48px;
+                
+    margin-left: 16px;
+    
+  }
+}
+

@@ -1,52 +1,88 @@
-@media (min-width: 480px) {
-  .image {
-    width: 425px;
-  }
-  .hero {
-    position: relative;
-    overflow: hidden;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
+.hero {
+  position: relative;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 48px;
-  }
-  .top,
-  .bottom,
-  .right {
-    z-index: -1;
-  }
-  .top {
-    width: 216px;
-    height: 220px;
-    position: absolute;
-    top: -60px;
-    left: 0;
-    overflow: hidden;
-  }
-  .bottom {
-    width: 197px;
-    height: 204px;
-    position: absolute;
-    bottom: 14px;
-    left: 9%;
-    transform: rotate(180deg);
-  }
-  .right {
-    display: block;
-    width: 470px;
-    height: 460px;
-    position: absolute;
-    right: -220px;
-    top: 40px;
-    transform: rotate(130deg);
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.top,
+.bottom,
+.right {
+  z-index: -1;
 }
 .text {
   margin-top: 12px;
   color: #6c757d;
   font-size: 12px;
 }
+.image {
+  display: block; 
+  width: 100%;
+  height: auto;
+  aspect-ratio: 425 / 233;
+}
+.right, .top, .bottom  {
+  display: block;
+  position: absolute;
+  height: auto;
+  aspect-ratio: 138 / 140;
+}
+.top {
+  width: 216px;
+  top: -60px;
+}
+.bottom {
+  width: 197px; 
+  transform: rotate(180deg);
+}
+
+
+@media (max-width: 480px){
+  
+  .hero{
+    gap: 80px;
+    padding: 60px 20px 120px 20px;
+  }
+  .top {
+    left: -60px;
+  }
+  .bottom {
+    right: 20px;
+    bottom: 28px;
+  }
+   .right {
+    width: 138px;
+    right: -75px;
+    top: 20px;
+    transform: rotate(270deg);
+    
+}
+}
+
+@media (min-width: 481px) {
+  .image {
+    width: 425px;
+  }
+  .hero{
+    gap: 48px;
+  }
+  .top {
+    left: 0;
+  }
+  .bottom {
+    bottom: 14px;
+    left: 9%;
+  }
+  .right {
+    width: 470px;
+    right: -220px;
+    top: 40px;
+    transform: rotate(139deg);
+  }
+}
+

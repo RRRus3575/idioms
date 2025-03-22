@@ -17,7 +17,7 @@ const HomePage = () => {
     <div className="App">
       <Header onFormSubmit={handleFormSubmit} />
       <Main idioms={idioms} onFormSubmit={handleFormSubmit} />
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

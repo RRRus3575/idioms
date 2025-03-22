@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import sprite from "../../sprite.svg";
-import styles from "./form.module.css";
+import styles from "./FormCards.module.css";
 import { useMediaQuery } from "react-responsive";
 
 
-const FormHeader = ({ handleFormSubmit }) => {
+const FormCards = ({ handleFormSubmit }) => {
   const [formData, setFormData] = useState({
     idiom: "",
     language: "english",
   });
 
-  const isMobile = useMediaQuery({ maxWidth: 480 });
+  const isMobile = useMediaQuery({ maxWidth: 400 });
   
   
   const handleChange = (event) => {
@@ -37,7 +37,11 @@ const FormHeader = ({ handleFormSubmit }) => {
         />
       </label>
       <div className="form-select">
-        <select className={styles.select} onChange={handleChange}>
+      <label>
+      <svg className={styles.icon}>
+          <use xlinkHref={`${sprite}#down`} />
+        </svg>
+      <select className={styles.select} onChange={handleChange}>
           <option value="english" className={styles.option}>
           {isMobile ? "Eng" : "English"}
             
@@ -46,13 +50,13 @@ const FormHeader = ({ handleFormSubmit }) => {
           {isMobile ? "Ger" : "Germany"}
           </option>
         </select>
-        <svg className={styles.icon}>
-          <use xlinkHref={`${sprite}#down`} />
-        </svg>
+        
+      </label>
+        
       </div>
       <button className="hidden">Search</button>
     </form>
   );
 };
 
-export default FormHeader;
+export default FormCards;

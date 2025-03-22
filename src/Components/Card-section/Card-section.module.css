@@ -1,3 +1,7 @@
+
+.section{
+  padding: 120px 20px;
+}
 .image {
   width: 28px;
   height: 28px;
@@ -10,22 +14,20 @@
 }
 .cardright,
 .cardleft {
-  width: 413px;
+  width: 91vw;
   padding: 40px;
   border-radius: 20px;
 }
 .cardleft > .title {
-  margin-bottom: 124px;
+  margin-bottom: 80px;
 }
 .cardright > .title {
   margin-bottom: 12px;
 }
 .cardleft {
-  margin-top: 80px;
   background-color: #e4e6ff;
 }
 .cardright {
-  margin-bottom: 80px;
   background-color: #f3ecfe;
   color: #660ff2;
 }
@@ -41,6 +43,7 @@
 }
 .cardlist {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
@@ -62,18 +65,56 @@
   bottom: -22px;
   right: -51px;
 }
-.arrowbottom {
-  transform: rotate(180deg);
-  bottom: 36px;
-  left: -60px;
-}
-.wrapdown {
-  position: absolute;
-  width: 140px;
-  font-size: 12px;
-  bottom: -90px;
-  right: -170px;
-}
+
+
 .form {
   position: relative;
+}
+
+@media( min-width: 480px){
+  .cardright,
+  .cardleft {
+    width: 413px;
+  }
+  .cardleft > .title {
+    margin-bottom: 124px;
+  }
+  .cardleft {
+    margin-top: 80px;
+  }
+  .cardright {
+    margin-bottom: 80px;
+  }
+  .section{
+    padding: 80px 20px;
+  }
+  
+}
+@media(max-width:750px){
+  .arrowbottom {
+    transform: rotate(180deg) rotateY(180deg);
+    bottom: 20px;
+    right: -55px;
+  }
+  .wrapdown {
+    position: absolute;
+    width: 121px;
+    font-size: 12px;
+    bottom: -77px;
+    right: 105px;
+  }
+}
+@media(min_width: 751px){
+  .arrowbottom {
+    transform: rotate(180deg);
+    bottom: 36px;
+    left: -60px;
+  }
+  .wrapdown {
+    position: absolute;
+    width: 140px;
+    font-size: 12px;
+    bottom: -90px;
+    right: -170px;
+  }
 }
