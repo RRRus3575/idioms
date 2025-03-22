@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import sprite from "../../sprite.svg";
 import styles from "./form.module.css";
+import { useMediaQuery } from "react-responsive";
+
 
 const FormHeader = ({ handleFormSubmit }) => {
   const [formData, setFormData] = useState({
@@ -8,6 +10,8 @@ const FormHeader = ({ handleFormSubmit }) => {
     language: "english",
   });
 
+  const isMobile = useMediaQuery({ maxWidth: 480 });
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -15,6 +19,8 @@ const FormHeader = ({ handleFormSubmit }) => {
     setFormData(updatedFormData);
 
     handleFormSubmit(updatedFormData);
+
+
   };
   return (
     <form className={styles.headerForm}>
@@ -32,7 +38,8 @@ const FormHeader = ({ handleFormSubmit }) => {
       <div className="form-select">
         <select className={styles.select} onChange={handleChange}>
           <option value="english" className={styles.option}>
-            English
+          {isMobile ? "Eng" : "English"}
+            
           </option>
           <option value="german" className={styles.option}>
             German

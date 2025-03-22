@@ -5,6 +5,10 @@
   transform: translateY(-50%);
   color: #6c757d;
 }
+.form-select {
+  position: relative;
+  display: flex;
+}
 
 .input {
   padding-left: 39px;
@@ -26,7 +30,6 @@
   border-radius: 0 8px 8px 0;
   padding-left: 20px;
   padding-right: 20px;
-  width: 110px;
   align-items: center;
   position: relative;
   appearance: none;
@@ -43,4 +46,18 @@
   height: 12px;
   pointer-events: none;
   z-index: 3;
+}
+@media (max-width: 480px) {
+  .input{
+    width: 40vw;
+  }
+  .select {
+    width: 76px;
+    
+  }
+}
+@media (min-width: 481px){
+  .select {
+    width: 110px;
+  }
 }

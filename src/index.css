@@ -73,11 +73,7 @@ select {
 label {
   position: relative;
 }
-.form-select {
-  position: relative;
-  display: flex;
-  width: 110px;
-}
+
 form {
   position: relative;
   display: flex;

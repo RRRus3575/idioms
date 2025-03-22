@@ -1,14 +1,12 @@
 
 .header {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   height: 60px;
   border-bottom: 1px solid #ced4da;}
 
-.logo {
-  width: 100px;
-  height: 35px;
-}
+
 
 nav {
   display: flex;
@@ -28,6 +26,21 @@ nav > ul {
   display: flex;
   gap: 8px;
 }
+@media (max-width: 480px){
+  .header {
+    padding: 12px 6px;
+  }
+  .logo{
+    width: calc(100vw - 78vw);
+  }
+}
+
+@media(min-width: 481px){
+  .logo {
+    width: 100px;
+    height: 35px;
+  }
+}
 
 @media (max-width: 775px){
 .disactive{
@@ -42,6 +55,9 @@ nav > ul {
   opacity: 1;
   
 }
+.header {
+  padding: 12px 15px;
+}
 .button{
   background: none;
     border: none;
@@ -52,9 +68,7 @@ nav > ul {
     width: 36px;
     height: 36px;
 }
-.header {
-  padding: 12px 20px;
-}
+
 }
 @media (min-width: 776px){
   .button{
@@ -63,5 +77,6 @@ nav > ul {
   .header {
     padding: 12px 80px;
   }
+  
 }
 
