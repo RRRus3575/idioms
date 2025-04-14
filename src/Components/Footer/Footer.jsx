@@ -11,7 +11,7 @@ const Footer = () => {
             <use xlinkHref={`${sprite}#logo`} />
           </svg>
         </a>
-        <ul className={styles.wrapper}>
+        <ul className={styles.wrapperpriv}>
             <li><a href="#">Privacy Policy</a></li>
             <li><a href="#">Terms of use </a></li>
         </ul>
