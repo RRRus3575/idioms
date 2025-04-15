@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "../Components/Header/Header"
 import Main from "../Components/Main/Main"
 import Footer from "../Components/Footer/Footer"
+import IdiomsBlock from "../Components/IdiomsBlock/IdiomsBlock";
 
 
 
@@ -17,6 +18,7 @@ const HomePage = () => {
     <div className="App">
       <Header onFormSubmit={handleFormSubmit} />
       <Main idioms={idioms} onFormSubmit={handleFormSubmit} />
+      <IdiomsBlock/>
       <Footer/>
     </div>
   );

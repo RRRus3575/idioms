@@ -1,0 +1,44 @@
+.idiomslist{
+    display: flex;
+    flex-direction: column;
+}
+
+.idiomoitems{
+    display: flex;
+    border-bottom: solid 1px #DEE2E6;
+}
+
+.titleblock{
+    display: flex;
+    gap: 8px ;
+    align-items: center;
+}
+.title{
+    font-size: 16px;
+    font-weight: bold;
+    color: #212529;
+}
+
+.button{
+    padding: 2px;
+    border: none;
+    height: 18px;
+    width: 18px;
+    background-color: transparent;
+}
+
+@media (max-width: 750px) {
+
+    .idiomoitems{
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 0;
+    }
+}
+
+@media (min-width: 751px) {
+omoitems{
+        gap: 120px;
+        padding: 40px 0;
+    }
+}

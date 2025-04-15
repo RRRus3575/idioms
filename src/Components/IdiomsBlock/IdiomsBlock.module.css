@@ -1,0 +1,58 @@
+.section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title{
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+.tabButtons{
+    padding: 2px;
+    display: flex;
+    justify-content: space-between;
+    border: solid 1px #CED4DA;
+    border-radius: 40px;
+}
+.tabButton{
+    background-color: transparent;
+    transition: background-color 100ms ease-in-out;
+    border-radius: 40px;
+    border: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+    
+}
+.active{
+    background-color: #660FF2;
+    color: #FFFFFF;
+}
+
+@media (max-width: 750px){
+    .section{
+        padding: 120px 20px;
+    }
+    .tabButton{
+        padding-left: 43px;
+        padding-right: 43px;
+    }
+    .tabButtons{
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: 40px;
+    }
+}
+@media (min-width: 751px){
+    .section{
+        padding: 200px 0;
+    }
+    .tabButtons{
+        width: 310px;
+        margin-bottom: 64px;
+    }
+    .tabButton{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
