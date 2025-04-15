@@ -38,7 +38,7 @@
 
 @media (max-width: 750px){
     .section{
-        width: 100vw;
+        width: 100%;
         padding: 120px 20px;
     }
     .tabButton{

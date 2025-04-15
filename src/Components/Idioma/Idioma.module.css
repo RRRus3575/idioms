@@ -54,7 +54,7 @@
 @media (max-width: 750px) {
 
     .idiomoitems{
-        width: 100vw;
+        width: 100%;
         max-width: 400px;
         flex-direction: column;
         gap: 20px;
