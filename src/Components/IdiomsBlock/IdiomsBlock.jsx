@@ -119,6 +119,7 @@ const IdiomsBlock = () => {
             <div>
         <Idioma idioms={idiomsToShow} />
       </div>
+      <button className={style.more}>Show more</button>
 
 
         </section>

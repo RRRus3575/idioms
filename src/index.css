@@ -63,12 +63,16 @@ img {
 article > * + * {
   margin-top: 1em;
 }
-
+button{
+  border: none;
+  background-color: transparent;
+}
 input,
 button,
 textarea,
 select {
   font: inherit;
+  cursor: pointer;
 }
 label {
   position: relative;

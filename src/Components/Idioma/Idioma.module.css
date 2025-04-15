@@ -11,7 +11,8 @@
 .titleblock{
     display: flex;
     gap: 8px ;
-    align-items: center;
+    align-items: baseline;
+    margin-bottom: 16px;
 }
 .title{
     font-size: 16px;
@@ -20,16 +21,41 @@
 }
 
 .button{
-    padding: 2px;
+    padding: 4px;
     border: none;
     height: 18px;
     width: 18px;
     background-color: transparent;
 }
-
+.block{
+    margin-bottom: 14px;
+    line-height: 1.4;
+}
+.blocktitle{
+    margin-bottom: 4px;
+    color: #6C757D;
+    font-size: 14px;
+}
+.violet{
+    color: #9051F6;
+}
+.readmore{
+    width: 112px;
+    height: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    background-color: transparent;
+    color: #9051F6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 @media (max-width: 750px) {
 
     .idiomoitems{
+        width: 100vw;
+        max-width: 400px;
         flex-direction: column;
         gap: 20px;
         padding: 20px 0;
@@ -37,8 +63,13 @@
 }
 
 @media (min-width: 751px) {
-omoitems{
+    .idiomoitems{
         gap: 120px;
         padding: 40px 0;
+        justify-content: space-between;
+        align-items: end;
+    }
+    .wrapperright{
+        width: 398px;
     }
 }

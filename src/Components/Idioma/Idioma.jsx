@@ -15,7 +15,7 @@ const Idioma = ({idioms}) =>{
         <ul className={style}>
       {idioms.map(({title, meaning, analogs}, index) => (
         <li key={index} className={style.idiomoitems}>
-            <div>
+            <div className={style.wrapperright}>
                 <div className={style.titleblock}>
                     <h3 className={style.title}>{title}</h3>
                     <button onClick={() => speak(title)} className={style.button}>
@@ -29,24 +29,24 @@ const Idioma = ({idioms}) =>{
                         </svg>
                     </button>
                 </div>
-                <div>
-                    <h4>Meaning</h4>
+                <div className={style.block}>
+                    <h4 className={style.blocktitle}>Meaning</h4>
                     <p>{meaning}</p>
                 </div>
                 <div>
-                    <h4>Analogs</h4>
+                    <h4 className={style.blocktitle}>Analogs</h4>
                     <ul>
                         {Array.isArray(analogs) && analogs.map(({lang, text})=>(
                             <li key={lang}>
-                                <em>{lang}:</em> “{text}”
+                                <em className={style.violet}>{lang}:</em> “{text}”
                             </li>
                         ))}
                     </ul>
                 </div>
             </div>
             <div>
-                <button>Read more <svg>
-                    <use xlinkHref={`${sprite}#arrow`}/>
+                <button className={style.readmore}>Read more <svg width="16" height="16">
+                    <use xlinkHref={`${sprite}#arrow`} />
                     </svg>
                 </button>
             </div>
