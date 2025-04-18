@@ -57,7 +57,7 @@ const isMobile = useMediaQuery({ maxWidth: 750 });
           <use xlinkHref={`${sprite}#down`} />
         </svg>
       </div>
-      <button type="submit" className={styles.button}>
+      <button type="submit" className={styles.button} aria-label="search">
          {isMobile ? 
           <svg width="16px" height="16px">
           <use xlinkHref={`${sprite}#find`} />

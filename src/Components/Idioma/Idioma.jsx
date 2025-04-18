@@ -18,12 +18,12 @@ const Idioma = ({idioms}) =>{
             <div className={style.wrapperright}>
                 <div className={style.titleblock}>
                     <h3 className={style.title}>{title}</h3>
-                    <button onClick={() => speak(title)} className={style.button}>
+                    <button aria-label="reproduction of an idiom by voice" onClick={() => speak(title)} className={style.button}>
                         <svg width="16" height="16">
                             <use xlinkHref={`${sprite}#sound`}/>
                         </svg>
                     </button>
-                    <button className={style.button}>
+                    <button className={style.button} aria-label="add to favorites">
                         <svg width="16" height="16">
                             <use xlinkHref={`${sprite}#bookmark`}/>
                         </svg>

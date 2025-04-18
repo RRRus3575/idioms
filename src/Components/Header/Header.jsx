@@ -18,7 +18,8 @@ const Header = ({ onFormSubmit }) => {
           </svg>
         </a>
       </nav>
-      <button onClick={()=>{
+      <button aria-label="open search"
+      onClick={()=>{
         setIsActive(true)
       }} className={`${styles.button} ${!isActive ? styles.active : styles.disactive}`}
       >
