@@ -8,13 +8,13 @@
 
 
 
-nav {
+.header nav {
   display: flex;
   gap: 48px;
   align-items: center;
 }
 
-nav > ul {
+.header nav > ul {
   display: flex;
   align-items: center;
   gap: 28px;

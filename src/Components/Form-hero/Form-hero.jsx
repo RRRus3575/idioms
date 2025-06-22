@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import sprite from "../../sprite.svg";
 import styles from "./Form-hero.module.css";
 import { useMediaQuery } from "react-responsive";
 
@@ -29,7 +28,7 @@ const isMobile = useMediaQuery({ maxWidth: 750 });
     <form className={styles.heroForm} onSubmit={handleSubmit}>
       <label className={styles.inputLabel}>
         <svg className={styles.search} width="16px" height="16px">
-          <use xlinkHref={`${sprite}#find`} />
+          <use xlinkHref={`/sprite.svg#find`} />
         </svg>
         <input
           name="idiom" 
@@ -54,13 +53,13 @@ const isMobile = useMediaQuery({ maxWidth: 750 });
           </option>
         </select>
         <svg className={styles.icon}>
-          <use xlinkHref={`${sprite}#down`} />
+          <use xlinkHref={`/sprite.svg#down`} />
         </svg>
       </div>
       <button type="submit" className={styles.button} aria-label="search">
          {isMobile ? 
           <svg width="16px" height="16px">
-          <use xlinkHref={`${sprite}#find`} />
+          <use xlinkHref={`/sprite.svg#find`} />
         </svg>         
           : "Search"}
       </button>

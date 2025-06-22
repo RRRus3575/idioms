@@ -1,5 +1,4 @@
 import style from "./Idioma.module.css"
-import sprite from "../../sprite.svg";
 import React from "react";
 
 const Idioma = ({idioms}) =>{
@@ -20,12 +19,12 @@ const Idioma = ({idioms}) =>{
                     <h3 className={style.title}>{title}</h3>
                     <button aria-label="reproduction of an idiom by voice" onClick={() => speak(title)} className={style.button}>
                         <svg width="16" height="16">
-                            <use xlinkHref={`${sprite}#sound`}/>
+                            <use xlinkHref={`/sprite.svg#sound`}/>
                         </svg>
                     </button>
                     <button className={style.button} aria-label="add to favorites">
                         <svg width="16" height="16">
-                            <use xlinkHref={`${sprite}#bookmark`}/>
+                            <use xlinkHref={`/sprite.svg#bookmark`}/>
                         </svg>
                     </button>
                 </div>
@@ -46,7 +45,7 @@ const Idioma = ({idioms}) =>{
             </div>
             <div>
                 <button className={style.readmore}>Read more <svg width="16" height="16">
-                    <use xlinkHref={`${sprite}#arrow`} />
+                    <use xlinkHref={`/sprite.svg#arrow`} />
                     </svg>
                 </button>
             </div>

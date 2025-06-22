@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import Header from "../Components/Header/Header"
-import Main from "../Components/Main/Main"
-import Footer from "../Components/Footer/Footer"
-
-
+import Header from "@/components/Header/Header";
+import Main from "@/components/Main/Main";
+import Footer from "@/components/Footer/Footer";
 
 const HomePage = () => {
-    const [idioms, setIdioms] = useState([]);
+  const [idioms, setIdioms] = useState([]);
 
   const handleFormSubmit = (data) => {
     console.log("Submitted Data:", data);
@@ -17,9 +15,9 @@ const HomePage = () => {
     <div className="App">
       <Header onFormSubmit={handleFormSubmit} />
       <Main idioms={idioms} onFormSubmit={handleFormSubmit} />
-      <Footer/>
+      <Footer />
     </div>
   );
-}
+};
 
-export default HomePage
+export default HomePage;

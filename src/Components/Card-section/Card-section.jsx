@@ -1,5 +1,4 @@
 import React from "react";
-import sprite from "../../sprite.svg";
 import FormCards from "../FormCards/FormCards";
 import style from "./Card-section.module.css";
 
@@ -11,7 +10,7 @@ const CardSection = () => {
         <ul className={style.cardlist}>
           <li className={style.cardleft}>
             <svg className={style.image}>
-              <use xlinkHref={`${sprite}#star`} />
+              <use xlinkHref={`/sprite.svg#star`} />
             </svg>
             <h3 className={style.title}>Rate & Discuss idioms</h3>
             <p className={style.textup}>
@@ -21,7 +20,7 @@ const CardSection = () => {
           </li>
           <li className={style.cardright}>
             <svg className={style.image}>
-              <use xlinkHref={`${sprite}#find`} /> 
+              <use xlinkHref={`/sprite.svg#find`} /> 
             </svg>
             <h3 className={style.title}>Search idioms</h3>
             <p>
@@ -32,14 +31,14 @@ const CardSection = () => {
               <div className={style.wrap}>
                 <p>enter the desired phrase or idiom</p>
                 <svg className={style.arrowup}>
-                  <use xlinkHref={`${sprite}#drop`} />
+                  <use xlinkHref={`/sprite.svg#drop`} />
                 </svg>
               </div>
               <FormCards />
               <div className={style.wrapdown}>
                 <p>select the language of idiom here and search the result</p>
                 <svg className={style.arrowbottom}>
-                  <use xlinkHref={`${sprite}#drop`} />
+                  <use xlinkHref={`/sprite.svg#drop`} />
                 </svg>
               </div>
             </div>

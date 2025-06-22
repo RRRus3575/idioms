@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import sprite from "../../sprite.svg";
 import styles from "./form.module.css";
 import { useMediaQuery } from "react-responsive";
 
@@ -27,7 +26,7 @@ const FormHeader = ({ handleFormSubmit }) => {
     <form className={styles.headerForm}>
       <label className={styles.inputLabel}>
         <svg className={styles.search} width="16px" height="16px">
-          <use xlinkHref={`${sprite}#find`} />
+          <use xlinkHref={`/sprite.svg#find`} />
         </svg>
         <input
           name="idiom"
@@ -47,7 +46,7 @@ const FormHeader = ({ handleFormSubmit }) => {
           </option>
         </select>
         <svg className={styles.icon}>
-          <use xlinkHref={`${sprite}#down`} />
+          <use xlinkHref={`/sprite.svg#down`} />
         </svg>
       </div>
       <button className="hidden" aria-label="search">Search</button>

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import sprite from "../../sprite.svg";
 import styles from "./Header.module.css";
 import FormHeader from "../Form-header/Form-header";
 
@@ -14,7 +13,7 @@ const Header = ({ onFormSubmit }) => {
       <nav>
         <a href="#">
           <svg className={styles.logo}>
-            <use xlinkHref={`${sprite}#logo`} />
+            <use xlinkHref={`/sprite.svg#logo`} />
           </svg>
         </a>
       </nav>
@@ -23,9 +22,10 @@ const Header = ({ onFormSubmit }) => {
         setIsActive(true)
       }} className={`${styles.button} ${!isActive ? styles.active : styles.disactive}`}
       >
-      <svg className={styles.search} width="16px" height="16px">
-          <use xlinkHref={`${sprite}#find`} />
-        </svg>
+      <svg>
+        <use xlinkHref="/sprite.svg#icon-name" />
+      </svg>
+
       </button>
       <div className={!isActive ? styles.disactive : styles.active}
 >

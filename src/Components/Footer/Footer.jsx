@@ -1,5 +1,4 @@
 import React from "react";
-import sprite from "../../sprite.svg";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
@@ -8,7 +7,7 @@ const Footer = () => {
         <div className={styles.wrap}>
         <a href="#">
           <svg className={styles.logo}>
-            <use xlinkHref={`${sprite}#logo`} />
+            <use xlinkHref={`/sprite.svg#logo`} />
           </svg>
         </a>
         <ul className={styles.wrapperpriv}>
