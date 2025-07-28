@@ -1,6 +1,9 @@
 import React from "react";
 
+
 const IdiomsList = ({ idioms }) => {
+
+
   return (
     <ul>
       {idioms.map((item, index) => (

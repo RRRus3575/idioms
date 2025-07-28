@@ -12,11 +12,11 @@ const Idioma = ({idioms}) =>{
       
     return(
         <ul className={style}>
-      {idioms.map(({title, meaning, analogs}, index) => (
+      {idioms && idioms.map(({text, meaning, analogs}, index) => (
         <li key={index} className={style.idiomoitems}>
             <div className={style.wrapperright}>
                 <div className={style.titleblock}>
-                    <h3 className={style.title}>{title}</h3>
+                    <h3 className={style.title}>{text}</h3>
                     <button aria-label="reproduction of an idiom by voice" onClick={() => speak(title)} className={style.button}>
                         <svg width="16" height="16">
                             <use xlinkHref={`/sprite.svg#sound`}/>
@@ -32,16 +32,16 @@ const Idioma = ({idioms}) =>{
                     <h4 className={style.blocktitle}>Meaning</h4>
                     <p>{meaning}</p>
                 </div>
-                <div>
+                {analogs && analogs.length > 0 && <div>
                     <h4 className={style.blocktitle}>Analogs</h4>
                     <ul>
-                        {Array.isArray(analogs) && analogs.map(({lang, text})=>(
-                            <li key={lang}>
-                                <em className={style.violet}>{lang}:</em> “{text}”
+                        {Array.isArray(analogs) && analogs.map(({id, language, phrase})=>(
+                            <li key={id}>
+                                <em className={style.violet}>{language}:</em> “{phrase}”
                             </li>
                         ))}
                     </ul>
-                </div>
+                </div>}
             </div>
             <div>
                 <button className={style.readmore}>Read more <svg width="16" height="16">
@@ -56,4 +56,4 @@ const Idioma = ({idioms}) =>{
     )
 }
 
-export default Idioma
+export default Idioma;
