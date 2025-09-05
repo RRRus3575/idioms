@@ -12,12 +12,12 @@ const Idioma = ({idioms}) =>{
       
     return(
         <ul className={style}>
-      {idioms && idioms.map(({text, meaning, analogs}, index) => (
+      {idioms && idioms.map(({text, localization , analogs}, index) => (
         <li key={index} className={style.idiomoitems}>
             <div className={style.wrapperright}>
                 <div className={style.titleblock}>
                     <h3 className={style.title}>{text}</h3>
-                    <button aria-label="reproduction of an idiom by voice" onClick={() => speak(title)} className={style.button}>
+                    <button aria-label="reproduction of an idiom by voice" onClick={() => speak(text)} className={style.button}>
                         <svg width="16" height="16">
                             <use xlinkHref={`/sprite.svg#sound`}/>
                         </svg>
@@ -30,7 +30,7 @@ const Idioma = ({idioms}) =>{
                 </div>
                 <div className={style.block}>
                     <h4 className={style.blocktitle}>Meaning</h4>
-                    <p>{meaning}</p>
+                    <p>{localization.meaning}</p>
                 </div>
                 {analogs && analogs.length > 0 && <div>
                     <h4 className={style.blocktitle}>Analogs</h4>

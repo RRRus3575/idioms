@@ -3,17 +3,43 @@ import style from "./IdiomsBlock.module.css";
 import Idioma from "../Idioma/Idioma";
 import { useGetIdiomsQuery } from "@/store/api";
 
+const PAGE_SIZE = 20; // при желании поменяй
+
 const IdiomsBlock = () => {
   const [activeTab, setActiveTab] = useState("popular");
 
-  const { data, isLoading, isError, error } = useGetIdiomsQuery();
+  // 🔹 Пагинация
+  const [page, setPage] = useState(1);
+  const [items, setItems] = useState([]);
 
+  // ⚠️ Предполагаем, что useGetIdiomsQuery принимает { page, limit }
+  const { data, isLoading, isFetching, isError, error } = useGetIdiomsQuery({
+    page,
+    limit: PAGE_SIZE,
+  });
+
+  // Лог
   useEffect(() => {
     console.log("Ответ API:", data);
   }, [data]);
 
+  // 🔹 На первую страницу — заменяем, на последующие — доклеиваем без дублей
+  useEffect(() => {
+    if (!data?.result) return;
+
+    if (page === 1) {
+      setItems(data.result);
+    } else {
+      setItems(prev => {
+        const seen = new Set(prev.map(i => i.id));
+        const incoming = data.result.filter(i => !seen.has(i.id));
+        return [...prev, ...incoming];
+      });
+    }
+  }, [data, page]);
+
   // 🔥 Пока грузится — показываем лоадер
-  if (isLoading) return <p>Loading idioms...</p>;
+  if (isLoading && page === 1) return <p>Loading idioms...</p>;
 
   // 🔥 Если ошибка — показываем её
   if (isError) {
@@ -21,16 +47,21 @@ const IdiomsBlock = () => {
     return <p>Failed to load idioms</p>;
   }
 
-  // 🔥 Безопасно достаём данные
-  const idiomsArray = data?.result || [];
-  const totalPages = data?.totalPages || 0;
-  const totalIdioms = data?.totalIdioms || 0;
-  const currentPage = data?.currentPage || 1;
+  // 🔥 Метаданные
+  const totalPages  = data?.totalPages || 0;
+  const totalIdioms = data?.totalIdioms || items.length;
+  const currentPage = data?.currentPage || page;
+  const canLoadMore = currentPage < totalPages;
+
+  // 🔹 Обработчик "Show more"
+  const handleLoadMore = () => {
+    if (!canLoadMore || isFetching) return;
+    setPage(p => p + 1);
+  };
 
   return (
     <section className={style.section}>
       <h2 className={style.title}>Idioms</h2>
-      <p>Total idioms: {totalIdioms} (Page {currentPage} of {totalPages})</p>
 
       <div className={style.tabButtons}>
         <button
@@ -49,11 +80,19 @@ const IdiomsBlock = () => {
 
       {/* ✅ Передаём массив идиом */}
       <div>
-        <Idioma idioms={idiomsArray} />
+        <Idioma idioms={items} />
       </div>
 
       {/* Пагинация */}
-      {totalPages > 1 && <button className={style.more}>Show more</button>}
+      {totalPages > 1 && page !== totalPages && (
+        <button
+          className={style.more}
+          onClick={handleLoadMore}
+          disabled={!canLoadMore || isFetching}
+        >
+          {isFetching ? "Loading..." : "Show more"}
+        </button>
+      )}
     </section>
   );
 };
