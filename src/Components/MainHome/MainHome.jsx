@@ -1,20 +1,16 @@
 import React from "react";
 import Hero from "../Hero/Hero";
 import CardSection from "../Card-section/Card-section";
-import IdiomsList from "../IdiomsList/IdiomsList";
 import IdiomsBlock from "../IdiomsBlock/IdiomsBlock";
 
-const Main = ({ idioms, onFormSubmit }) => {
+const MainHome = ({ onFormSubmit }) => {
   return (
     <main>
-      <Hero onFormSubmit={onFormSubmit} />
-      <p>
-        {idioms.idiom} - {idioms.language}
-      </p>
+      <Hero onFormSubmit={onFormSubmit} />     
       <CardSection onFormSubmit={onFormSubmit} />
       <IdiomsBlock/>
     </main>
   );
 };
 
-export default Main;
+export default MainHome;

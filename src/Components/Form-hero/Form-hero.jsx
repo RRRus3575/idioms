@@ -16,12 +16,24 @@ const FormHero = ({ onFormSubmit }) => {
     }));
   };
 
-const isMobile = useMediaQuery({ maxWidth: 750 });
+  const isMobile = useMediaQuery({ maxWidth: 750 });
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Предотвращаем перезагрузку страницы
-    onFormSubmit(formData); // Передаём данные в родительский компонент
-    setFormData({ idiom: "", language: "english" }); // Сбрасываем форму
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const payload = {
+      idiom: formData.idiom.trim(),
+      language: formData.language,
+    };
+    if (!payload.idiom) return;
+
+    // ждём переход на /search?q=...
+    const p = onFormSubmit?.(payload);
+    if (p && typeof p.then === "function") {
+      await p;
+    }
+
+    // очищаем только поле текста, язык оставляем
+    setFormData((s) => ({ ...s, idiom: "" }));
   };
 
   return (

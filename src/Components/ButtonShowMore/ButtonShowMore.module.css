@@ -1,0 +1,25 @@
+.more{
+    padding: 14px 48px;
+    color: #660FF2;
+    font-weight: 600;
+    border: solid 1px #660FF2;
+    border-radius: 80px;
+    transition: background-color 300ms ease, color 300ms ease;
+}
+
+.more:hover, .more:focus{
+    background-color: #9051F6;  
+    color: #fff;  
+}
+
+@media (max-width: 750px){
+    .more{
+        margin-top:  40px;
+    }
+}
+
+@media (min-width: 751px){
+    .more{
+        margin-top:  64px;
+    }
+}
