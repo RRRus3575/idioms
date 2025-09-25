@@ -8,16 +8,6 @@ const Search = () => {
   return (
     <div>
       <Header />
-      <div className="container">
-        <Breadcrumbs
-          labelMap={{
-            "/": "Home",
-            "/search": "Search",
-            idioms: "Idioms",         // переименования сегментов (опционально)
-          }}
-          preserveQuery={false}        // true — оставит ?q=... у последней крошки
-        />
-      </div>
       <MainIdioms /> 
       <Footer />
     </div>

@@ -1,35 +1,37 @@
 import React, { useMemo } from "react";
-import { useRouter } from "next/router"; // Pages Router
+import { useRouter } from "next/router";
 import { useGetCategoriesQuery, useGetIdiomsQuery } from "@/store/api";
 import FormHero from "../Form-hero/Form-hero";
 import FiltersBar from "../FiltersBar/FiltersBar";
 import ButtonShowMore from "../ButtonShowMore/ButtonShowMore";
 import Idioma from "../Idioma/Idioma";
 import { toLangCode } from "@/utils/lang";
-import style from "./MainIdioms.module.css"
-
-// Если у тебя форма поиска отдельным компонентом:
+import style from "./MainIdioms.module.css";
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const MainIdioms = () => {
   const router = useRouter();
 
-  // 1) Собираем состояние из URL
+  // 1) URL → состояние (lang всегда ISO-код, например 'en')
   const urlState = useMemo(() => {
     if (!router.isReady) return null;
 
     const q = (router.query.q || "").toString();
-    const rawLang  = (router.query.lang || "english").toString();
-    const langCode = toLangCode(rawLang, "en");
+    const rawLang = (router.query.lang || "en").toString();
+    const lang = toLangCode(rawLang, "en");        // ← код языка
     const sort = (router.query.sort || "az").toString();
     const page = Number(router.query.page || 1);
-    const categoriesStr = (router.query.categories || "").toString(); // "1,2,3"
+    const categoriesStr = (router.query.categories || "").toString();
     const categoryIds = categoriesStr ? categoriesStr.split(",") : [];
-    const hideOutdated = router.query.hideOutdated === "1";
+    const hideOutdated =
+      router.query.hideOutdated === "1" ||
+      router.query.hideOutdated === "true" ||
+      router.query.hideOutdated === true;
 
-    return { q, language: langCode, sort, page, categoryIds, hideOutdated };
+    return { q, lang, sort, page, categoryIds, hideOutdated };
   }, [router.isReady, router.query]);
 
-  // 2) Запрос категорий (если нужно показывать список на фронте)
+  // 2) Категории (если нужен язык на бэке)
   const { data: categories = [], isLoading: catsLoading } =
     useGetCategoriesQuery(urlState ? { language: urlState.lang } : undefined, {
       skip: !urlState,
@@ -38,39 +40,31 @@ const MainIdioms = () => {
   // 3) Параметры для идиом
   const idiomsParams = useMemo(() => {
     if (!urlState) return null;
-
     const { q, lang, sort, page, categoryIds, hideOutdated } = urlState;
-
     return {
       query: q,
-      language: lang,
-      categoryIds,
+      language: lang,           // ← код
+      languageVersion: lang,    // ← код (а не 'english'/'german')
+      categoryIds,              // слайс склеит в "1,2,3"
       sort,
       page,
       limit: 20,
-      hideOutdated,
-      // если бэку нужна languageVersion — выстави по своим правилам:
-      languageVersion: lang === "english" ? "en" : "de",
+      hideOutdated,             // boolean
     };
   }, [urlState]);
 
   // 4) Запрос идиом
-  const {
-    data,
-    isLoading,
-    isFetching,
-    isError,
-  } = useGetIdiomsQuery(idiomsParams || {}, { skip: !idiomsParams });
+  const { data, isLoading, isFetching, isError } =
+    useGetIdiomsQuery(idiomsParams || {}, { skip: !idiomsParams });
 
   const items = data?.result || [];
   const totalPages = data?.totalPages || 1;
   const currentPage = data?.currentPage || urlState?.page || 1;
   const canLoadMore = currentPage < totalPages;
 
-  // 5) Обработчики — меняем URL (shallow), RTK Query сам перефетчит
+  // 5) Обновление URL
   const updateQuery = (patch) => {
     const next = { ...router.query, ...patch };
-    // чистим пустые значения
     Object.keys(next).forEach((k) => {
       if (next[k] === "" || next[k] == null) delete next[k];
     });
@@ -86,9 +80,9 @@ const MainIdioms = () => {
   const handleClearAll = () => {
     updateQuery({
       q: urlState?.q || "",
-      categories: "",   // очистим мульти-выбор
+      categories: "",
       sort: "az",
-      hideOutdated: "0",
+      hideOutdated: "0", // если хочешь хранить в URL как '0'/'1'
       page: "1",
     });
   };
@@ -102,51 +96,48 @@ const MainIdioms = () => {
   };
 
   const handleToggleOutdated = () => {
-    const next = urlState?.hideOutdated ? "0" : "1";
-    updateQuery({ hideOutdated: next, page: "1" });
+    updateQuery({ hideOutdated: urlState?.hideOutdated ? "0" : "1", page: "1" });
   };
 
-  // (Опционально) если форма поиска на этой странице должна менять URL:
+  // Сабмит формы: кладём в URL уже КОД языка
   const handleFormSubmit = ({ idiom, language, categoryIds = [], sort = "az" }) => {
     const q = (idiom || "").trim();
-    if (!q) return Promise.resolve(); // чтобы не падать без текста
-
+    if (!q) return Promise.resolve();
+    const lang = toLangCode(language, "en"); // ← нормализуем
     return router.push({
-        pathname: "/search",
-        query: {
+      pathname: "/search",
+      query: {
         q,
-        lang: language || "english",
+        lang,
         categories: (categoryIds || []).join(","),
         sort,
         page: "1",
-        },
+      },
     });
-    };
+  };
 
   if (!urlState) return null;
 
   return (
     <main className={style.main}>
       <div>
-        <FormHero
-            onFormSubmit={handleFormSubmit}
-        // если хочешь сразу контролировать инпут через URL, можно расширить FormHero пропсами value/onChange
+        <Breadcrumbs
+          labelMap={{ "/": "Home", "/search": "Search", idioms: "Idioms" }}
+          preserveQuery={false}
         />
-
+        <FormHero onFormSubmit={handleFormSubmit} />
         <FiltersBar
-            categories={urlState.categoryIds}
-            onChangeCategories={handleChangeCategories}
-            sort={urlState.sort}
-            onChangeSort={handleChangeSort}
-            hideOutdated={urlState.hideOutdated}
-            onToggleOutdated={handleToggleOutdated}
-            onClearAll={handleClearAll}
-        // можешь пробросить список доступных категорий, если нужно для выпадашки
-            allCategories={categories}
-            categoriesLoading={catsLoading}
+          categories={urlState.categoryIds}
+          onChangeCategories={handleChangeCategories}
+          sort={urlState.sort}
+          onChangeSort={handleChangeSort}
+          hideOutdated={urlState.hideOutdated}
+          onToggleOutdated={handleToggleOutdated}
+          onClearAll={handleClearAll}
+          allCategories={categories}
+          categoriesLoading={catsLoading}
         />
       </div>
-
 
       {isLoading && currentPage === 1 && <p>Loading idioms…</p>}
       {isError && <p>Failed to load idioms</p>}
@@ -156,7 +147,6 @@ const MainIdioms = () => {
           <div>
             <Idioma idioms={items} />
           </div>
-
           {totalPages > 1 && currentPage !== totalPages && (
             <ButtonShowMore
               isFetching={isFetching}
