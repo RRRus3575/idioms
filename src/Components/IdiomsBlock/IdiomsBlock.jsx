@@ -55,8 +55,8 @@ const IdiomsBlock = () => {
           Most popular
         </button>
         <button
-          className={`${style.tabButton} ${activeTab === "searched" ? style.active : ""}`}
-          onClick={() => setActiveTab("searched")}
+          className={`${style.tabButton} ${activeTab === "last_searched" ? style.active : ""}`}
+          onClick={() => setActiveTab("last_searched")}
         >
           Recent search
         </button>

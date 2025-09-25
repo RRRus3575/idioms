@@ -11,6 +11,7 @@ import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const MainIdioms = () => {
   const router = useRouter();
+  const codeToUiLang = (code) => (code === "de" ? "german" : "english");
 
   // 1) URL → состояние (lang всегда ISO-код, например 'en')
   const urlState = useMemo(() => {
@@ -30,6 +31,29 @@ const MainIdioms = () => {
 
     return { q, lang, sort, page, categoryIds, hideOutdated };
   }, [router.isReady, router.query]);
+
+
+  // helper: сабмит с сохранением всех текущих фильтров
+  const submitWithCurrentFilters = (patch = {}) => {
+    const { categoryIds = [], sort = "az", hideOutdated = false } = urlState || {};
+    const next = {
+      // если хочешь сохранять и другие неизвестные параметры — раскоммить:
+      // ...router.query,
+      categories: (categoryIds || []).join(","),
+      sort,
+      hideOutdated: hideOutdated ? "1" : "0",
+      page: "1",
+      ...patch, // q, lang и т.п. перекрывают
+    };
+
+    // подчистим пустые
+    Object.keys(next).forEach((k) => {
+      if (next[k] === "" || next[k] == null) delete next[k];
+    });
+
+    return router.push({ pathname: "/search", query: next });
+  };
+
 
   // 2) Категории (если нужен язык на бэке)
   const { data: categories = [], isLoading: catsLoading } =
@@ -100,20 +124,11 @@ const MainIdioms = () => {
   };
 
   // Сабмит формы: кладём в URL уже КОД языка
-  const handleFormSubmit = ({ idiom, language, categoryIds = [], sort = "az" }) => {
+    const handleFormSubmit = ({ idiom, language }) => {
     const q = (idiom || "").trim();
     if (!q) return Promise.resolve();
-    const lang = toLangCode(language, "en"); // ← нормализуем
-    return router.push({
-      pathname: "/search",
-      query: {
-        q,
-        lang,
-        categories: (categoryIds || []).join(","),
-        sort,
-        page: "1",
-      },
-    });
+    const lang = toLangCode(language, "en");
+    return submitWithCurrentFilters({ q, lang });
   };
 
   if (!urlState) return null;
@@ -125,7 +140,11 @@ const MainIdioms = () => {
           labelMap={{ "/": "Home", "/search": "Search", idioms: "Idioms" }}
           preserveQuery={false}
         />
-        <FormHero onFormSubmit={handleFormSubmit} />
+        <FormHero
+            onFormSubmit={handleFormSubmit}
+            initialIdiom={urlState.q}
+            initialLanguage={codeToUiLang(urlState.lang)}
+        />
         <FiltersBar
           categories={urlState.categoryIds}
           onChangeCategories={handleChangeCategories}

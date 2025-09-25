@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./Header.module.css";
 import FormHeader from "../Form-header/Form-header";
+import Link from "next/link";
 
 
 const Header = ({ onFormSubmit }) => {
@@ -11,11 +12,11 @@ const Header = ({ onFormSubmit }) => {
   return (
     <header className={styles.header}>
       <nav>
-        <a href="#">
+        <Link  href="/">
           <svg className={styles.logo}>
             <use xlinkHref={`/sprite.svg#logo`} />
           </svg>
-        </a>
+        </Link>
       </nav>
       <button aria-label="open search"
       onClick={()=>{

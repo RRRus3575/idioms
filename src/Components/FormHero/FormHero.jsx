@@ -1,39 +1,63 @@
-import React, { useRef, useState } from "react";
+// components/FormHero/FormHero.jsx
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./FormHero.module.css";
 import { useMediaQuery } from "react-responsive";
 
-const FormHero = ({ onFormSubmit }) => {
-  const [formData, setFormData] = useState({ idiom: "", language: "english" });
+const FormHero = ({ onFormSubmit, initialIdiom = "", initialLanguage = "english" }) => {
+  const [formData, setFormData] = useState({ idiom: initialIdiom, language: initialLanguage });
+  const [dirty, setDirty] = useState(false); // ← пользователь редактирует
+  const prevInitialIdiom = useRef(initialIdiom);
+  const prevInitialLang  = useRef(initialLanguage);
+
   const isMobile = useMediaQuery({ maxWidth: 750 });
-  const inputRef = useRef(null);
+
+  // Если initialIdiom реально поменялся (напр., после сабмита) — обновляем и сбрасываем dirty
+  useEffect(() => {
+    if (initialIdiom !== prevInitialIdiom.current) {
+      prevInitialIdiom.current = initialIdiom;
+      setFormData((s) => ({ ...s, idiom: initialIdiom }));
+      setDirty(false);
+    }
+  }, [initialIdiom]);
+
+  // Язык синхроним всегда по факту смены initialLanguage
+  useEffect(() => {
+    if (initialLanguage !== prevInitialLang.current) {
+      prevInitialLang.current = initialLanguage;
+      setFormData((s) => ({ ...s, language: initialLanguage }));
+    }
+  }, [initialLanguage]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((s) => ({ ...s, [name]: value }));
+    if (name === "idiom") setDirty(true); // пользователь начал редактировать
   };
 
   const clearIdiom = () => {
     setFormData((s) => ({ ...s, idiom: "" }));
-    inputRef.current?.focus();
+    setDirty(true);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = { idiom: formData.idiom.trim(), language: formData.language };
     if (!payload.idiom) return;
+
     const p = onFormSubmit?.(payload);
     if (p && typeof p.then === "function") await p;
+
+    // после успешной навигации URL поменяет initialIdiom → эффект выше аккуратно обновит поле и сбросит dirty
   };
 
   return (
     <form className={styles.heroForm} onSubmit={handleSubmit}>
       <label className={styles.inputLabel}>
         <svg className={styles.search} width="16" height="16" aria-hidden>
-          <use xlinkHref={`/sprite.svg#find`} />
+          <use xlinkHref="/sprite.svg#find" />
         </svg>
 
         <input
-          ref={inputRef}
           name="idiom"
           value={formData.idiom}
           onChange={handleChange}
@@ -42,17 +66,15 @@ const FormHero = ({ onFormSubmit }) => {
           autoComplete="off"
         />
 
-        {/* крестик показываем только если есть текст */}
-        {formData.idiom.length > 0 && (
+        {formData.idiom && (
           <button
             type="button"
             className={styles.clear}
             onClick={clearIdiom}
             aria-label="Clear search"
           >
-            {/* Можешь заменить на <use xlinkHref="/sprite.svg#close" /> если иконка есть в спрайте */}
-            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden>
-              <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            <svg className={styles.image} width="16" height="16" aria-hidden>
+              <use xlinkHref="/sprite.svg#plus" />
             </svg>
           </button>
         )}
@@ -69,14 +91,14 @@ const FormHero = ({ onFormSubmit }) => {
           <option value="german"  className={styles.option}>German</option>
         </select>
         <svg className={styles.icon} aria-hidden>
-          <use xlinkHref={`/sprite.svg#down`} />
+          <use xlinkHref="/sprite.svg#down" />
         </svg>
       </div>
 
       <button type="submit" className={styles.button} aria-label="search">
         {isMobile ? (
           <svg width="16" height="16" aria-hidden>
-            <use xlinkHref={`/sprite.svg#find`} />
+            <use xlinkHref="/sprite.svg#find" />
           </svg>
         ) : (
           "Search"

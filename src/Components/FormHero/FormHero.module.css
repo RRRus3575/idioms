@@ -72,10 +72,24 @@
   border-radius: 80px;
     background-color: #660ff2;
     color: #fff;
-    border: none;
-
+    border: solid 2px #660ff2;
+  transition: background-color 300ms ease-in-out
+  border-color 300ms ease-in-out;
 }
 
+.button:hover, .button:focus{
+  background-color: #9051F6;
+  border: solid 2px #9051F6;
+}
+
+.button:active{
+  border: solid 2px #9051F6;
+  background-color: #660ff2;
+}
+.image{
+  transform: rotate(45deg);
+  fill: #6b7280;
+}
 .clear {
   position: absolute;
   right: 10px;

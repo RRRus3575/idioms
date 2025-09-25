@@ -16,18 +16,21 @@ export const api = createApi({
     },
   }),
   endpoints: (builder) => ({
-    // Категории (можно передать language, если нужно)
+
+    // --- CATEGORIES ---
     getCategories: builder.query({
       query: (args) => {
         const language = args && typeof args === 'object' ? args.language : undefined;
-        return { url: 'idioms/categories', params: { language } };
+        return { url: '/idioms/categories', params: language ? { language } : undefined };
       },
-      // чтобы были отсортированы по имени
+      // сортируем и строки, и объекты { id, name }
       transformResponse: (data = []) =>
-        [...data].sort((a, b) => String(a.name).localeCompare(String(b.name))),
+        [...data].sort((a, b) =>
+          String(a?.name ?? a).localeCompare(String(b?.name ?? b))
+        ),
     }),
 
-    // Идиомы
+    // --- IDIOMS ---
     getIdioms: builder.query({
       query: (args = {}) => {
         const {
@@ -36,57 +39,61 @@ export const api = createApi({
           language,
           favorite = false,
           query,
-          categories,               // массив/строка id категорий
+          categories,                 // массив/строка id категорий
           languageVersion = 'en',
           sort = 'az',
-          ids,                       // массив/строка id идиом
+          hideOutdated = false,
+          ids,                        // массив/строка id идиом (необяз.)
         } = args;
 
-        const fav = favorite === true || favorite === 'true' ? 'true' : 'false';
-        const idsParam = toIdsParam(ids);
-        const byIds = Boolean(idsParam);
+        const fav       = (favorite === true || favorite === 'true') ? 'true' : 'false';
+        const idsParam  = toIdsParam(ids);
+        const catsParam = toIdsParam(categories);
+        const byIds     = Boolean(idsParam);
 
         return {
           url: '/idioms',
           params: {
-            page: byIds ? 1 : page,
-            limit: byIds ? (idsParam?.split(',').length || 20) : limit,
+            page:  byIds ? 1 : page,
+            limit: byIds ? (idsParam?.split(',').length || limit) : limit,
             language,
             favorite: fav,
             query,
-            categories: toIdsParam(categories),
+            categories: catsParam,  // ← ВАЖНО: реально уходит на бекенд
             languageVersion,
             sort,
+            hideOutdated: (hideOutdated === true || hideOutdated === 'true') ? 'true' : 'false',
             ids: idsParam,
           },
         };
       },
 
-      // ключ кэша без page/limit
+      // ключ кэша: учитываем categories (а не categoryIds)
       serializeQueryArgs: ({ endpointName, queryArgs = {} }) => {
         const {
           language,
           favorite = false,
-          query,
-          categoryIds,
+          query = '',
+          categories = '',
           languageVersion = 'en',
-          sort = 'last_added',
-          hideOutdated,
+          sort = 'az',
+          hideOutdated = false,
+          ids = '',
         } = queryArgs;
-        const fav = favorite === true || favorite === 'true' ? 'true' : 'false';
 
         return `${endpointName}-${JSON.stringify({
           language,
-          favorite: fav,
+          favorite: String(favorite),
           query,
-          categories: toIdsParam(categoryIds) || null,
+          categories: toIdsParam(categories) || null,   // ← ВАЖНО
           languageVersion,
           sort,
-          hideOutdated
+          hideOutdated: String(hideOutdated),
+          ids: toIdsParam(ids) || null,
         })}`;
       },
 
-      // склейка страниц (если не byIds)
+      // склейка страниц (когда ключ один и это не byIds)
       merge: (currentCache = {}, newData = {}, { arg }) => {
         const isByIds = Boolean(toIdsParam(arg?.ids));
         if (!currentCache.result || isByIds) {
@@ -98,13 +105,14 @@ export const api = createApi({
         currentCache.result.push(...incoming);
 
         currentCache.currentPage = newData.currentPage;
-        currentCache.totalPages = newData.totalPages;
+        currentCache.totalPages  = newData.totalPages;
         currentCache.totalIdioms = newData.totalIdioms;
       },
 
-      // при ids — рефетч по изменению ids; иначе — по page/limit
+      // при byIds — рефетч по смене ids; иначе — по page/limit
+      // (смена фильтров меняет cache key → новый запрос сам)
       forceRefetch({ currentArg, previousArg }) {
-        const nowIds = toIdsParam(currentArg?.ids);
+        const nowIds  = toIdsParam(currentArg?.ids);
         const prevIds = toIdsParam(previousArg?.ids);
         if (nowIds || prevIds) return nowIds !== prevIds;
 
