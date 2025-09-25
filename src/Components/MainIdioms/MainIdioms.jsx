@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useRouter } from "next/router";
 import { useGetCategoriesQuery, useGetIdiomsQuery } from "@/store/api";
-import FormHero from "../Form-hero/Form-hero";
+import FormHero from "../FormHero/FormHero";
 import FiltersBar from "../FiltersBar/FiltersBar";
 import ButtonShowMore from "../ButtonShowMore/ButtonShowMore";
 import Idioma from "../Idioma/Idioma";
@@ -45,7 +45,7 @@ const MainIdioms = () => {
       query: q,
       language: lang,           // ← код
       languageVersion: lang,    // ← код (а не 'english'/'german')
-      categoryIds,              // слайс склеит в "1,2,3"
+      categories: (categoryIds || []).join(","),              // слайс склеит в "1,2,3"
       sort,
       page,
       limit: 20,

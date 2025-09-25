@@ -33,9 +33,9 @@
 .sortChevron {
   transition: transform .15s ease;
   display: inline-block;
-  transform: rotate(180deg);
+  transform: rotate(0deg);
 }
-.sortChevronOpen { transform: rotate(0deg); }
+.sortChevronOpen { transform: rotate(180deg); }
 
 /* выпадающее меню */
 .sortMenu {

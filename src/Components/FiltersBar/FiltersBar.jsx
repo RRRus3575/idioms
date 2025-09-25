@@ -14,11 +14,12 @@ const FiltersBar = ({
 
 
   return (
-    <div className="filters">
+    <div className={style.filters}>
       {/* чипсы выбранных категорий + выбор */}
-      <CategorySelect value={categories} onChange={onChangeCategories} />
-
-      <button type="button" onClick={onClearAll}>Clear all</button>
+      <div className={style.wrap}>
+        <CategorySelect value={categories} onChange={onChangeCategories} />
+        {categories.length>0 && (<button type="button" onClick={onClearAll}>Clear all</button>)}
+      </div>
 
       <label>
         <input type="checkbox" checked={!hideOutdated ? false : true}

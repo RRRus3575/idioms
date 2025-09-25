@@ -38,7 +38,7 @@ export const api = createApi({
           query,
           categories,               // массив/строка id категорий
           languageVersion = 'en',
-          sort = 'last_added',
+          sort = 'az',
           ids,                       // массив/строка id идиом
         } = args;
 
@@ -71,7 +71,7 @@ export const api = createApi({
           categoryIds,
           languageVersion = 'en',
           sort = 'last_added',
-          ids,
+          hideOutdated,
         } = queryArgs;
         const fav = favorite === true || favorite === 'true' ? 'true' : 'false';
 
@@ -82,7 +82,7 @@ export const api = createApi({
           categories: toIdsParam(categoryIds) || null,
           languageVersion,
           sort,
-          ids: toIdsParam(ids) || null,
+          hideOutdated
         })}`;
       },
 

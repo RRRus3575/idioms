@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Hero.module.css";
-import FormHero from "../Form-hero/Form-hero";
+import FormHero from "../FormHero/FormHero";
 
 const Hero = ({ onFormSubmit }) => {
   return (

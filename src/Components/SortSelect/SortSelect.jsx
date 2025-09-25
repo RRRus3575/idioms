@@ -95,7 +95,11 @@ function SortSelect({ value = "az", onChange }) {
         onKeyDown={onButtonKey}
       >
         <span className={style.sortValue}>{current.label}</span>
-        <span className={`${style.sortChevron} ${open ? style.sortChevronOpen : ""}`} aria-hidden>▴</span>
+        <span className={`${style.sortChevron} ${open ? style.sortChevronOpen : ""}`} aria-hidden>
+            <svg className={style.image} width={14} height={14}>
+              <use xlinkHref={`/sprite.svg#down`} />
+            </svg>
+        </span>
       </button>
 
       {open && (
