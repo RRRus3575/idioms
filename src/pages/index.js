@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router"; // Pages Router
-// ❗️если у тебя App Router (Next.js 13+ с /app), то нужно `next/navigation`
 
 import Header from "@/components/Header/Header";
 import MainHome from "@/Components/MainHome/MainHome";

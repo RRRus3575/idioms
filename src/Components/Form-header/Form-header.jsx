@@ -49,7 +49,7 @@ const FormHeader = ({ handleFormSubmit }) => {
           <use xlinkHref={`/sprite.svg#down`} />
         </svg>
       </div>
-      <button className="hidden" aria-label="search">Search</button>
+      <button className="hidden" aria-label="search" type="submit">Search</button>
     </form>
   );
 };
