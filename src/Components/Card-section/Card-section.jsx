@@ -2,7 +2,7 @@ import React from "react";
 import FormCards from "../FormCards/FormCards";
 import style from "./Card-section.module.css";
 
-const CardSection = () => {
+const CardSection = ({onFormSubmit}) => {
   return (
     <section className={style.section}>
       <h2 className="visually-hidden">Idioms Hub</h2>
@@ -34,7 +34,7 @@ const CardSection = () => {
                   <use xlinkHref={`/sprite.svg#drop`} />
                 </svg>
               </div>
-              <FormCards />
+              <FormCards handleFormSubmit={onFormSubmit} />
               <div className={style.wrapdown}>
                 <p>select the language of idiom here and search the result</p>
                 <svg className={style.arrowbottom}>

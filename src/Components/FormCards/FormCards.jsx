@@ -11,19 +11,21 @@ const FormCards = ({ handleFormSubmit }) => {
 
   const isMobile = useMediaQuery({ maxWidth: 400 });
   
-  
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    const updatedFormData = { ...formData, [name]: value };
-    setFormData(updatedFormData);
-
-    handleFormSubmit(updatedFormData);
-
-
+    const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    // НЕ вызываем handleFormSubmit здесь, иначе будет редирект на каждый ввод
   };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    handleFormSubmit(formData);
+  };
+
+  
+
   return (
-    <form className={styles.headerForm}>
+    <form className={styles.headerForm} onSubmit={onSubmit}>
       <label className={styles.inputLabel}>
         <svg className={styles.search} width="16px" height="16px">
           <use xlinkHref={`/sprite.svg#find`} />
@@ -53,7 +55,7 @@ const FormCards = ({ handleFormSubmit }) => {
       </label>
         
       </div>
-      <button className="hidden">Search</button>
+      <button className="hidden" aria-label="search" type="submit">Search</button>
     </form>
   );
 };

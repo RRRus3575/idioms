@@ -1,54 +1,58 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./form.module.css";
 import { useMediaQuery } from "react-responsive";
 
-
 const FormHeader = ({ handleFormSubmit }) => {
-  const [formData, setFormData] = useState({
-    idiom: "",
-    language: "english",
-  });
-
+  const [formData, setFormData] = useState({ idiom: "", language: "english" });
   const isMobile = useMediaQuery({ maxWidth: 480 });
-  
-  
-  const handleChange = (event) => {
-    const { name, value } = event.target;
 
-    const updatedFormData = { ...formData, [name]: value };
-    setFormData(updatedFormData);
-
-    handleFormSubmit(updatedFormData);
-
-
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    // НЕ вызываем handleFormSubmit здесь, иначе будет редирект на каждый ввод
   };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    handleFormSubmit(formData);
+  };
+
   return (
-    <form className={styles.headerForm}>
+    <form className={styles.headerForm} onSubmit={onSubmit}>
       <label className={styles.inputLabel}>
-        <svg className={styles.search} width="16px" height="16px">
-          <use xlinkHref={`/sprite.svg#find`} />
+        <svg className={styles.search} width="16" height="16" aria-hidden="true">
+          <use xlinkHref="/sprite.svg#find" />
         </svg>
         <input
           name="idiom"
+          value={formData.idiom}
           onChange={handleChange}
-          placeholder= {isMobile ? "Tap idiom" : "Tap idiom here"}
+          placeholder={isMobile ? "Tap idiom" : "Tap idiom here"}
           className={styles.input}
+          autoComplete="off"
         />
       </label>
+
       <div className="form-select">
-        <select className={styles.select} onChange={handleChange}>
+        <select
+          name="language"            // ← важно!
+          className={styles.select}
+          value={formData.language}
+          onChange={handleChange}
+        >
           <option value="english" className={styles.option}>
-          {isMobile ? "Eng" : "English"}
-            
+            {isMobile ? "Eng" : "English"}
           </option>
           <option value="german" className={styles.option}>
-          {isMobile ? "Ger" : "Germany"}
+            {isMobile ? "Ger" : "German"}
           </option>
         </select>
-        <svg className={styles.icon}>
-          <use xlinkHref={`/sprite.svg#down`} />
+        <svg className={styles.icon} aria-hidden="true">
+          <use xlinkHref="/sprite.svg#down" />
         </svg>
       </div>
+
+      {/* Enter по инпуту вызовет submit */}
       <button className="hidden" aria-label="search" type="submit">Search</button>
     </form>
   );
