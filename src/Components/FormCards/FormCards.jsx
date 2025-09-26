@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "./FormCards.module.css";
 import { useMediaQuery } from "react-responsive";
+import LanguageSelect from "@/Components/LanguageSelect/LanguageSelect";
+
 
 
 const FormCards = ({ handleFormSubmit }) => {
@@ -37,24 +39,32 @@ const FormCards = ({ handleFormSubmit }) => {
           className={styles.input}
         />
       </label>
-      <div className="form-select">
+      {/* <div className="form-select">
       <label>
       <svg className={styles.icon}>
           <use xlinkHref={`/sprite.svg#down`} />
         </svg>
       <select className={styles.select} onChange={handleChange}>
-          <option value="english" className={styles.option}>
+          <option value="en" className={styles.option}>
           {isMobile ? "Eng" : "English"}
             
           </option>
-          <option value="german" className={styles.option}>
+          <option value="de" className={styles.option}>
           {isMobile ? "Ger" : "Germany"}
           </option>
         </select>
         
       </label>
         
-      </div>
+      </div> */}
+
+        <LanguageSelect
+          variant="card"
+          value={formData.language}
+          onChange={(code)=> setFilters(f => ({ ...f, language: code }))}
+          shortLabels={isMobile}
+        />
+
       <button className="hidden" aria-label="search" type="submit">Search</button>
     </form>
   );

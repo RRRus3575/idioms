@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "./form.module.css";
 import { useMediaQuery } from "react-responsive";
+import LanguageSelect from "@/Components/LanguageSelect/LanguageSelect";
+
 
 const FormHeader = ({ handleFormSubmit }) => {
   const [formData, setFormData] = useState({ idiom: "", language: "english" });
@@ -33,7 +35,7 @@ const FormHeader = ({ handleFormSubmit }) => {
         />
       </label>
 
-      <div className="form-select">
+      {/* <div className="form-select">
         <select
           name="language"            // ← важно!
           className={styles.select}
@@ -50,7 +52,15 @@ const FormHeader = ({ handleFormSubmit }) => {
         <svg className={styles.icon} aria-hidden="true">
           <use xlinkHref="/sprite.svg#down" />
         </svg>
-      </div>
+      </div> */}
+
+      <LanguageSelect
+        variant="header"
+        value={formData.language}
+        onChange={(code) => setFormData(s => ({ ...s, language: code }))}
+        shortLabels={isMobile}
+      />
+
 
       {/* Enter по инпуту вызовет submit */}
       <button className="hidden" aria-label="search" type="submit">Search</button>

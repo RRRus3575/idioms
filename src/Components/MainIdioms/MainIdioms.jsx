@@ -11,7 +11,6 @@ import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const MainIdioms = () => {
   const router = useRouter();
-  const codeToUiLang = (code) => (code === "de" ? "german" : "english");
 
   // 1) URL → состояние (lang всегда ISO-код, например 'en')
   const urlState = useMemo(() => {
@@ -19,7 +18,7 @@ const MainIdioms = () => {
 
     const q = (router.query.q || "").toString();
     const rawLang = (router.query.lang || "en").toString();
-    const lang = toLangCode(rawLang, "en");        // ← код языка
+    const lang = toLangCode(rawLang, "en");      // ← код языка
     const sort = (router.query.sort || "az").toString();
     const page = Number(router.query.page || 1);
     const categoriesStr = (router.query.categories || "").toString();
@@ -143,7 +142,7 @@ const MainIdioms = () => {
         <FormHero
             onFormSubmit={handleFormSubmit}
             initialIdiom={urlState.q}
-            initialLanguage={codeToUiLang(urlState.lang)}
+            initialLanguage={urlState.lang}
         />
         <FiltersBar
           categories={urlState.categoryIds}

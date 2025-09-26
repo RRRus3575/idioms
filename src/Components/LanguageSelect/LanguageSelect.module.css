@@ -1,0 +1,29 @@
+.wrapper { position: relative; display: inline-flex; }
+
+.select {
+  appearance: none; -webkit-appearance: none; -moz-appearance: none;
+  border: none; outline: 1px solid #ced4da;
+  font-size: 16px; align-items: center; position: relative;
+  padding-left: 20px; padding-right: 20px; border-radius: 0 8px 8px 0;
+  height: 36px; background: #fff; color: #101828;
+}
+
+.option { font-size: 16px; }
+
+.icon {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  width: 12px; height: 12px; pointer-events: none; z-index: 3;
+}
+
+/* hero: 44px, width:110px */
+.select.v_hero { height: 44px; width: 110px; }
+
+/* header: 36px; 76/110 по брейкпоинту */
+.select.v_header { height: 36px; }
+@media (max-width: 480px) { .select.v_header { width: 76px; } }
+@media (min-width: 481px) { .select.v_header { width: 110px; } }
+
+/* card: 36px; 76 до 400px, 110 после */
+.select.v_card { height: 36px; }
+@media (max-width: 400px) { .select.v_card { width: 76px; } }
+@media (min-width: 401px) { .select.v_card { width: 110px; } }

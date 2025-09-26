@@ -2,6 +2,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./FormHero.module.css";
 import { useMediaQuery } from "react-responsive";
+import LanguageSelect from "@/Components/LanguageSelect/LanguageSelect";
+
 
 const FormHero = ({ onFormSubmit, initialIdiom = "", initialLanguage = "english" }) => {
   const [formData, setFormData] = useState({ idiom: initialIdiom, language: initialLanguage });
@@ -80,7 +82,7 @@ const FormHero = ({ onFormSubmit, initialIdiom = "", initialLanguage = "english"
         )}
       </label>
 
-      <div className={styles.formselect}>
+      {/* <div className={styles.formselect}>
         <select
           className={styles.select}
           name="language"
@@ -93,7 +95,14 @@ const FormHero = ({ onFormSubmit, initialIdiom = "", initialLanguage = "english"
         <svg className={styles.icon} aria-hidden>
           <use xlinkHref="/sprite.svg#down" />
         </svg>
-      </div>
+      </div> */}
+      <LanguageSelect
+        variant="hero"
+        value={formData.language} // 'en' | 'de' | 'uk' | 'it' | 'pt'
+        onChange={(code) => setFormData(s => ({ ...s, language: code }))}
+        shortLabels={isMobile}
+      />
+
 
       <button type="submit" className={styles.button} aria-label="search">
         {isMobile ? (
