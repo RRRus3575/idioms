@@ -75,7 +75,7 @@ const FormHero = ({ onFormSubmit, initialIdiom = "", initialLanguage = "en", onC
             aria-label="Clear search"
           >
             <svg className={styles.image} width="16" height="16" aria-hidden>
-              <use xlinkHref="/sprite.svg#plus" />
+              <use xlinkHref="/sprite.svg#plus"/>
             </svg>
           </button>
         )}

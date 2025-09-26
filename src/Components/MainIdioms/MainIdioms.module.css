@@ -16,9 +16,8 @@
 .image{
         transform: rotate(45deg);
 }
-.image use{
-
-     fill:#FF383C;
+.crossimg{
+    fill:#FF383C;
 }
 
 
