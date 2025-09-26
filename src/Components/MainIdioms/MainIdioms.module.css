@@ -4,4 +4,19 @@
     align-items: center;
 }
 
+.cross{
+    width: 72px;
+    height: 72px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFE9E7;
+}
+
+.image{
+    transform: rotate(45deg);
+    stroke: #FF383C;
+    fill: #FF383C !important;
+}
+
 

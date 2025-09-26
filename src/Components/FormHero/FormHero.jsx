@@ -5,7 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import LanguageSelect from "@/Components/LanguageSelect/LanguageSelect";
 
 
-const FormHero = ({ onFormSubmit, initialIdiom = "", initialLanguage = "english" }) => {
+const FormHero = ({ onFormSubmit, initialIdiom = "", initialLanguage = "en" }) => {
   const [formData, setFormData] = useState({ idiom: initialIdiom, language: initialLanguage });
   const [dirty, setDirty] = useState(false); // ← пользователь редактирует
   const prevInitialIdiom = useRef(initialIdiom);
@@ -45,12 +45,10 @@ const FormHero = ({ onFormSubmit, initialIdiom = "", initialLanguage = "english"
     e.preventDefault();
     const payload = { idiom: formData.idiom.trim(), language: formData.language };
     if (!payload.idiom) return;
-
     const p = onFormSubmit?.(payload);
     if (p && typeof p.then === "function") await p;
-
-    // после успешной навигации URL поменяет initialIdiom → эффект выше аккуратно обновит поле и сбросит dirty
   };
+
 
   return (
     <form className={styles.heroForm} onSubmit={handleSubmit}>

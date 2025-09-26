@@ -159,8 +159,16 @@ const MainIdioms = () => {
 
       {isLoading && currentPage === 1 && <p>Loading idioms…</p>}
       {isError && <p>Failed to load idioms</p>}
-
-      {!isLoading && !isError && (
+      {items.length<1 && (
+        <div>
+            <div className={style.cross}>
+                <svg className={style.image} width="40" height="40" aria-hidden>
+                    <use xlinkHref="/sprite.svg#plus" />
+                </svg>
+            </div>      
+        </div>
+        )}
+      {!isLoading && !isError && items.length>0 && (
         <>
           <div>
             <Idioma idioms={items} />
