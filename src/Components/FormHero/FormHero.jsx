@@ -5,7 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import LanguageSelect from "@/Components/LanguageSelect/LanguageSelect";
 
 
-const FormHero = ({ onFormSubmit, initialIdiom = "", initialLanguage = "en" }) => {
+const FormHero = ({ onFormSubmit, initialIdiom = "", initialLanguage = "en", onClear }) => {
   const [formData, setFormData] = useState({ idiom: initialIdiom, language: initialLanguage });
   const [dirty, setDirty] = useState(false); // ← пользователь редактирует
   const prevInitialIdiom = useRef(initialIdiom);
@@ -39,6 +39,7 @@ const FormHero = ({ onFormSubmit, initialIdiom = "", initialLanguage = "en" }) =
   const clearIdiom = () => {
     setFormData((s) => ({ ...s, idiom: "" }));
     setDirty(true);
+    onClear?.();
   };
 
   const handleSubmit = async (e) => {

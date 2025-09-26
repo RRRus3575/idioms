@@ -11,12 +11,14 @@
     justify-content: center;
     align-items: center;
     background-color: #FFE9E7;
+    border-radius: 50%;
 }
-
 .image{
-    transform: rotate(45deg);
-    stroke: #FF383C;
-    fill: #FF383C !important;
+        transform: rotate(45deg);
+}
+.image use{
+
+     fill:#FF383C;
 }
 
 

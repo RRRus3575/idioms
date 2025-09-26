@@ -12,6 +12,11 @@ import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 const MainIdioms = () => {
   const router = useRouter();
 
+  const handleClearSearch = () => {
+  // чистим только q; язык, категории, сортировка и флаги сохраняются
+  return submitWithCurrentFilters({ q: "", lang: urlState.lang });
+};
+
   // 1) URL → состояние (lang всегда ISO-код, например 'en')
   const urlState = useMemo(() => {
     if (!router.isReady) return null;
@@ -141,6 +146,7 @@ const MainIdioms = () => {
         />
         <FormHero
             onFormSubmit={handleFormSubmit}
+            onClear={handleClearSearch}
             initialIdiom={urlState.q}
             initialLanguage={urlState.lang}
         />
@@ -159,13 +165,15 @@ const MainIdioms = () => {
 
       {isLoading && currentPage === 1 && <p>Loading idioms…</p>}
       {isError && <p>Failed to load idioms</p>}
-      {items.length<1 && (
+      {!isLoading && !isError && items.length<1 && (
         <div>
             <div className={style.cross}>
                 <svg className={style.image} width="40" height="40" aria-hidden>
                     <use xlinkHref="/sprite.svg#plus" />
                 </svg>
             </div>      
+            <h2>Nothing is found</h2>
+            <p>Try to change the filter categories, language or keywords</p>
         </div>
         )}
       {!isLoading && !isError && items.length>0 && (
