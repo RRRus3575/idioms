@@ -13,6 +13,7 @@ const MainIdioms = () => {
   const router = useRouter();
 
 
+
   // URL → состояние
   const urlState = useMemo(() => {
     if (!router.isReady) return null;
@@ -159,14 +160,16 @@ const MainIdioms = () => {
       {isError && <p>Failed to load idioms</p>}
 
       {!isLoading && !isError && items.length < 1 && (
-        <div>
+        <div className={style.notFound}>
           <div className={style.cross}>
             <svg className={style.image} width="40" height="40" aria-hidden>
-              <use xlinkHref="/sprite.svg#plus" className={style.crossimg} />
+              <use xlinkHref="/sprite.svg#close" className={style.crossimg} />
             </svg>
           </div>
-          <h2>Nothing is found</h2>
-          <p>Try to change the filter categories, language or keywords</p>
+          <div>
+            <h2 className={style.errorname}>Nothing is found</h2>
+            <p>Try to change the filter categories, language or keywords</p>
+          </div>
         </div>
       )}
 

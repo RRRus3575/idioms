@@ -49,7 +49,7 @@
   font-size:16px;
 }
 .item:first-child{ border-top:none; } /* без линии у первого */
-.item:hover, .item:focus-visible{ background:#F3F4F6; }
+.item:hover, .item:focus-visible{ background:#F3ECFE; }
 .active{ background:#F3ECFE; color:#660FF2; }
 
 /* чтобы стрелка была над кнопкой, а не внутри меню */
