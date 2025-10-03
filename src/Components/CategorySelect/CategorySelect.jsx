@@ -92,58 +92,61 @@ function CategorySelect({ value = [], onChange, language, onClearAll }) {
             </span>
           </button>
         ))}
+        <div className={styles.triggerWrap}>
+          <button
+              ref={btnRef}
+              type="button"
+              className={`${styles.trigger} ${open ? styles.active : ""}`}
+              onClick={() => setOpen((o) => !o)}
+              aria-expanded={open}
+              aria-haspopup="listbox"
+            >
+              Choose a category <svg className={styles.image} width="16" height="16" aria-hidden>
+                  <use xlinkHref="/sprite.svg#plus" />
+                </svg>
+            </button>
+            {open && (
+            <div ref={menuRef} className={styles.menu} role="listbox" aria-multiselectable="true">
+              <label className={styles.inputLabel}>
+                <svg className={styles.search} width="16" height="16" aria-hidden>
+                  <use xlinkHref="/sprite.svg#find" />
+                </svg>
+                <input
+                  className={styles.input}
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  placeholder="Search categories…"
+                  autoFocus
+                />
+              </label>
+          
 
-        <button
-          ref={btnRef}
-          type="button"
-          className={`${styles.trigger} ${open ? styles.active : ""}`}
-          onClick={() => setOpen((o) => !o)}
-          aria-expanded={open}
-          aria-haspopup="listbox"
-        >
-          Choose a category <svg className={styles.image} width="16" height="16" aria-hidden>
-              <use xlinkHref="/sprite.svg#plus" />
-            </svg>
-        </button>
+              <ul className={styles.list}>
+                {available.length === 0 && (
+                  <li className={styles.empty}>No categories</li>
+                )}
+                {available.map((c) => (
+                  <li key={c.id}>
+                    <button
+                      type="button"
+                      className={styles.item}
+                      onClick={() => add(c.id)}
+                    >
+                      {c.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+
+
+            </div>
+          )}
+        </div>
+        
         {value.length>0 && (<button type="button" onClick={onClearAll} className={styles.clear} >Clear all</button>)}
       </div>
 
-      {open && (
-        <div ref={menuRef} className={styles.menu} role="listbox" aria-multiselectable="true">
-          <label className={styles.inputLabel}>
-            <svg className={styles.search} width="16" height="16" aria-hidden>
-              <use xlinkHref="/sprite.svg#find" />
-            </svg>
-            <input
-              className={styles.input}
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Search categories…"
-              autoFocus
-            />
-          </label>
-          
 
-          <ul className={styles.list}>
-            {available.length === 0 && (
-              <li className={styles.empty}>No categories</li>
-            )}
-            {available.map((c) => (
-              <li key={c.id}>
-                <button
-                  type="button"
-                  className={styles.item}
-                  onClick={() => add(c.id)}
-                >
-                  {c.name}
-                </button>
-              </li>
-            ))}
-          </ul>
-
-
-        </div>
-      )}
     </div>
   );
 }

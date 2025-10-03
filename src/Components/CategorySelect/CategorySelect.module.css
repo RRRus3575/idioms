@@ -4,6 +4,11 @@
   margin-bottom: 28px;
 }
 
+.triggerWrap{
+  position: relative;
+  display: inline-block; /* чтобы ширина тянулась по кнопке */
+}
+
 .chips { 
   display:flex; 
   flex-wrap:wrap; 
@@ -58,6 +63,8 @@
 .menu {
   position:absolute;  
   z-index:50;
+  top: calc(100% + 8px);
+  left: 0;
   width:184px;
   height: 272px;
   background:#fff; 

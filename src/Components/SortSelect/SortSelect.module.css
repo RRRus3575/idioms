@@ -7,7 +7,7 @@
 }
 
 .sortPrefix {
-  color: #6b7280; /* gray-500 */
+  color: #343A40; 
   font-size: 14px;
 }
 
@@ -19,7 +19,7 @@
   border: none;
   padding: 4px 6px;
   font-weight: 600;
-  color: #111827;
+  color: #343A40;
   cursor: pointer;
   outline: none;
 }
@@ -28,7 +28,9 @@
   box-shadow: 0 0 0 3px rgba(59,130,246,.35);
 }
 
-.sortValue { letter-spacing: .2px; }
+.sortValue { 
+  letter-spacing: .2px; 
+}
 
 .sortChevron {
   transition: transform .15s ease;
@@ -42,29 +44,35 @@
   position: absolute;
   top: calc(100% + 8px);
   left: 0;                   /* если надо выровнять по правому краю: right:0; left:auto; */
-  width: 180px;
-  padding: 6px;
+  width: 126px;
   margin: 0;
   list-style: none;
-  background: #fff;
-  border: 1px solid #e5e7eb; /* gray-200 */
+  border: 1px solid #CED4DA; /* gray-200 */
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,.08);
   z-index: 50;
+  overflow: hidden;
 }
 
-.sortItem {
-  width: 100%;
+.sortMenu > li {
+  width: 126px;
+  height: 36px;
   text-align: left;
-  padding: 10px 12px;
-  border: none;
+  padding: 8px 20px;
+  border-top: 1px solid #CED4DA; 
   background: transparent;
-  border-radius: 8px;
   cursor: pointer;
   outline: none;
-  color: #111827;
-  font: inherit;
+  color: #212529;
+  font-size: 14px;
 }
-.sortItem:hover,
-.sortItem:focus-visible { background: #f3f4f6; } /* gray-100 */
-.sortItemSelected { font-weight: 600; }
+
+.sortMenu > li:first-child{
+ border: none;
+}
+
+.sortItem::first-letter{
+  border: none;
+}
+.sortMenu > li:hover,
+.sortMenu > li:focus-visible { background: #F3ECFE; } 
+
