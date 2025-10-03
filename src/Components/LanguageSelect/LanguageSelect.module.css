@@ -1,29 +1,56 @@
-.wrapper { position: relative; display: inline-flex; }
+.wrapper { position: relative; display: inline-block; }
 
-.select {
-  appearance: none; -webkit-appearance: none; -moz-appearance: none;
-  border: none; outline: 1px solid #ced4da;
-  font-size: 16px; align-items: center; position: relative;
-  padding-left: 20px; padding-right: 20px; border-radius: 0 8px 8px 0;
-  height: 36px; background: #fff; color: #101828;
+/* кнопка, которая выглядит как select */
+.selectBtn{
+  appearance:none; 
+  border: none;
+  outline: 1px solid #CED4DA; 
+  background:#fff; 
+  color:#101828;
+  height:42px; 
+  padding:0 28px 0 12px; 
+  border-radius:0 8px 8px 0; 
+  font-size:16px;
+  display:inline-flex; 
+  align-items:center; 
+  gap:8px; 
+  cursor:pointer;
 }
 
-.option { font-size: 16px; }
 
-.icon {
-  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-  width: 12px; height: 12px; pointer-events: none; z-index: 3;
+.selectBtn:focus-visible{ outline:none; box-shadow:0 0 0 3px rgba(102,15,242,.25); }
+
+.icon{ position:absolute; right:10px; top:50%; transform:translateY(-50%); width:12px; height:12px; pointer-events:none; transition: transform 300ms ease;}
+.icon.turned {transform: rotate(180deg) translateY(50%);}
+/* размеры по вариантам */
+.selectBtn.v_hero  { height:44px; width:110px; }
+.selectBtn.v_header{ height:36px; }
+@media (max-width: 480px){ .selectBtn.v_header{ width:76px; } }
+@media (min-width: 481px){ .selectBtn.v_header{ width:110px; } }
+.selectBtn.v_card{ height:36px; }
+@media (max-width: 400px){ .selectBtn.v_card{ width:76px; } }
+@media (min-width: 401px){ .selectBtn.v_card{ width:110px; } }
+
+/* выпадающее меню как на скрине */
+.menuWrap{
+  position:absolute; top:calc(100% + 6px); left:0; z-index:50; width:100%;
+}
+.menu{
+  margin:0; padding:0; list-style:none;
+  background:#fff; border:1px solid #CED4DA; border-radius:12px; overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,.06);
 }
 
-/* hero: 44px, width:110px */
-.select.v_hero { height: 44px; width: 110px; }
+/* элементы */
+.item{
+  width:100%; text-align:left; background:#fff; color:#101828;
+  height:44px; padding:0 14px; cursor:pointer; display:flex; align-items:center;
+  border-top:1px solid #CED4DA;  /* разделители */
+  font-size:16px;
+}
+.item:first-child{ border-top:none; } /* без линии у первого */
+.item:hover, .item:focus-visible{ background:#F3F4F6; }
+.active{ background:#F3ECFE; color:#660FF2; }
 
-/* header: 36px; 76/110 по брейкпоинту */
-.select.v_header { height: 36px; }
-@media (max-width: 480px) { .select.v_header { width: 76px; } }
-@media (min-width: 481px) { .select.v_header { width: 110px; } }
-
-/* card: 36px; 76 до 400px, 110 после */
-.select.v_card { height: 36px; }
-@media (max-width: 400px) { .select.v_card { width: 76px; } }
-@media (min-width: 401px) { .select.v_card { width: 110px; } }
+/* чтобы стрелка была над кнопкой, а не внутри меню */
+.icon.v_hero, .icon.v_header, .icon.v_card { position:absolute; }

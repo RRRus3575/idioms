@@ -5,20 +5,20 @@ import styles from "./CategorySelect.module.css";
 /**
  * value: string[]        // массив ID выбранных категорий
  * onChange: (ids: string[]) => void
- * language?: string      // если бэку нужен язык — пробрасывай, иначе можно не передавать
+ * language?: string
+ * onClearAll?: () => void
  */
 function CategorySelect({ value = [], onChange, language, onClearAll }) {
-  // если твоему эндпоинту нужны категории для конкретного языка — пробрось language
   const { data: rawCats = [], isLoading, isError } =
     useGetCategoriesQuery(language ? { language } : undefined);
 
-  // ⚙️ Санация выбранных: убираем пустые, приводим к строкам, удаляем дубликаты
+  // нормализация выбранных
   const selectedIds = useMemo(
     () => [...new Set((Array.isArray(value) ? value : []).filter(Boolean).map(String))],
     [value]
   );
 
-  // Нормализуем категории: поддержка и объектов {id,name}, и простых строк
+  // нормализация категорий
   const cats = useMemo(() => {
     return rawCats.map((c) =>
       typeof c === "string" ? { id: c, name: c } : { id: String(c.id), name: c.name }
@@ -30,46 +30,48 @@ function CategorySelect({ value = [], onChange, language, onClearAll }) {
   const btnRef = useRef(null);
   const menuRef = useRef(null);
 
-  // Выбранные для чипсов
+  // выбранные / доступные
   const selected = useMemo(
     () => cats.filter((c) => selectedIds.includes(c.id)),
     [cats, selectedIds]
   );
 
-  // Доступные к выбору + фильтр по поиску (исключаем выбранные)
   const available = useMemo(() => {
     const lower = q.trim().toLowerCase();
     const base = cats.filter((c) => !selectedIds.includes(c.id));
     return lower ? base.filter((c) => c.name.toLowerCase().includes(lower)) : base;
   }, [cats, selectedIds, q]);
 
-  // Клик вне — закрыть меню
+  // ▼ КЛЮЧЕВАЯ ЛОГИКА
+  const allSelected = cats.length > 0 && selectedIds.length >= cats.length;
+  const isSearching = q.trim().length > 0;
+  const showTrigger = !allSelected || isSearching;     // показывать кнопку
+  const showMenu    = open && (!allSelected || isSearching); // показывать меню
+
+  // click-outside
   useEffect(() => {
     if (!open) return;
     const onDoc = (e) => {
       if (!btnRef.current || !menuRef.current) return;
       if (!btnRef.current.contains(e.target) && !menuRef.current.contains(e.target)) {
         setOpen(false);
-        setQ("");
+        setQ(""); // очистим поиск при явном закрытии
       }
     };
     document.addEventListener("mousedown", onDoc);
     return () => document.removeEventListener("mousedown", onDoc);
   }, [open]);
 
-  // Добавить категорию → сразу триггерим onChange; меню оставляем открытым
+  // добавить категорию (не чистим поиск, если этим выбором добиваем "всё выбрано")
   const add = (id) => {
     if (!id || selectedIds.includes(id)) return;
     const next = [...selectedIds, id];
-    onChange(next); // родитель сделает updateQuery({ categories: next.join(","), page:"1" })
-    setQ("");       // очистим поиск — визуально видно, что опция «исчезла»
+    onChange(next);
+    const willBeAllSelected = next.length >= cats.length && cats.length > 0;
+    if (!willBeAllSelected) setQ("");
   };
 
-  // Удалить категорию (по клику на чип)
-  const remove = (id) => {
-    const next = selectedIds.filter((v) => v !== id);
-    onChange(next);
-  };
+  const remove = (id) => onChange(selectedIds.filter((v) => v !== id));
 
   if (isLoading) return <p>Loading categories…</p>;
   if (isError) return <p>Failed to load categories</p>;
@@ -85,15 +87,18 @@ function CategorySelect({ value = [], onChange, language, onClearAll }) {
             onClick={() => remove(c.id)}
             title="Remove"
           >
-            {c.name} <span className={styles.close}>
+            {c.name}
+            <span className={styles.close}>
               <svg className={styles.cross} width="16" height="16" aria-hidden>
                 <use xlinkHref="/sprite.svg#close" />
               </svg>
             </span>
           </button>
         ))}
+
         <div className={styles.triggerWrap}>
-          <button
+          {showTrigger && (
+            <button
               ref={btnRef}
               type="button"
               className={`${styles.trigger} ${open ? styles.active : ""}`}
@@ -101,12 +106,20 @@ function CategorySelect({ value = [], onChange, language, onClearAll }) {
               aria-expanded={open}
               aria-haspopup="listbox"
             >
-              Choose a category <svg className={styles.image} width="16" height="16" aria-hidden>
-                  <use xlinkHref="/sprite.svg#plus" />
-                </svg>
+              Choose a category
+              <svg className={styles.image} width="16" height="16" aria-hidden>
+                <use xlinkHref="/sprite.svg#plus" />
+              </svg>
             </button>
-            {open && (
-            <div ref={menuRef} className={styles.menu} role="listbox" aria-multiselectable="true">
+          )}
+
+          {showMenu && (
+            <div
+              ref={menuRef}
+              className={styles.menu}
+              role="listbox"
+              aria-multiselectable="true"
+            >
               <label className={styles.inputLabel}>
                 <svg className={styles.search} width="16" height="16" aria-hidden>
                   <use xlinkHref="/sprite.svg#find" />
@@ -119,7 +132,6 @@ function CategorySelect({ value = [], onChange, language, onClearAll }) {
                   autoFocus
                 />
               </label>
-          
 
               <ul className={styles.list}>
                 {available.length === 0 && (
@@ -137,16 +149,16 @@ function CategorySelect({ value = [], onChange, language, onClearAll }) {
                   </li>
                 ))}
               </ul>
-
-
             </div>
           )}
         </div>
-        
-        {value.length>0 && (<button type="button" onClick={onClearAll} className={styles.clear} >Clear all</button>)}
+
+        {value.length > 0 && (
+          <button type="button" onClick={onClearAll} className={styles.clear}>
+            Clear all
+          </button>
+        )}
       </div>
-
-
     </div>
   );
 }
