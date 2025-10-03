@@ -9,7 +9,6 @@ const HomePage = () => {
   const router = useRouter();
 
   const handleFormSubmit = ({ idiom, language, categoryIds = [], sort = "az" }) => {
-    console.log(language)
     router.push({
       pathname: "/search",
       query: {

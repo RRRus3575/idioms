@@ -4,7 +4,7 @@ import { useMediaQuery } from "react-responsive";
 import LanguageSelect from "@/Components/LanguageSelect/LanguageSelect";
 
 
-const FormHeader = ({ handleFormSubmit }) => {
+const FormHeader = ({ handleFormSubmit = () => {} }) => {
   const [formData, setFormData] = useState({ idiom: "", language: "english" });
   const isMobile = useMediaQuery({ maxWidth: 480 });
 

@@ -9,8 +9,10 @@ import { toLangCode } from "@/utils/lang";
 import style from "./MainIdioms.module.css";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
-const MainIdioms = () => {
+const MainIdioms = ({externalSearch}) => {
   const router = useRouter();
+  const [extTsUsed, setExtTsUsed] = useState(0);
+
 
 
 
@@ -56,6 +58,56 @@ const MainIdioms = () => {
     });
     router.replace({ pathname: "/search", query: next }, undefined, { shallow: true });
   };
+    // если пришли внешние параметры — один раз применяем их к URL (shallow)
+  useEffect(() => {
+    if (!externalSearch) return;
+    const {
+      __ts,
+      q = "",
+      lang = "en",
+      categories = "",   // может быть строкой "a,b" или массивом
+      sort = "az",
+      hideOutdated = "0",
+    } = externalSearch;
+
+    if (!__ts || __ts === extTsUsed) return; // уже применяли
+
+    // если пусто совсем — просто помечаем как использованное и выходим
+    const catsStr = Array.isArray(categories) ? categories.join(",") : (categories || "");
+    const hasAny = (q && q.trim().length > 0) || (catsStr && catsStr.length > 0);
+    if (!hasAny) { setExtTsUsed(__ts); return; }
+
+    const next = {
+      ...router.query,
+      q: q.trim(),
+      lang: toLangCode(lang, "en"),
+      categories: catsStr,
+      sort,
+      hideOutdated: (hideOutdated === true || hideOutdated === "1") ? "1" : "0",
+      page: "1",
+    };
+
+    // убрать пустые ключи
+    Object.keys(next).forEach((k) => {
+      if (next[k] === "" || next[k] == null) delete next[k];
+    });
+
+    // если уже такой же URL — не дёргаем router
+    const same =
+      (router.query.q || "") === (next.q || "") &&
+      (router.query.lang || "") === (next.lang || "") &&
+      (router.query.categories || "") === (next.categories || "") &&
+      (router.query.sort || "az") === (next.sort || "az") &&
+      ((router.query.hideOutdated ? "1" : "0") === (next.hideOutdated || "0"));
+
+    if (!same) {
+      router.replace({ pathname: "/search", query: next }, undefined, { shallow: true });
+    }
+
+    setExtTsUsed(__ts);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [externalSearch?.__ts]);
+
 
   const handleClearSearch = () =>
     submitWithCurrentFilters({ q: "", lang: urlState?.lang });

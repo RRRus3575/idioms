@@ -4,7 +4,7 @@ import FormHeader from "../Form-header/Form-header";
 import Link from "next/link";
 
 
-const Header = ({ onFormSubmit }) => {
+const Header = ({ onFormSubmit = () => {} }) => {
   const [isActive, setIsActive] = useState(false);
 
 
