@@ -10,7 +10,7 @@ const Search = () => {
 
   const mainStyle = useMemo(
     () => ({
-      height: `calc(100vh - ${headerH}px - ${footerH}px)`,
+      minHeight: `calc(100vh - ${headerH}px - ${footerH}px)`,
       overflow: "auto"
     }),
     [headerH, footerH]

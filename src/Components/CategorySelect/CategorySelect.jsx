@@ -7,7 +7,7 @@ import styles from "./CategorySelect.module.css";
  * onChange: (ids: string[]) => void
  * language?: string      // если бэку нужен язык — пробрасывай, иначе можно не передавать
  */
-function CategorySelect({ value = [], onChange, language }) {
+function CategorySelect({ value = [], onChange, language, onClearAll }) {
   // если твоему эндпоинту нужны категории для конкретного языка — пробрось language
   const { data: rawCats = [], isLoading, isError } =
     useGetCategoriesQuery(language ? { language } : undefined);
@@ -85,31 +85,44 @@ function CategorySelect({ value = [], onChange, language }) {
             onClick={() => remove(c.id)}
             title="Remove"
           >
-            {c.name} <span className={styles.close}>×</span>
+            {c.name} <span className={styles.close}>
+              <svg className={styles.cross} width="16" height="16" aria-hidden>
+                <use xlinkHref="/sprite.svg#close" />
+              </svg>
+            </span>
           </button>
         ))}
 
         <button
           ref={btnRef}
           type="button"
-          className={styles.trigger}
+          className={`${styles.trigger} ${open ? styles.active : ""}`}
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
           aria-haspopup="listbox"
         >
-          Choose a category +
+          Choose a category <svg className={styles.image} width="16" height="16" aria-hidden>
+              <use xlinkHref="/sprite.svg#plus" />
+            </svg>
         </button>
+        {value.length>0 && (<button type="button" onClick={onClearAll} className={styles.clear} >Clear all</button>)}
       </div>
 
       {open && (
         <div ref={menuRef} className={styles.menu} role="listbox" aria-multiselectable="true">
-          <input
-            className={styles.search}
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Search categories…"
-            autoFocus
-          />
+          <label className={styles.inputLabel}>
+            <svg className={styles.search} width="16" height="16" aria-hidden>
+              <use xlinkHref="/sprite.svg#find" />
+            </svg>
+            <input
+              className={styles.input}
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Search categories…"
+              autoFocus
+            />
+          </label>
+          
 
           <ul className={styles.list}>
             {available.length === 0 && (
