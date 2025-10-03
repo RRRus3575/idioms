@@ -1,27 +1,21 @@
 .wrapper { position: relative; display: inline-block; }
 
-/* кнопка, которая выглядит как select */
+/* кнопка */
 .selectBtn{
-  appearance:none; 
-  border: none;
-  outline: 1px solid #CED4DA; 
-  background:#fff; 
-  color:#101828;
-  height:42px; 
-  padding:0 28px 0 12px; 
-  border-radius:0 8px 8px 0; 
-  font-size:16px;
-  display:inline-flex; 
-  align-items:center; 
-  gap:8px; 
-  cursor:pointer;
+  appearance:none; border:none; outline:1px solid #CED4DA;
+  background:#fff; color:#101828;
+  height:42px; padding:0 28px 0 12px; border-radius:0 8px 8px 0; font-size:16px;
+  display:inline-flex; align-items:center; gap:8px; cursor:pointer;
 }
-
-
 .selectBtn:focus-visible{ outline:none; box-shadow:0 0 0 3px rgba(102,15,242,.25); }
 
-.icon{ position:absolute; right:10px; top:50%; transform:translateY(-50%); width:12px; height:12px; pointer-events:none; transition: transform 300ms ease;}
-.icon.turned {transform: rotate(180deg) translateY(50%);}
+.icon{
+  position:absolute; right:10px; top:50%;
+  transform: translateY(-50%) rotate(0deg);
+  width:12px; height:12px; pointer-events:none; transition: transform 300ms ease;
+}
+.turned{ transform: translateY(-50%) rotate(180deg); }
+
 /* размеры по вариантам */
 .selectBtn.v_hero  { height:44px; width:110px; }
 .selectBtn.v_header{ height:36px; }
@@ -31,26 +25,30 @@
 @media (max-width: 400px){ .selectBtn.v_card{ width:76px; } }
 @media (min-width: 401px){ .selectBtn.v_card{ width:110px; } }
 
-/* выпадающее меню как на скрине */
+/* меню */
 .menuWrap{
   position:absolute; top:calc(100% + 6px); left:0; z-index:50; width:100%;
 }
 .menu{
   margin:0; padding:0; list-style:none;
-  background:#fff; border:1px solid #CED4DA; border-radius:12px; overflow:hidden;
+  background:#fff; border:1px solid #CED4DA; border-radius:12px; overflow:auto;
   box-shadow:0 10px 25px rgba(0,0,0,.06);
+  max-height:150px;                    /* ограничение высоты */
+  scrollbar-width:none;                /* Firefox — скрыть полосу */
+  -ms-overflow-style:none;             /* IE/старый Edge */
 }
+.menu::-webkit-scrollbar{ display:none; } /* Chrome/Safari/Opera — скрыть полосу */
 
 /* элементы */
 .item{
   width:100%; text-align:left; background:#fff; color:#101828;
   height:44px; padding:0 14px; cursor:pointer; display:flex; align-items:center;
-  border-top:1px solid #CED4DA;  /* разделители */
+  border-top: 1px solid #CED4DA;
   font-size:16px;
 }
-.item:first-child{ border-top:none; } /* без линии у первого */
+.menu li:first-child{ border-top:none; }
 .item:hover, .item:focus-visible{ background:#F3ECFE; }
 .active{ background:#F3ECFE; color:#660FF2; }
 
-/* чтобы стрелка была над кнопкой, а не внутри меню */
+/* (позиция стрелки фиксирована поверх кнопки) */
 .icon.v_hero, .icon.v_header, .icon.v_card { position:absolute; }
