@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import style from "./IdiomsBlock.module.css";
-import Idioma from "../Idioma/Idioma";
+import ListIdioms from "../ListIdioms/listIdioms";
 import { useGetIdiomsQuery } from "@/store/api";
 import ButtonShowMore from "../ButtonShowMore/ButtonShowMore";
 
@@ -68,7 +68,7 @@ const IdiomsBlock = () => {
       {!isLoading && !isError && (
         <>
           <div>
-            <Idioma idioms={items} />
+            <ListIdioms idioms={items} />
           </div>
 
           {totalPages > 1 && currentPage !== totalPages && (

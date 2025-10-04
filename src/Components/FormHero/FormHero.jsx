@@ -5,6 +5,7 @@ import LanguageSelect from "@/Components/LanguageSelect/LanguageSelect";
 
 const FormHero = forwardRef(function FormHero(
   { onFormSubmit, initialIdiom = "", initialLanguage = "en", onClear },
+  ref // ← обязательно второй параметр у forwardRef
 ) {
   const [formData, setFormData] = useState({ idiom: initialIdiom, language: initialLanguage });
   const [dirty, setDirty] = useState(false);
@@ -34,22 +35,35 @@ const FormHero = forwardRef(function FormHero(
     if (name === "idiom") setDirty(true);
   };
 
+  // если пользователь стер всё руками — сразу чистим поиск
+  useEffect(() => {
+    if (!dirty) return;
+    if (formData.idiom.trim() === "") {
+      onClear?.();
+      setDirty(false);
+    }
+  }, [formData.idiom, dirty, onClear]);
+
   const clearIdiom = () => {
     setFormData((s) => ({ ...s, idiom: "" }));
-    setDirty(true);
+    setDirty(false);
     onClear?.();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = { idiom: formData.idiom.trim(), language: formData.language };
-    if (!payload.idiom) return;
-    const p = onFormSubmit?.(payload);
+    const q = formData.idiom.trim();
+
+    if (!q) {           // пустая строка -> сбрасываем поиск
+      onClear?.();
+      return;
+    }
+    const p = onFormSubmit?.({ idiom: q, language: formData.language });
     if (p && typeof p.then === "function") await p;
   };
 
   return (
-    <form className={styles.heroForm} onSubmit={handleSubmit}>
+    <form ref={ref} className={styles.heroForm} onSubmit={handleSubmit}>
       <label className={styles.inputLabel}>
         <svg className={styles.search} width="16" height="16" aria-hidden>
           <use xlinkHref="/sprite.svg#find" />

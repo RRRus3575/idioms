@@ -35,25 +35,6 @@ const FormHeader = ({ handleFormSubmit = () => {} }) => {
         />
       </label>
 
-      {/* <div className="form-select">
-        <select
-          name="language"            // ← важно!
-          className={styles.select}
-          value={formData.language}
-          onChange={handleChange}
-        >
-          <option value="english" className={styles.option}>
-            {isMobile ? "Eng" : "English"}
-          </option>
-          <option value="german" className={styles.option}>
-            {isMobile ? "Ger" : "German"}
-          </option>
-        </select>
-        <svg className={styles.icon} aria-hidden="true">
-          <use xlinkHref="/sprite.svg#down" />
-        </svg>
-      </div> */}
-
       <LanguageSelect
         variant="header"
         value={formData.language}

@@ -123,6 +123,17 @@ export const api = createApi({
       },
     }),
 
+    getIdiomById: builder.query({
+      // бэк: GET /idioms/:id
+      query: ({ id, language }) => ({
+        url: `/idioms/${id}`,
+        // если бэку нужен язык — прокидываем, иначе можно убрать:
+        params: language ? { language } : undefined,
+      }),
+      // чтобы при каждом новом id показывался свежий лоадинг
+      keepUnusedDataFor: 0,
+    }),
+
     addIdiom: builder.mutation({
       query: (newIdiom) => ({
         url: '/idioms',
@@ -136,6 +147,7 @@ export const api = createApi({
 export const {
   useGetCategoriesQuery,
   useGetIdiomsQuery,
+  useGetIdiomByIdQuery,
   useLazyGetIdiomsQuery,
   useAddIdiomMutation,
 } = api;

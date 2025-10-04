@@ -4,7 +4,7 @@ import { useGetCategoriesQuery, useGetIdiomsQuery } from "@/store/api";
 import FormHero from "../FormHero/FormHero";
 import FiltersBar from "../FiltersBar/FiltersBar";
 import ButtonShowMore from "../ButtonShowMore/ButtonShowMore";
-import Idioma from "../Idioma/Idioma";
+import ListIdioms from "../ListIdioms/listIdioms";
 import { toLangCode } from "@/utils/lang";
 import style from "./MainIdioms.module.css";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -228,7 +228,7 @@ const MainIdioms = ({externalSearch}) => {
       {!isLoading && !isError && items.length > 0 && (
         <>
           <div>
-            <Idioma idioms={items} />
+            <ListIdioms idioms={items} />
           </div>
           {totalPages > 1 && currentPage !== totalPages && (
             <ButtonShowMore
