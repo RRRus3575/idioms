@@ -4,6 +4,7 @@ import style from "./IdiomsBlock.module.css";
 import ListIdioms from "../ListIdioms/listIdioms";
 import { useGetIdiomsQuery } from "@/store/api";
 import ButtonShowMore from "../ButtonShowMore/ButtonShowMore";
+import LoaderIdioms from "../LoaderIdioms/LoaderIdioms";
 
 const PAGE_SIZE = 20;
 
@@ -38,6 +39,10 @@ const IdiomsBlock = () => {
   const currentPage = data?.currentPage ?? page;
   const canLoadMore = currentPage < totalPages;
 
+  const showInitialSkeleton =
+  (isLoading && page === 1) ||
+  (isFetching && page === 1 && items.length === 0);
+
   const handleLoadMore = () => {
     if (!canLoadMore || isFetching) return;
     setPage(p => p + 1);
@@ -62,10 +67,10 @@ const IdiomsBlock = () => {
         </button>
       </div>
 
-      {isLoading && currentPage === 1 && <p>Loading idioms...</p>}
+      {showInitialSkeleton && currentPage === 1 && <LoaderIdioms/>}
       {isError && <p>Failed to load idioms</p>}
 
-      {!isLoading && !isError && (
+      {!showInitialSkeleton && !isError && (
         <>
           <div>
             <ListIdioms idioms={items} />

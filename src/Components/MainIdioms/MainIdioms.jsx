@@ -8,6 +8,7 @@ import ListIdioms from "../ListIdioms/listIdioms";
 import { toLangCode } from "@/utils/lang";
 import style from "./MainIdioms.module.css";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import LoaderIdioms from "../LoaderIdioms/LoaderIdioms";
 
 const MainIdioms = ({externalSearch}) => {
   const router = useRouter();
@@ -208,7 +209,7 @@ const MainIdioms = ({externalSearch}) => {
             />
       </div>
 
-      {isLoading && currentPage === 1 && <p>Loading idioms…</p>}
+      {isLoading && currentPage === 1 && <LoaderIdioms/>}
       {isError && <p>Failed to load idioms</p>}
 
       {!isLoading && !isError && items.length < 1 && (
