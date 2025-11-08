@@ -3,17 +3,31 @@ import styles from "./FormHero.module.css";
 import { useMediaQuery } from "react-responsive";
 import LanguageSelect from "@/Components/LanguageSelect/LanguageSelect";
 
+// Разрешённые коды (без 'ru'). При необходимости оставь 'all' для режима "все языки".
+const ALLOWED_LANGS = new Set(["en", "de", "it", "pt", "uk", "all"]);
+
+// Универсальная нормализация входящего кода языка
+const normalizeLang = (x) => {
+  const v = String(x ?? "en").toLowerCase().trim();
+  return ALLOWED_LANGS.has(v) ? v : "en";
+};
+
 const FormHero = forwardRef(function FormHero(
   { onFormSubmit, initialIdiom = "", initialLanguage = "en", onClear },
-  ref // ← обязательно второй параметр у forwardRef
+  ref
 ) {
-  const [formData, setFormData] = useState({ idiom: initialIdiom, language: initialLanguage });
-  const [dirty, setDirty] = useState(false);
-  const prevInitialIdiom = useRef(initialIdiom);
-  const prevInitialLang  = useRef(initialLanguage);
-
   const isMobile = useMediaQuery({ maxWidth: 750 });
 
+  const [formData, setFormData] = useState({
+    idiom: initialIdiom,
+    language: normalizeLang(initialLanguage),
+  });
+
+  const [dirty, setDirty] = useState(false);
+  const prevInitialIdiom = useRef(initialIdiom);
+  const prevInitialLang = useRef(normalizeLang(initialLanguage));
+
+  // Синхронизация извне: идиома
   useEffect(() => {
     if (initialIdiom !== prevInitialIdiom.current) {
       prevInitialIdiom.current = initialIdiom;
@@ -22,20 +36,26 @@ const FormHero = forwardRef(function FormHero(
     }
   }, [initialIdiom]);
 
+  // Синхронизация извне: язык (с нормализацией)
   useEffect(() => {
-    if (initialLanguage !== prevInitialLang.current) {
-      prevInitialLang.current = initialLanguage;
-      setFormData((s) => ({ ...s, language: initialLanguage }));
+    const next = normalizeLang(initialLanguage);
+    if (next !== prevInitialLang.current) {
+      prevInitialLang.current = next;
+      setFormData((s) => ({ ...s, language: next }));
     }
   }, [initialLanguage]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((s) => ({ ...s, [name]: value }));
-    if (name === "idiom") setDirty(true);
+    if (name === "idiom") {
+      setFormData((s) => ({ ...s, idiom: value }));
+      setDirty(true);
+    } else if (name === "language") {
+      setFormData((s) => ({ ...s, language: normalizeLang(value) }));
+    }
   };
 
-  // если пользователь стер всё руками — сразу чистим поиск
+  // Если пользователь стёр запрос — сразу чистим результаты
   useEffect(() => {
     if (!dirty) return;
     if (formData.idiom.trim() === "") {
@@ -53,12 +73,12 @@ const FormHero = forwardRef(function FormHero(
   const handleSubmit = async (e) => {
     e.preventDefault();
     const q = formData.idiom.trim();
-
-    if (!q) {           // пустая строка -> сбрасываем поиск
+    if (!q) {
       onClear?.();
       return;
     }
-    const p = onFormSubmit?.({ idiom: q, language: formData.language });
+    const lang = normalizeLang(formData.language); // финальная защита
+    const p = onFormSubmit?.({ idiom: q, language: lang });
     if (p && typeof p.then === "function") await p;
   };
 
@@ -95,8 +115,11 @@ const FormHero = forwardRef(function FormHero(
       <LanguageSelect
         variant="hero"
         value={formData.language}
-        onChange={(code) => setFormData((s) => ({ ...s, language: code }))}
+        // Любое значение с селекта прогоняем через normalizeLang
+        onChange={(code) => setFormData((s) => ({ ...s, language: normalizeLang(code) }))}
         shortLabels={isMobile}
+        // Если у компонента есть проп для ограничения опций — раскомментируй:
+        // allowed={Array.from(ALLOWED_LANGS)}
       />
 
       <button type="submit" className={styles.button} aria-label="search">

@@ -9,6 +9,7 @@ import { toLangCode } from "@/utils/lang";
 import style from "./MainIdioms.module.css";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import LoaderIdioms from "../LoaderIdioms/LoaderIdioms";
+import ErrorContainer from "@/Error/Error";
 
 const MainIdioms = ({externalSearch}) => {
   const router = useRouter();
@@ -195,35 +196,26 @@ const MainIdioms = ({externalSearch}) => {
           initialLanguage={urlState.lang}
         />
 
-
-            <FiltersBar
-              categories={urlState.categoryIds}
-              onChangeCategories={handleChangeCategories}
-              sort={urlState.sort}
-              onChangeSort={handleChangeSort}
-              hideOutdated={urlState.hideOutdated}
-              onToggleOutdated={handleToggleOutdated}
-              onClearAll={handleClearAll}
-              allCategories={categories}
-              categoriesLoading={catsLoading}
-            />
+        <FiltersBar
+          categories={urlState.categoryIds}
+          onChangeCategories={handleChangeCategories}
+          sort={urlState.sort}
+          onChangeSort={handleChangeSort}
+          hideOutdated={urlState.hideOutdated}
+          onToggleOutdated={handleToggleOutdated}
+          onClearAll={handleClearAll}
+          allCategories={categories}
+          categoriesLoading={catsLoading}
+        />
       </div>
 
       {isLoading && currentPage === 1 && <LoaderIdioms/>}
-      {isError && <p>Failed to load idioms</p>}
+      {isError && (
+        <ErrorContainer title="Oops! Something went wrong" text="Try searching again — it might work next time"/>
+      )}
 
       {!isLoading && !isError && items.length < 1 && (
-        <div className={style.notFound}>
-          <div className={style.cross}>
-            <svg className={style.image} width="40" height="40" aria-hidden>
-              <use xlinkHref="/sprite.svg#close" className={style.crossimg} />
-            </svg>
-          </div>
-          <div>
-            <h2 className={style.errorname}>Nothing is found</h2>
-            <p>Try to change the filter categories, language or keywords</p>
-          </div>
-        </div>
+        <ErrorContainer title="Nothing is found" text="Try to change the filter categories, language or keywords"/>
       )}
 
       {!isLoading && !isError && items.length > 0 && (
