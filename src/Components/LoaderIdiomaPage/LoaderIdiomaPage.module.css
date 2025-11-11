@@ -1,0 +1,19 @@
+.container{
+  width: 100%;
+  max-width: 846px;
+  margin: 0 auto;
+  padding: 16px;
+  border-radius: 16px;
+  background: #fff;
+}
+
+/* по умолчанию – desktop */
+.desktop { display: block; }
+.mobile  { display: none; }
+
+/* показываем mobile-версию на узких экранах */
+@media (max-width: 640px){
+  .container{ padding: 12px; border-radius: 12px; }
+  .desktop { display: none; }
+  .mobile  { display: block; }
+}

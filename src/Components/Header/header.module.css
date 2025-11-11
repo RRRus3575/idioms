@@ -28,7 +28,7 @@
 }
 @media (max-width: 480px){
   .header {
-    padding: 12px 6px;
+    padding: 12px 10px;
   }
   .logo{
     width: calc(100vw - 78vw);
@@ -55,9 +55,6 @@
   opacity: 1;
   
 }
-.header {
-  padding: 12px 15px;
-}
 .button{
   background: none;
     border: none;
@@ -68,9 +65,13 @@
     width: 36px;
     height: 36px;
 }
-
+@media (min-width: 480px) {
+  .header {
+    padding: 12px 20px;
+  }
 }
-@media (min-width: 776px){
+}
+@media (min-width: 775px){
   .button{
     display: none;
   }

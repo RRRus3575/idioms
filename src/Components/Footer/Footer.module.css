@@ -1,7 +1,7 @@
 
   .footer{
     width: 100%;
-    padding: 20px 40px;
+    padding: 20px 10px;
     display: flex;
     color: #6C757D;
     font-size: 12px;
@@ -22,7 +22,24 @@
   .wrap ul{
     flex-shrink: 0;
   }
+@media(max-with: 380px) {
+  .footer{
+    padding: 10px;
+  }
+}
 
+@media(min-with: 480px) {
+  .footer{
+    padding: 20px;
+  }
+}
+
+
+@media(min-width: 750px) {
+  .footer{
+    padding: 20px 80px;
+  }
+}
 
   @media (max-width: 750px){
     .footer{
@@ -47,7 +64,7 @@
     }
   }
 
-  @media (min-width: 751px) {
+  @media (min-width: 750px) {
     .footer{
       justify-content: space-between;
     }

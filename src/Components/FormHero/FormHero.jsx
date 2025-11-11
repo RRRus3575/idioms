@@ -17,6 +17,7 @@ const FormHero = forwardRef(function FormHero(
   ref
 ) {
   const isMobile = useMediaQuery({ maxWidth: 750 });
+  const isLowMobile = useMediaQuery({ maxWidth: 380})
 
   const [formData, setFormData] = useState({
     idiom: initialIdiom,
@@ -123,7 +124,7 @@ const FormHero = forwardRef(function FormHero(
       />
 
       <button type="submit" className={styles.button} aria-label="search">
-        {isMobile ? (
+        {isMobile && !isLowMobile ? (
           <svg width="16" height="16" aria-hidden>
             <use xlinkHref="/sprite.svg#find" />
           </svg>

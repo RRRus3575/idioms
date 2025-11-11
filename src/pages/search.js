@@ -36,7 +36,7 @@ const Search = () => {
   };
 
   return (
-    <div className="page-container">
+    <div className="pagecontainer">
       <div ref={headerRef}><Header onFormSubmit={handleFormSubmit} /></div>
 
       <div style={mainStyle}>

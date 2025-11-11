@@ -116,10 +116,21 @@
   }
   .button {
     width: 149px;
-    padding: 14px  48px;
-                
+    padding: 14px  48px;    
     margin-left: 16px;
     
   }
 }
+
+@media (max-width: 380px){
+  .heroForm{
+    flex-wrap: wrap;
+  }
+  .button {
+    width: 149px;
+    padding: 14px  48px; 
+    margin: 15px 0 0 0;         
+  }
+}
+
 

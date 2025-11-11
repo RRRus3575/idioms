@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-wrap: wrap;
     font-size: 16px;
     color: #495057;
     margin-bottom: 24px ;
@@ -18,12 +19,19 @@
 .link:hover, .link:focus{
     border-color: #660FF2;
 }
-.image{
+.sep{
     transform: rotate(270deg);
     color: #495057;
     margin-right: 8px;
+    margin-left: 8px;
 }
 
 .plate{
     fill: inherit;
+}
+
+@media (max-width: 390px) {
+    .nav{
+        padding: 0 5px;
+    }
 }

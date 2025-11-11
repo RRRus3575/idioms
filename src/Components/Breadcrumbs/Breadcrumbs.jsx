@@ -21,7 +21,7 @@ export default function Breadcrumbs({
 
         {backHref && (
           <span className={styles.span}>
-            <svg className={styles.image} width="12" height="12" aria-hidden>
+            <svg className={styles.sep} width="12" height="12" aria-hidden>
               <use xlinkHref={separatorIcon} />
             </svg>
             <Link href={backHref} className={styles.link}>
@@ -31,7 +31,7 @@ export default function Breadcrumbs({
         )}
 
         <span className={styles.span}>
-          <svg className={styles.image} width="12" height="12" aria-hidden>
+          <svg className={styles.sep} width="12" height="12" aria-hidden>
             <use xlinkHref={separatorIcon} />
           </svg>
           <span aria-current="page">{currentLabel}</span>
@@ -46,28 +46,28 @@ export default function Breadcrumbs({
 
   return (
     <nav aria-label="Breadcrumb" className={`${styles.nav} ${className}`}>
-      {crumbs.map((c, i) => {
-        const first = i === 0;
-        return c.isCurrent ? (
-          <span key={c.href || i} className={styles.span}>
-            {!first && (
-              <svg className={styles.image} width="12" height="12" aria-hidden>
-                <use xlinkHref={separatorIcon} />
-              </svg>
-            )}
-            <span aria-current="page">{c.label}</span>
-          </span>
-        ) : (
-          <span key={c.href || i} className={styles.span}>
-            {!first && (
-              <svg className={styles.image} width="12" height="12" aria-hidden>
-                <use xlinkHref={separatorIcon} />
-              </svg>
-            )}
-            <Link href={c.href} className={styles.link}>{c.label}</Link>
-          </span>
-        );
-      })}
+{crumbs.map((c, i) => {
+  const isLast = i === crumbs.length - 1;
+
+  return (
+    <span key={c.href || i} className={styles.span}>
+      {c.isCurrent ? (
+        <span aria-current="page" className={styles.label}>{c.label}</span>
+      ) : (
+        <Link href={c.href} className={`${styles.link} ${styles.label}`}>
+          {c.label}
+        </Link>
+      )}
+
+      {!isLast && (
+        <svg className={styles.sep} width="12" height="12" aria-hidden>
+          <use xlinkHref={separatorIcon} />
+        </svg>
+      )}
+    </span>
+  );
+})}
+
     </nav>
   );
 }

@@ -1,4 +1,5 @@
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import LoaderIdiomaPage from "../LoaderIdiomaPage/LoaderIdiomaPage";
 import styles from "./MainIdiomItem.module.css"
 import { isYoungerThanNDays } from "@/utils/date";
 
@@ -21,6 +22,7 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                     currentLabel={idiom?.text || "Idiom"}
                     backHref={backHref} 
                 />
+                {isLoading && (<LoaderIdiomaPage/>)}
                 <div className={styles.head} >
                     <div className={styles.headtext}>
                         <h2>{idiom?.text}</h2>

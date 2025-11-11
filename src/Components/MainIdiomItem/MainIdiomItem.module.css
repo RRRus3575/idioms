@@ -45,6 +45,12 @@
     font-size: 14px;
 }
 
+@media(max-width: 380px){
+    .main{
+        padding: 48px 10px;
+    }
+}
+
 @media (min-width: 776px) {
     .main {
         margin-top: 80px ;
