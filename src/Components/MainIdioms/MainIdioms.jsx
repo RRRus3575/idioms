@@ -183,55 +183,59 @@ const MainIdioms = ({externalSearch}) => {
 
   return (
     <main className={style.main}>
-      <div>
-        <Breadcrumbs
-          labelMap={{ "/": "Home", "/search": "Search", idioms: "Idioms" }}
-          preserveQuery={false}
-        />
+      <section>
+        <div>
+          <Breadcrumbs
+            labelMap={{ "/": "Home", "/search": "Search", idioms: "Idioms" }}
+            preserveQuery={false}
+          />
 
-        <FormHero
-          onFormSubmit={handleFormSubmit}
-          onClear={handleClearSearch}
-          initialIdiom={urlState.q}
-          initialLanguage={urlState.lang}
-        />
+          <FormHero
+            onFormSubmit={handleFormSubmit}
+            onClear={handleClearSearch}
+            initialIdiom={urlState.q}
+            initialLanguage={urlState.lang}
+          />
 
-        <FiltersBar
-          categories={urlState.categoryIds}
-          onChangeCategories={handleChangeCategories}
-          sort={urlState.sort}
-          onChangeSort={handleChangeSort}
-          hideOutdated={urlState.hideOutdated}
-          onToggleOutdated={handleToggleOutdated}
-          onClearAll={handleClearAll}
-          allCategories={categories}
-          categoriesLoading={catsLoading}
-        />
-      </div>
+          <FiltersBar
+            categories={urlState.categoryIds}
+            onChangeCategories={handleChangeCategories}
+            sort={urlState.sort}
+            onChangeSort={handleChangeSort}
+            hideOutdated={urlState.hideOutdated}
+            onToggleOutdated={handleToggleOutdated}
+            onClearAll={handleClearAll}
+            allCategories={categories}
+            categoriesLoading={catsLoading}
+          />
+        </div>
+        
 
-      {isLoading && currentPage === 1 && <LoaderIdioms/>}
-      {isError && (
-        <ErrorContainer title="Oops! Something went wrong" text="Try searching again — it might work next time"/>
-      )}
+        {isLoading && currentPage === 1 && <LoaderIdioms/>}
+        {isError && (
+          <ErrorContainer title="Oops! Something went wrong" text="Try searching again — it might work next time"/>
+        )}
 
-      {!isLoading && !isError && items.length < 1 && (
-        <ErrorContainer title="Nothing is found" text="Try to change the filter categories, language or keywords"/>
-      )}
+        {!isLoading && !isError && items.length < 1 && (
+          <ErrorContainer title="Nothing is found" text="Try to change the filter categories, language or keywords"/>
+        )}
 
-      {!isLoading && !isError && items.length > 0 && (
-        <>
-          <div>
-            <ListIdioms idioms={items} />
-          </div>
-          {totalPages > 1 && currentPage !== totalPages && (
-            <ButtonShowMore
-              isFetching={isFetching}
-              canLoadMore={canLoadMore}
-              handleLoadMore={handleLoadMore}
-            />
-          )}
-        </>
-      )}
+        {!isLoading && !isError && items.length > 0 && (
+          <>
+            <div>
+              <ListIdioms idioms={items} />
+            </div>
+            {totalPages > 1 && currentPage !== totalPages && (
+              <ButtonShowMore
+                isFetching={isFetching}
+                canLoadMore={canLoadMore}
+                handleLoadMore={handleLoadMore}
+              />
+            )}
+          </>
+        )}
+      </section>
+      
     </main>
   );
 };

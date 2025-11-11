@@ -103,7 +103,7 @@ button{
 }
 section {
   padding-top: 80px;
-  padding-bottom: 140px;
+  padding-bottom: 120px;
 }
 option:first-child {
   border-radius: 8px 8px 0 0;
@@ -123,4 +123,16 @@ link, a{
 }
 link:hover, link:focus{
     border-color: #660FF2;
+}
+
+@media (max-width:380px){
+  section{
+    padding: 48px 10px;
+  }
+}
+
+@media (max-width:750px){
+  section{
+    padding: 48px 20px;
+  }
 }

@@ -2,10 +2,10 @@
   width: 100%;
   max-width: 960px;
   margin-inline: auto;                 /* <-- центрирование */
-  padding-inline: clamp(16px, 4vw, 24px); /* немного воздуха у краёв */
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-top: 20px;
 }
 
 /* показываем mobile-вариант до 750px */
@@ -19,5 +19,8 @@
 }
 
 @media (min-width: 900px) {
-  .container { gap: 40px; }
+  .container { 
+    gap: 40px; 
+    margin-top: 40px;
+  }
 }
