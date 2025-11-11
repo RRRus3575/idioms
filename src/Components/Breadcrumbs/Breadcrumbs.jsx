@@ -34,7 +34,7 @@ export default function Breadcrumbs({
           <svg className={styles.sep} width="12" height="12" aria-hidden>
             <use xlinkHref={separatorIcon} />
           </svg>
-          <span aria-current="page">{currentLabel}</span>
+          <span aria-current="page" className={styles.label}>{currentLabel}</span>
         </span>
       </nav>
     );

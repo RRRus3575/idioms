@@ -11,16 +11,20 @@ export default function IdiomoDescribe({idiom}){
 
             <div className={styles.block}>
                 <h3 className={styles.title}>Analogs</h3>
-                {idiom.analogs.length > 0 && (
+                {idiom.analogs.length > 0 ? (
                     <ul className={styles.list}>
-                        {idiom.analogs.map()}
+                        {idiom.analogs.map((item)=>(
+                            <li key ={item.id} className={styles.item}>
+                                {item.phrase}
+                            </li>
+                        ))}
                     </ul>
-                )} 
+                ) : (<p>No equivalent found yet</p>)} 
             </div>
 
             <div className={styles.block}> 
                 <h3 className={styles.title}>Examples</h3>
-                {idiom.examples.length > 0 && (
+                {idiom.examples.length > 0 ? (
                     <ul className={styles.list}>
                         {idiom.examples.map((item)=>(
                             <li key ={item.id} className={styles.item}>
@@ -28,7 +32,7 @@ export default function IdiomoDescribe({idiom}){
                             </li>
                         ))}
                     </ul>
-                )} 
+                ) : (<p>No equivalent found yet</p>)} 
             </div>
 
             <div className={styles.block}>
@@ -38,12 +42,28 @@ export default function IdiomoDescribe({idiom}){
 
             <div className={styles.block}>
                 <h3 className={styles.title}>Synonyms</h3>
-                <p></p>
+                {idiom.synonyms.length > 0 ? (
+                    <ul className={styles.list}>
+                        {idiom.synonyms.map((item)=>(
+                            <li key ={item.id} className={`${styles.item} ${styles.violet}`}>
+                                {item.phrase}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (<p>No equivalent found yet</p>)} 
             </div>
 
             <div className={styles.block}>
                 <h3 className={styles.title}>Antonyms</h3>
-                <p></p>
+                {idiom.antonyms.length > 0 ? (
+                    <ul className={styles.list}>
+                        {idiom.antonyms.map((item)=>(
+                            <li key ={item.id} className={`${styles.item} ${styles.violet}`}>
+                                {item.phrase}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (<p>No equivalent found yet</p>)} 
             </div>
         </div>
     )
