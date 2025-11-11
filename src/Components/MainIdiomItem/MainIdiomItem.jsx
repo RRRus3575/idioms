@@ -1,4 +1,5 @@
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import IdiomoDescribe from "../IdiomoDescribe/IdiomoDescribe";
 import LoaderIdiomaPage from "../LoaderIdiomaPage/LoaderIdiomaPage";
 import styles from "./MainIdiomItem.module.css"
 import { isYoungerThanNDays } from "@/utils/date";
@@ -17,6 +18,7 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
 
     return(
         <main className={styles.main}>
+            <h1 className="visually-hidden">Idioma page</h1>
             <section>
                 <div className={styles.container}>
                     <Breadcrumbs 
@@ -48,6 +50,7 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                             </div>
                             {recently && (<div className={styles.recently} ><p>recently added</p></div>)}
                         </div>
+                        {idiom && <IdiomoDescribe idiom={idiom} />}
                     </div>
                 </section>
 

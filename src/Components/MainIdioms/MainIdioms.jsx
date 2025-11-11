@@ -183,6 +183,7 @@ const MainIdioms = ({externalSearch}) => {
 
   return (
     <main className={style.main}>
+      <h1 className="visually-hidden">Search page</h1>
       <section>
         <div>
           <Breadcrumbs
