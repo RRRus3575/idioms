@@ -27,6 +27,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    fill: #495057;
 }
 .head{
     display: flex;
@@ -40,6 +41,12 @@
     color: #660FF2;
     background-color: #F3ECFE;
     font-size: 14px;
+}
+
+.wrap{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 @media(max-width: 380px){

@@ -74,6 +74,36 @@ select {
   font: inherit;
   cursor: pointer;
 }
+
+textarea, input{
+  padding: 12px 20px;
+  
+  outline: 1px solid #CED4DA;
+  transition: 200ms ease-in-out border-color, 200ms ease-in-out background-color;
+}
+
+textarea:hover, input:hover{
+  background-color: #F3ECFE;
+  outline: 1px solid #9051F6;
+}
+
+input,
+textarea,
+[contenteditable] {
+  caret-color: #660FF2;   /* задаёт цвет текстового курсора */
+}
+
+textarea:focus, input:focus{
+  background-color: #Fff;
+  outline: 1px solid #9051F6;
+}
+
+input::placeholder, texarea::placeholder{
+    font-size: 14px;
+    color: #6C757D;
+    font-weight: 400;
+}
+
 label {
   position: relative;
 }
