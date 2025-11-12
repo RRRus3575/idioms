@@ -32,3 +32,11 @@
     }
 
 }
+
+@media (min-width: 775px) and (max-width: 1440px) {
+
+    .container{
+        max-width: 521px;
+    }
+
+}
