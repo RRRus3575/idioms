@@ -1,0 +1,31 @@
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px 26px;
+    border: 1px solid #660FF2;
+    background-color: transparent;
+    color: #660FF2;
+    border-radius: 80px;
+    transition: background-color 200ms ease-in-out, color 200ms ease-in-out, border-color 200ms ease-in-out;
+}
+.button:hover, .button:focus{
+    background-color: #9051F6;
+    color: #fff;
+}
+.button:hover{
+    border-color: #9051F6;
+}
+
+.inactive, .button:hover.inactive{
+    border: 1px solid #CED4DA;
+    color: #fff ;
+    background-color: #CED4DA;
+}
+
+@media (min-width:750px){
+    .button{
+        padding: 14px 26px;
+    }
+}

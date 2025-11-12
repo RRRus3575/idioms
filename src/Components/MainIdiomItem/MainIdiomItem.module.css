@@ -36,7 +36,10 @@
 }
 .recently{
     width: 138px;
-    padding: 8px 20px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 28px;
     color: #660FF2;
     background-color: #F3ECFE;
@@ -49,14 +52,24 @@
     gap: 20px;
 }
 
-@media(max-width: 380px){
+@media(min-width: 480px){
+    .container{
+        max-width: 480px;
+    }
 
 }
 
-@media (min-width: 776px) {
+@media (min-width: 775px) {
 
     .head{
         flex-direction: row;
         justify-content: space-between;
+    }
+
+}
+
+@media(min-width: 1440px){
+    .container{
+        max-width: 846px;
     }
 }

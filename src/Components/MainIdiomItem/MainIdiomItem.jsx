@@ -2,6 +2,7 @@ import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import CommentBlock from "../Comment/Comment";
 import IdiomoDescribe from "../IdiomoDescribe/IdiomoDescribe";
 import LoaderIdiomaPage from "../LoaderIdiomaPage/LoaderIdiomaPage";
+import Outdated from "../Outdated/Outdated";
 import styles from "./MainIdiomItem.module.css"
 import { isYoungerThanNDays } from "@/utils/date";
 
@@ -57,10 +58,15 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
 
                 {idiom && (
                     <section>
-                        <h2 className="visually-hidden">Feedback and comments</h2>
-                        <div className={styles.wrap}>
-                            <CommentBlock/>
-                        </div>
+                        <div className={styles.container}>
+                            <h2 className="visually-hidden">Feedback and comments</h2>
+                                <div className={styles.wrap}>
+                                    <CommentBlock/>
+                                    <Outdated/>
+                                </div>
+
+                            </div>
+                       
 
                     </section>
                 )}
