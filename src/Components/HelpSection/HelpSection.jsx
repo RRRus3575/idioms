@@ -5,13 +5,15 @@ export default function HelpSection() {
 
     return(
         <section>
+            <div className={styles.container}>
+
             <h2>Help us</h2>
             <div className={styles.card}>
-                <svg width={28} height={28}>
-                    <use/>
+                <svg width={28} height={28} className={`${styles.icon} ${styles.dark}`}>
+                    <use  xlinkHref="/sprite.svg#plus"/>
                 </svg>
-                <h3>Add idioms in your language</h3>
-                <p>Add idioms in your native language to help learners all over the world.</p>
+                <h3 className={styles.title}>Add idioms in your language</h3>
+                <p className={styles.text}>Add idioms in your native language to help learners all over the world.</p>
                 <Button
                     text="Add idiom"
                     type="button"
@@ -19,11 +21,11 @@ export default function HelpSection() {
             </div>
 
             <div className={styles.card}>
-                <svg width={28} height={28}>
+                <svg width={28} height={28} className={`${styles.icon} ${styles.dark}`}>
                     <use/>
                 </svg>
-                <h3>Add idioms in your language</h3>
-                <p>Add idioms in your native language to help learners all over the world.</p>
+                <h3 className={styles.title}>Add idioms in your language</h3>
+                <p className={styles.text}>Add idioms in your native language to help learners all over the world.</p>
                 <Button
                     text="Add idiom"
                     type="button"
@@ -31,16 +33,17 @@ export default function HelpSection() {
                 />
             </div>
 
-            <div className={styles.card}>
-                <svg width={28} height={28}>
+            <div className={styles.card} >
+                <svg width={28} height={28} className={`${styles.icon} ${styles.dark}`}>
                     <use/>
                 </svg>
-                <h3>Add idioms in your language</h3>
-                <p>Add idioms in your native language to help learners all over the world.</p>
+                <h3 className={styles.title}>Add idioms in your language</h3>
+                <p className={styles.text}>Add idioms in your native language to help learners all over the world.</p>
                 <Button
                     text="Add idiom"
                     type="button"
                 />
+            </div>
             </div>
         </section>
     )
