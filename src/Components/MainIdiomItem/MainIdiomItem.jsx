@@ -1,5 +1,6 @@
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import CommentBlock from "../Comment/Comment";
+import HelpSection from "../HelpSection/HelpSection";
 import IdiomoDescribe from "../IdiomoDescribe/IdiomoDescribe";
 import LoaderIdiomaPage from "../LoaderIdiomaPage/LoaderIdiomaPage";
 import Outdated from "../Outdated/Outdated";
@@ -28,54 +29,46 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                         backHref={backHref} 
                     />
                     {isLoading && (<LoaderIdiomaPage/>)}
-                        <div className={styles.head} >
-                            <div className={styles.headtext}>
-                                <h2 className={styles.title} >{idiom?.text}</h2>
-                                <div className={styles.wraphead}>
-                                    <button
-                                        aria-label="reproduction of an idiom by voice"
-                                        onClick={() => speak(idiom.text)}
-                                        className={styles.button}
-                                        type="button"
-                                        >
-                                        <svg width="20" height="20">
-                                            <use xlinkHref="/sprite.svg#sound" />
-                                        </svg>
-                                    </button>
+                    <div className={styles.head} >
+                        <div className={styles.headtext}>
+                            <h2 className={styles.title} >{idiom?.text}</h2>
+                            <div className={styles.wraphead}>
+                                <button
+                                    aria-label="reproduction of an idiom by voice"
+                                    onClick={() => speak(idiom.text)}
+                                    className={styles.button}
+                                    type="button"
+                                    >
+                                    <svg width="20" height="20">
+                                        <use xlinkHref="/sprite.svg#sound" />
+                                    </svg>
+                                </button>
 
-                                    <button className={styles.button} aria-label="add to favorites" type="button">
-                                        <svg width="20" height="20">
-                                            <use xlinkHref="/sprite.svg#bookmark" />
-                                        </svg>
-                                    </button>
-                                </div>                
-                            </div>
-                            {recently && (<div className={styles.recently} ><p>recently added</p></div>)}
+                                <button className={styles.button} aria-label="add to favorites" type="button">
+                                    <svg width="20" height="20">
+                                        <use xlinkHref="/sprite.svg#bookmark" />
+                                    </svg>
+                                </button>
+                            </div>                
                         </div>
-                        {idiom && <IdiomoDescribe idiom={idiom} />}
+                        {recently && (<div className={styles.recently} ><p>recently added</p></div>)}
                     </div>
-                </section>
+                    {idiom && <IdiomoDescribe idiom={idiom} />}
+                </div>
+            </section>
 
-                {idiom && (
-                    <section>
-                        <div className={styles.container}>
-                            <h2 className="visually-hidden">Feedback and comments</h2>
-                                <div className={styles.wrap}>
-                                    <CommentBlock/>
-                                    <Outdated/>
-                                </div>
-
+            {idiom && (
+                <section>
+                    <div className={styles.container}>
+                        <h2 className="visually-hidden">Feedback and comments</h2>
+                            <div className={styles.wrap}>
+                                <CommentBlock/>
+                                <Outdated/>
                             </div>
-                       
-
-                    </section>
-                )}
-
-                
-                
-
-            
-            
+                        </div>
+                </section>
+            )}
+            <HelpSection/>                      
         </main>
 
     )

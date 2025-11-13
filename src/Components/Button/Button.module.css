@@ -4,22 +4,34 @@
     align-items: center;
     width: 100%;
     padding: 10px 26px;
-    border: 1px solid #660FF2;
+    border: 2px solid #660FF2;
     background-color: transparent;
     color: #660FF2;
     border-radius: 80px;
     transition: background-color 200ms ease-in-out, color 200ms ease-in-out, border-color 200ms ease-in-out;
 }
+
+.button.colored{
+    background-color: #660FF2;
+    color: #fff;
+}
+
+.button.colored:focus{
+    border-color: #9051F6;
+    background-color: #660FF2;
+}
+
 .button:hover, .button:focus{
     background-color: #9051F6;
     color: #fff;
+    outline: none;
 }
 .button:hover{
     border-color: #9051F6;
 }
 
 .inactive, .button:hover.inactive{
-    border: 1px solid #CED4DA;
+    border-color: #CED4DA;
     color: #fff ;
     background-color: #CED4DA;
 }

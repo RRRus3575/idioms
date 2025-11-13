@@ -1,0 +1,22 @@
+.card{
+    max-width: 400px;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+
+@media (min-width: 775px) {
+
+    .card{
+        max-width: 412px;
+    }
+
+}
+
+@media (min-width: 775px) and (max-width: 1440px){
+
+    .card{
+        max-width: 521px;
+    }
+
+}
