@@ -47,7 +47,7 @@ export default function HelpSection() {
 
             <div className={styles.card}>
                 <svg width={28} height={28} className={`${styles.icon} ${styles.dark}`}>
-                    <use/>
+                    <use xlinkHref="/sprite.svg#support"/>
                 </svg>
                 <h3 className={styles.title}>Donate</h3>
                 <p className={styles.text}>As money doesn’t grow on trees and platforms cannot function without finances, we will always appreciate your support of Idiomo</p>
@@ -55,12 +55,13 @@ export default function HelpSection() {
                     text="Support the project"
                     type="button"
                     colored={true}
+                    onClick={toggleDonate}
                 />
             </div>
 
             <div className={styles.card} >
                 <svg width={28} height={28} className={`${styles.icon} ${styles.dark}`}>
-                    <use/>
+                    <use xlinkHref="/sprite.svg#chat"/>
                 </svg>
                 <h3 className={styles.title}>Help us to improve Idiomo</h3>
                 <div className={styles.text}>
@@ -71,14 +72,33 @@ export default function HelpSection() {
                     <Button
                         text="I have an offer  "
                         type="button"
+                        onClick={toggleImprove}
                     />
             </div>
             </div>
-            {isOpen && (
+            {isOpen && addIdiom && (
                 <Modal
-                    close={isOpenToggle}
+                    close={toggleAddIdiom}
                     >
                         <div>ADD</div>
+
+                    </Modal>
+               )}
+
+               {isOpen && donate && (
+                <Modal
+                    close={toggleDonate}
+                    >
+                        <div>donate</div>
+
+                    </Modal>
+               )}
+
+               {isOpen && improve && (
+                <Modal
+                    close={toggleImprove}
+                    >
+                        <div>improve</div>
 
                     </Modal>
                )}
