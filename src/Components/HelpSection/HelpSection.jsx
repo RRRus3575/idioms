@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Button from "../Button/Button"
 import  styles from "./HelpSection.module.css"
 import Modal from "../Modal/Modal"
+import AddIdiom from "../AddIdiom/AddIdiom"
 
 export default function HelpSection() {
     const [isOpen, setIsOpen] = useState(false)
@@ -9,9 +10,47 @@ export default function HelpSection() {
     const [donate, setDonate] = useState(false)
     const [improve, setImprove] = useState(false)
 
+    useEffect(() => {
+        const handleEsc = (e) => {
+            if (e.key === "Escape") {
+                closeModal()
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener("keydown", handleEsc);
+        }
+
+        return () => {
+            document.removeEventListener("keydown", handleEsc);
+        };
+    }, [isOpen]);
+
     const isOpenToggle = () =>{
-        setIsOpen((prev) => !prev);
+        setIsOpen(prev => {
+            const next = !prev;
+
+            if (next) {
+           // открыто — блокируем скролл
+            document.body.style.overflow = 'hidden';
+            } else {
+            // закрыто — возвращаем как было
+            document.body.style.overflow = '';
+            }
+
+            return next;
+        });
     }
+
+    const closeModal = () => {
+        setIsOpen(false);
+        setAddIdiom(false);
+        setDonate(false);
+        setImprove(false);
+        document.body.style.overflow = '';
+    };
+
+
     const toggleAddIdiom = () =>{
         isOpenToggle()
         setAddIdiom((prev) => !prev);
@@ -26,6 +65,8 @@ export default function HelpSection() {
         setIsOpen((prev) => !prev);
         setImprove((prev) => !prev);
     }
+
+
 
     return(
         <section>
@@ -79,8 +120,9 @@ export default function HelpSection() {
             {isOpen && addIdiom && (
                 <Modal
                     close={toggleAddIdiom}
+                    width={630}
                     >
-                        <div>ADD</div>
+                        <AddIdiom/>
 
                     </Modal>
                )}

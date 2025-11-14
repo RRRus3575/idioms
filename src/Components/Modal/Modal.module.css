@@ -11,6 +11,8 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 20px;
+  
 }
 
 /* Затемнение фона */
@@ -25,14 +27,19 @@
   position: relative;
   z-index: 1;
   background: #fff;
-  border-radius: 12px;
+  border-radius: 20px;
   padding: 32px;
-  max-width: 500px;
   width: 100%;
   max-height: 90vh;
-  overflow-y: auto;
-  box-sizing: border-box;
+
+  /* ДОБАВИТЬ: */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* чтобы скролл был только у .content */
 }
+
+
+
 
 /* Крестик */
 .close {
@@ -41,9 +48,15 @@
   right: 24px;
   border: none;
   background: transparent;
-  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
   cursor: pointer;
+  fill: #495057;
+  transition: background-color 200ms ease-in-out, fill 200ms ease-in-out;
+  border-radius: 50%;
+  padding: 4px;
 }
 
 
@@ -53,22 +66,33 @@
   margin-bottom: 16px;
 }
 
+.close:focus{
+    background-color: #F3ECFE;
+    fill: #660FF2;
+}
+
+.close:hover{
+    fill: #000;
+}
+
+.icon{
+    transform: rotate(45deg);
+}
 
 
+@media (max-width: 380px){
+    .modal{
+        padding: 25px 10px;
+    }
+}
 /* Адаптация под мобильные */
 @media (max-width: 600px) {
-  .modal {
-    align-items: flex-end; /* модалка “всплывает” снизу */
-  }
 
   .dialog {
-    border-radius: 12px 12px 0 0;
     max-width: 100%;
     width: 100%;
-    max-height: 80vh;
     padding: 20px 16px 16px;
   }
-
 }
 
 
@@ -77,5 +101,10 @@
   .close {
     top: 32px;
     right: 32px;
+  }
+
+  .modal{
+    padding: 50px;
+
   }
 }

@@ -1,0 +1,77 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    padding: 2px;
+    margin-top: 24px ;
+}
+
+.title{
+    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #343A40;
+}
+
+.idiomo{
+    color: #495057;
+    overflow-y: auto;
+}
+.label{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+}
+
+.wrap{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.textarea{
+    height: 112px;
+    resize: none;
+}
+
+.button{
+    margin-top: 40px ;
+    width: 100%;
+}
+
+.sup{
+    color: #6C757D;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+@media(min-width: 750px) {
+    .wrap{
+        flex-direction: row;
+        gap: 24px;
+        width: 100%;
+    }
+
+    .idiomo{
+        margin-top: 60px;
+    }
+
+    .form{
+        margin-top: 40px;
+    }
+
+    .title{
+        font-size: 40px;
+        font-weight: 800;
+        text-align: center;
+    }
+
+    .text{
+        text-align: center;
+    }
+}
