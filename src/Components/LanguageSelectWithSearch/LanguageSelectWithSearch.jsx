@@ -2,27 +2,25 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./LanguageSelectWithSearch.module.css";
 
 export default function LanguageSelectWithSearch({
-  options = [],                     // [{ value, label }, ...]
-  value = "",                       // выбранное значение, например "en"
+  options = [],
+  value = "",
   onChange,
   placeholder = "Search language of the idiom…",
-  clear,                            // необязательный проп: внешняя очистка, если нужен
+  clear,
 }) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const wrapRef = useRef(null);
+  const rootRef = useRef(null);
 
-  // синхронизируем текст в инпуте с выбранным значением
   useEffect(() => {
     const current = options.find((o) => o.value === value);
     setSearch(current ? current.label : "");
   }, [value, options]);
 
-  // клик вне компонента — закрываем список
   useEffect(() => {
     const handler = (e) => {
-      if (!wrapRef.current) return;
-      if (!wrapRef.current.contains(e.target)) {
+      if (!rootRef.current) return;
+      if (!rootRef.current.contains(e.target)) {
         setOpen(false);
       }
     };
@@ -41,11 +39,9 @@ export default function LanguageSelectWithSearch({
   };
 
   const handleClear = () => {
-    // если родитель передал свой clear — даём ему сработать
     if (clear) {
       clear();
     } else {
-      // иначе просто сбрасываем значение через onChange("")
       onChange?.("");
     }
     setSearch("");
@@ -53,54 +49,68 @@ export default function LanguageSelectWithSearch({
   };
 
   return (
-      
-        <div className={styles.inputWrap} onClick={() => setOpen(true)}>
-          <svg className={styles.search} width="16" height="16" aria-hidden>
-            <use xlinkHref="/sprite.svg#find" />
-          </svg>
+    <div ref={rootRef}>
+      <div className={styles.inputWrap} onClick={() => setOpen(true)}>
+        <svg className={styles.search} width="16" height="16" aria-hidden>
+          <use xlinkHref="/sprite.svg#find" />
+        </svg>
 
-          <input
-            className={styles.input}
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              if (!open) setOpen(true);
-            }}
-            onFocus={() => setOpen(true)}
-            placeholder={placeholder}
-          />
+        <input
+          className={styles.input}
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            if (!open) setOpen(true);
+          }}
+          onFocus={() => setOpen(true)}
+          placeholder={placeholder}
+        />
 
-          {/* кнопка очистки, показываем только если что-то выбрано */}
-          {value && (
-            <button
-              type="button"
-              className={styles.clear}
-              onClick={handleClear}
-              aria-label="Clear language"
-            >
-              <svg className={styles.clearIcon} width="16" height="16" aria-hidden>
-                <use xlinkHref="/sprite.svg#plus" />
-              </svg>
-            </button>
-          )}
+        {/* кнопка очистки */}
+        {value && (
+          <button
+            type="button"
+            className={styles.clear}
+            onClick={handleClear}
+            aria-label="Clear language"
+          >
+            <svg className={styles.clearIcon} width="16" height="16" aria-hidden>
+              <use xlinkHref="/sprite.svg#plus" />
+            </svg>
+          </button>
+        )}
 
-          {open && (
-            <ul className={styles.list}>
-              {filtered.length === 0 && (
-                <li className={styles.empty}>Nothing found</li>
-              )}
-              {filtered.map((opt) => (
-                <li
-                  key={opt.value}
-                  className={styles.item}
-                  onClick={() => handleSelect(opt)}
-                >
-                  {opt.label}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        {/* стрелка дропдауна */}
+        <svg
+          className={`${styles.arrow} ${open ? styles.arrowOpen : ""}`}
+          width="16"
+          height="16"
+          aria-hidden
+        >
+          {/* тут поставь тот id, который у тебя в sprite: chevron, arrow и т.п. */}
+          <use xlinkHref="/sprite.svg#chevron-down" />
+        </svg>
 
+        {open && (
+          <ul className={styles.list}>
+            {filtered.length === 0 && (
+              <li className={styles.empty}>Nothing found</li>
+            )}
+            {filtered.map((opt) => (
+              <li
+                key={opt.value}
+                className={styles.item}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  handleSelect(opt);
+                }}
+              >
+                {opt.label}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
   );
 }
