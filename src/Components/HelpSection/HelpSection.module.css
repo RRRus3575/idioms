@@ -21,6 +21,7 @@
  color: #343A40;
  font-size: 24px;
  margin-top: 16px;
+ font-weight: 600;
  margin-bottom: 12px;
 }
 
@@ -30,11 +31,41 @@
     margin-bottom: 80px;
 }
 
-@media (min-width: 775px) {
+.add{
+    background-color: #F8F9FA;
+}
+
+.donate{
+    background-color: #F3ECFE;
+}
+
+.improve{
+    background-color: #E4E6FF;
+}
+
+@media (min-width: 1440px) {
 
     .container{
-        max-width: 412px;
+        max-width: 846px;
     }
+
+    .card{
+        max-width: 414px;
+        flex: 1 1 0; 
+    }
+
+    .cards{
+        display: flex;
+        gap: 20px;
+        align-items: stretch;
+    }
+
+    .add{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
 
 }
 

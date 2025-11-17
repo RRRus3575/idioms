@@ -73,7 +73,9 @@ export default function HelpSection() {
             <div className={styles.container}>
 
             <h2>Help us</h2>
-            <div className={styles.card}>
+            <div className={styles.cards}>
+                
+            <div className={`${styles.card} ${styles.add}`}>
                 <svg width={28} height={28} className={`${styles.icon} ${styles.dark}`}>
                     <use  xlinkHref="/sprite.svg#plus"/>
                 </svg>
@@ -86,7 +88,7 @@ export default function HelpSection() {
                 />
             </div>
 
-            <div className={styles.card}>
+            {false && (<div className={`${styles.card} ${styles.donate}`}>
                 <svg width={28} height={28} className={`${styles.icon} ${styles.dark}`}>
                     <use xlinkHref="/sprite.svg#support"/>
                 </svg>
@@ -98,9 +100,9 @@ export default function HelpSection() {
                     colored={true}
                     onClick={toggleDonate}
                 />
-            </div>
+            </div>)}
 
-            <div className={styles.card} >
+            <div className={`${styles.card} ${styles.improve}`} >
                 <svg width={28} height={28} className={`${styles.icon} ${styles.dark}`}>
                     <use xlinkHref="/sprite.svg#chat"/>
                 </svg>
@@ -115,6 +117,7 @@ export default function HelpSection() {
                         type="button"
                         onClick={toggleImprove}
                     />
+            </div>
             </div>
             </div>
             {isOpen && addIdiom && (
