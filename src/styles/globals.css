@@ -1,8 +1,12 @@
 body {
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-open-sans), sans-serif;
 }
 
 code {
@@ -14,7 +18,7 @@ code {
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-open-sans), sans-serif;
 }
 
 ul,
@@ -39,12 +43,6 @@ dd {
   margin: 0;
 }
 
-body {
-  min-height: 100vh;
-  scroll-behavior: smooth;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
-}
 
 ul,
 ol {
