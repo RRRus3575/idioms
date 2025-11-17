@@ -53,8 +53,12 @@
 @media(min-width: 750px) {
     .wrap{
         flex-direction: row;
-        gap: 24px;
+        justify-content: space-between;
         width: 100%;
+    }
+
+    .wrap > .label {
+        width: calc((100% - 24px) / 2);
     }
 
     .idiomo{

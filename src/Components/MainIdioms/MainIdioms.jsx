@@ -111,8 +111,7 @@ const MainIdioms = ({externalSearch}) => {
   }, [externalSearch?.__ts]);
 
 
-  const handleClearSearch = () =>
-    submitWithCurrentFilters({ q: "", lang: urlState?.lang });
+  const handleClearSearch = () => submitWithCurrentFilters({ q: "", lang: urlState?.lang });
 
   // данные
   const { data: categories = [], isLoading: catsLoading } =

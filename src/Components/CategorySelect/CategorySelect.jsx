@@ -2,12 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useGetCategoriesQuery } from "@/store/api";
 import styles from "./CategorySelect.module.css";
 
-/**
- * value: string[]        // массив ID выбранных категорий
- * onChange: (ids: string[]) => void
- * language?: string
- * onClearAll?: () => void
- */
+
 function CategorySelect({ value = [], onChange, language, onClearAll }) {
   const { data: rawCats = [], isLoading, isError } =
     useGetCategoriesQuery(language ? { language } : undefined);

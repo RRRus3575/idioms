@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect, useMemo } from "react";
 import styles from "./LanguageSelect.module.css";
+import { ALLOWED, LABELS, SHORT } from "@/utils/lang";
 
-const ALLOWED = ["pt","it","de","en","uk"];
-const LABELS  = { en:"English", de:"German", uk:"Ukrainian", it:"Italian", pt:"Portug." };
-const SHORT   = { en:"Eng",     de:"Ger",    uk:"Ukr",       it:"Ita",     pt:"Por" };
+
+
 const cx = (...a) => a.filter(Boolean).join(" ");
 
 export default function LanguageSelect({
