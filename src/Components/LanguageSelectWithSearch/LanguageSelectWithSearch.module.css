@@ -2,23 +2,22 @@
   position: relative;
 }
 
-/* уже были */
+.input {
+  padding-left: 44px;
+  padding-right: 40px;
+}
+
 .search {
   position: absolute;
   top: 16px;
   left: 20px;
 }
 
-.input {
-  padding-left: 44px;
-  padding-right: 40px; /* чуть места справа под стрелку/clear */
-}
-
-/* кнопка очистки (если у тебя её ещё нет в css) */
+/* крестик/плюс */
 .clear {
   position: absolute;
   top: 50%;
-  right: 36px;
+  right: 12px;
   transform: translateY(-50%);
   border: none;
   background: none;
@@ -27,35 +26,16 @@
 }
 
 .clearIcon {
-  transform: rotate(45deg); /* из плюса крестик */
+  transform: rotate(45deg); /* из плюсика делаем крестик */
 }
 
-/* стрелка дропдауна */
+/* стрелка */
 .arrow {
-  position: absolute;
-  top: 50%;
-  right: 12px;
+  position:absolute; right:10px; top:24px;
   transform: translateY(-50%) rotate(0deg);
-  transition: transform 0.15s ease;
-  pointer-events: none; /* клики проходят сквозь, всё ловит inputWrap */
+  width:12px; height:12px; pointer-events:none; transition: transform 300ms ease;
 }
 
 .arrowOpen {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-/* список как был */
-.list {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  width: 100%;
-  margin: 0;
-  padding: 4px 0;
-  border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  max-height: 240px;
-  overflow-y: auto;
-  z-index: 20;
+  transform: translateY(-50%) rotate(180deg); /* вверх */
 }

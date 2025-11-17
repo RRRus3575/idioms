@@ -12,11 +12,13 @@ export default function LanguageSelectWithSearch({
   const [search, setSearch] = useState("");
   const rootRef = useRef(null);
 
+  // синхронизируем текст в инпуте с выбранным значением
   useEffect(() => {
     const current = options.find((o) => o.value === value);
     setSearch(current ? current.label : "");
   }, [value, options]);
 
+  // клик вне — закрываем
   useEffect(() => {
     const handler = (e) => {
       if (!rootRef.current) return;
@@ -48,6 +50,8 @@ export default function LanguageSelectWithSearch({
     setOpen(false);
   };
 
+  const hasText = search.trim().length > 0;
+
   return (
     <div ref={rootRef}>
       <div className={styles.inputWrap} onClick={() => setOpen(true)}>
@@ -66,8 +70,8 @@ export default function LanguageSelectWithSearch({
           placeholder={placeholder}
         />
 
-        {/* кнопка очистки */}
-        {value && (
+        {/* если есть текст — показываем плюс/крестик */}
+        {hasText ? (
           <button
             type="button"
             className={styles.clear}
@@ -78,18 +82,17 @@ export default function LanguageSelectWithSearch({
               <use xlinkHref="/sprite.svg#plus" />
             </svg>
           </button>
+        ) : (
+          // если текста нет — показываем стрелку
+          <svg
+            className={`${styles.arrow} ${open ? styles.arrowOpen : ""}`}
+            width="16"
+            height="16"
+            aria-hidden
+          >
+            <use xlinkHref="/sprite.svg#down" />
+          </svg>
         )}
-
-        {/* стрелка дропдауна */}
-        <svg
-          className={`${styles.arrow} ${open ? styles.arrowOpen : ""}`}
-          width="16"
-          height="16"
-          aria-hidden
-        >
-          {/* тут поставь тот id, который у тебя в sprite: chevron, arrow и т.п. */}
-          <use xlinkHref="/sprite.svg#chevron-down" />
-        </svg>
 
         {open && (
           <ul className={styles.list}>
