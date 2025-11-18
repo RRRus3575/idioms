@@ -8,7 +8,7 @@ import Done from "../Done/Done";
 export default function AddIdiom ({onClick}) {
 
     const [isLoading, setIsLoading] = useState(false)
-    const [done, setDone] = useState(false)
+    const [done, setDone] = useState(true)
 
 
     const initialForm = {
@@ -105,6 +105,7 @@ export default function AddIdiom ({onClick}) {
                         text="Add idiom"
                         colored={true}
                         type="Submit"
+                        
                     />
                 </div>
                 
@@ -117,6 +118,7 @@ export default function AddIdiom ({onClick}) {
                 title="Thanks for your help!"
                 text="We’ll verify the information and notify you about the result!"
                 buttonText="Back to Idiomo"
+                onClick={onClick}
             />
         )}
         </>

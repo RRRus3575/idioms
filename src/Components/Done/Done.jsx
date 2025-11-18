@@ -1,7 +1,7 @@
 import Button from "../Button/Button"
 import styles from "./Done.module.css"
 
-export default Done ({title, text, buttonText}) {
+export default function Done ({title, text, buttonText}) {
 
     return(
          <div className={styles.done}>
