@@ -3,11 +3,12 @@ import Button from "../Button/Button"
 import styles from "./AddIdiom.module.css"
 import LanguageSelectWithSearch from "../LanguageSelectWithSearch/LanguageSelectWithSearch";
 import { LABELS } from "@/utils/lang";
+import Done from "../Done/Done";
 
 export default function AddIdiom ({onClick}) {
 
     const [isLoading, setIsLoading] = useState(false)
-    const [done, setDone] = useState(true)
+    const [done, setDone] = useState(false)
 
 
     const initialForm = {
@@ -112,20 +113,11 @@ export default function AddIdiom ({onClick}) {
 
         </div>)}
         {done && (
-            <div className={styles.done}>
-                <svg className={styles.check}>
-                    <use xlinkHref="/sprite.svg#checkbox" />
-                </svg>
-                <h3 className={styles.titledone}>Thanks for your help!</h3>
-                <p className={styles.text}>We’ll verify the information and notify you about the result!</p>
-                <Button
-                    text="Back to Idiomo"
-                    type="button"
-                    onClick={onClick}
-                    colored={true}
-                    width={212}
-                />
-            </div>
+            <Done
+                title="Thanks for your help!"
+                text="We’ll verify the information and notify you about the result!"
+                buttonText="Back to Idiomo"
+            />
         )}
         </>
     )
