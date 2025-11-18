@@ -112,12 +112,12 @@ export default function AddIdiom ({onClick}) {
 
         </div>)}
         {done && (
-            <div>
-                <svg>
-                    <use xlinkHref="/sprite.svg#find" />
+            <div className={styles.done}>
+                <svg className={styles.check}>
+                    <use xlinkHref="/sprite.svg#checkbox" />
                 </svg>
-                <h3>Thanks for your help!</h3>
-                <p>We’ll verify the information and notify you about the result!</p>
+                <h3 className={styles.titledone}>Thanks for your help!</h3>
+                <p className={styles.text}>We’ll verify the information and notify you about the result!</p>
                 <Button
                     text="Back to Idiomo"
                     type="button"
