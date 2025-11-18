@@ -47,7 +47,7 @@
   cursor:pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
   transition: border-color 300ms ease, background-color 300ms ease;
 }
 
@@ -71,7 +71,7 @@
   top: calc(100% + 8px);
   left: 0;
   width:184px;
-  height: 272px;
+  max-height: 272px;
   background:#fff; 
   border:1px solid #e5e7eb; 
   border-radius:12px;
@@ -92,12 +92,12 @@
 
 .list { 
   width:184px;
-  height: 100%;
   padding:0; 
   list-style:none; 
   max-height:260px; 
   overflow-y:auto;
-  scrollbar-width:none;      /* Firefox */
+  scrollbar-width:none;   
+  border-radius: 8px;   /* Firefox */
   -ms-overflow-style:none; 
 }
 

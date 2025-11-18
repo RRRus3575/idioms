@@ -47,6 +47,37 @@
     pointer-events: none;
     z-index: 3;
   }
+
+  .inputLabel {
+  position: relative;
+}
+
+
+  .image{
+  transform: rotate(45deg);
+  fill: #6b7280;
+}
+.clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: #6b7280;     /* gray-500 */
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 0;
+}
+
+.image:hover { fill: #212529;}           /* gray-100 */
+.clear:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(59,130,246,.35); }
+
   @media(max-width:400px){
     .select {
       width: 76px;

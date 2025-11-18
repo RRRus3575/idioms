@@ -1,22 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./form.module.css";
 import { useMediaQuery } from "react-responsive";
 import LanguageSelect from "@/Components/LanguageSelect/LanguageSelect";
+import { normalizeLang } from "@/utils/lang";
 
-
-const FormHeader = ({ handleFormSubmit = () => {} }) => {
-  const [formData, setFormData] = useState({ idiom: "", language: "english" });
+const FormHeader = ({ handleFormSubmit = () => {}, onClear }) => {
   const isMobile = useMediaQuery({ maxWidth: 480 });
+
+  const [formData, setFormData] = useState({
+    idiom: "",
+    language: normalizeLang("en"),
+  });
+
+  const [dirty, setDirty] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    // НЕ вызываем handleFormSubmit здесь, иначе будет редирект на каждый ввод
+
+    if (name === "idiom") {
+      setFormData((prev) => ({ ...prev, idiom: value }));
+      setDirty(true);
+    }
+  };
+
+  // если юзер сам стёр запрос — чистим результаты
+  useEffect(() => {
+    if (!dirty) return;
+    if (formData.idiom.trim() === "") {
+      onClear?.();
+      setDirty(false);
+    }
+  }, [formData.idiom, dirty, onClear]);
+
+  const clearIdiom = () => {
+    setFormData((s) => ({ ...s, idiom: "" }));
+    setDirty(false);
+    onClear?.();
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    handleFormSubmit(formData);
+    const q = formData.idiom.trim();
+    if (!q) {
+      onClear?.();
+      return;
+    }
+    const lang = normalizeLang(formData.language);
+    handleFormSubmit({ idiom: q, language: lang });
   };
 
   return (
@@ -25,6 +55,7 @@ const FormHeader = ({ handleFormSubmit = () => {} }) => {
         <svg className={styles.search} width="16" height="16" aria-hidden="true">
           <use xlinkHref="/sprite.svg#find" />
         </svg>
+
         <input
           name="idiom"
           value={formData.idiom}
@@ -33,18 +64,34 @@ const FormHeader = ({ handleFormSubmit = () => {} }) => {
           className={styles.input}
           autoComplete="off"
         />
+
+        {formData.idiom && (
+          <button
+            type="button"
+            className={styles.clear}
+            onClick={clearIdiom}
+            aria-label="Clear search"
+          >
+            <svg className={styles.image} width="16" height="16" aria-hidden>
+              <use xlinkHref="/sprite.svg#plus" />
+            </svg>
+          </button>
+        )}
       </label>
 
       <LanguageSelect
         variant="header"
         value={formData.language}
-        onChange={(code) => setFormData(s => ({ ...s, language: code }))}
+        onChange={(code) =>
+          setFormData((s) => ({ ...s, language: normalizeLang(code) }))
+        }
         shortLabels={isMobile}
       />
 
-
       {/* Enter по инпуту вызовет submit */}
-      <button className="hidden" aria-label="search" type="submit">Search</button>
+      <button className="hidden" aria-label="search" type="submit">
+        Search
+      </button>
     </form>
   );
 };

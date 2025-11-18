@@ -108,7 +108,7 @@
   padding: 0;
 }
 
-.clear:hover { background: #f3f4f6; }           /* gray-100 */
+.image:hover { fill: #212529;}           /* gray-100 */
 .clear:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(59,130,246,.35); }
 @media (min-width: 750px){
   .input {
