@@ -4,7 +4,11 @@ import styles from "./AddIdiom.module.css"
 import LanguageSelectWithSearch from "../LanguageSelectWithSearch/LanguageSelectWithSearch";
 import { LABELS } from "@/utils/lang";
 
-export default function AddIdiom () {
+export default function AddIdiom ({onClick}) {
+
+    const [isLoading, setIsLoading] = useState(false)
+    const [done, setDone] = useState(true)
+
 
     const initialForm = {
         text: "",
@@ -40,7 +44,9 @@ export default function AddIdiom () {
     }
 
     return(
-        <div className={styles.idiomo}>
+        <>
+
+        {!done && (<div className={styles.idiomo}>
             <h2 className={styles.title}>Add idiom</h2>
             <p className={styles.text}>Fill in the form and wait till the idiom appears on the platform.</p>
             <form className={styles.form} onSubmit={handleSubmit} >
@@ -104,6 +110,23 @@ export default function AddIdiom () {
                 
             </form>
 
-        </div>
+        </div>)}
+        {done && (
+            <div>
+                <svg>
+                    <use xlinkHref="/sprite.svg#find" />
+                </svg>
+                <h3>Thanks for your help!</h3>
+                <p>We’ll verify the information and notify you about the result!</p>
+                <Button
+                    text="Back to Idiomo"
+                    type="button"
+                    onClick={onClick}
+                    colored={true}
+                    width={212}
+                />
+            </div>
+        )}
+        </>
     )
 }

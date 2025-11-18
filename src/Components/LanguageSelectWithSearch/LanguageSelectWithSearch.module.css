@@ -35,14 +35,24 @@
   fill: #212529;
 }
 .list{
+  position: absolute;
+  z-index: 111;
+  width: 100%;
+  top: calc(100% + 8px);
   display: flex;
   flex-direction: column;
   border-radius: 8px;
+  overflow: hidden;
+  overflow-y: auto;
+  max-height: 259px;
+  outline: solid 1px #CED4DA;
+  font-weight: 400;
+  font-size: 14px;
 }
 .item{
   appearance:none; border:none; outline:1px solid #CED4DA;
   background:#fff; color:#101828;
-  height:42px; padding:0 28px 0 12px; font-size:16px;
+  height:44px; padding: 12px 20px; font-size:16px;
   display:inline-flex; align-items:center; gap:8px; cursor:pointer;
 }
 .item:focus-visible{ outline:none; box-shadow:0 0 0 3px rgba(102,15,242,.25); }

@@ -125,7 +125,7 @@ export default function HelpSection() {
                     close={toggleAddIdiom}
                     width={630}
                     >
-                        <AddIdiom/>
+                        <AddIdiom onClick={closeModal}/>
 
                     </Modal>
                )}

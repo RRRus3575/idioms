@@ -79,9 +79,9 @@
 }
 
 .input {
-  width:100%; 
+  width:184px; 
   padding-left: 36px;
-  padding-right: 36px;
+  padding-right: 29px;
   height: 44px;
   border:1px solid #e5e7eb;
   border-radius:8px; 
@@ -90,6 +90,9 @@
     font-size: 14px;
 }
 
+.input::placeholder{
+  font-size: 14px;
+}
 .list { 
   width:184px;
   padding:0; 
@@ -97,7 +100,7 @@
   max-height:260px; 
   overflow-y:auto;
   scrollbar-width:none;   
-  border-radius: 8px;   /* Firefox */
+  border-radius: 0 0 8px 8px;   /* Firefox */
   -ms-overflow-style:none; 
 }
 
