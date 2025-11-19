@@ -5,7 +5,7 @@ export default function ErrorContainer({title, text}) {
         <div className={style.notFound}>
           <div className={style.cross}>
             <svg className={style.image} width="40" height="40" aria-hidden>
-              <use xlinkHref="/sprite.svg#close" className={style.crossimg} />
+              <use xlinkHref="/sprite.svg#plus" className={style.crossimg} />
             </svg>
           </div>
           <div>

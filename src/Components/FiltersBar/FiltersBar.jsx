@@ -28,9 +28,9 @@ const FiltersBar = ({
             className={style.checkboxInput}
           />
           <span className={style.checkboxCustom}>
-            <svg className={style.checkbox} width="16" height="16" aria-hidden="true">
+            {/* <svg className={style.checkbox} width="16" height="16" aria-hidden="true">
               <use xlinkHref="/sprite.svg#checkbox" />
-            </svg>
+            </svg> */}
           </span>
           Don’t show outdated
         </label>

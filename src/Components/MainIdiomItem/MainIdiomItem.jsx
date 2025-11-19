@@ -12,6 +12,7 @@ import { isYoungerThanNDays } from "@/utils/date";
 const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
     console.log(idiom)
 
+
     const recently = isYoungerThanNDays(idiom?.createdAt);
 
     const speak = (text) => {
@@ -30,7 +31,7 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                         backHref={backHref} 
                     />
                     {isLoading && (<LoaderIdiomaPage/>)}
-                    <div className={styles.head} >
+                    {idiom && <div className={styles.head} >
                         <div className={styles.headtext}>
                             <h2 className={styles.title} >{idiom?.text}</h2>
                             <div className={styles.wraphead}>
@@ -53,7 +54,7 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                             </div>                
                         </div>
                         {recently && (<div className={styles.recently} ><p>recently added</p></div>)}
-                    </div>
+                    </div>}
                     {idiom && <IdiomoDescribe idiom={idiom} />}
                 </div>
             </section>
@@ -64,7 +65,7 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                         <h2 className="visually-hidden">Feedback and comments</h2>
                             <div className={styles.wrap}>
                                 <CommentBlock/>
-                                <Outdated/>
+                                <Outdated idiom={idiom} />
                             </div>
                         </div>
                 </section>

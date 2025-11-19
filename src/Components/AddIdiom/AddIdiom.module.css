@@ -50,19 +50,7 @@
     font-weight: 400;
 }
 
-.check{
-    width: 72px;
-    height: 72px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #660FF2;
-    background-color: #F3ECFE;
-    border-radius: 50%;
-    padding: 16px;
-    margin-bottom: 16px;
-    margin-top: 40px;
-}
+
 
 
 

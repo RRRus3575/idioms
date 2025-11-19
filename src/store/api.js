@@ -136,11 +136,31 @@ export const api = createApi({
 
     addIdiom: builder.mutation({
       query: (newIdiom) => ({
-        url: '/idioms',
+        url: '/idioms/createIdiom',
         method: 'POST',
         body: newIdiom,
       }),
     }),
+
+    addComment: builder.mutation({
+      // ожидаем объект { id, ...commentData }
+      query: ({ id, ...commentData }) => ({
+        url: `/idioms/${id}/comment`,
+        method: 'POST',
+        body: commentData,
+      }),
+    }),
+
+    voteOutdated: builder.mutation({
+      // { id, ...payload } – если бэку нужно тело (reason и т.п.)
+      query: ({ id, ...payload }) => ({
+        url: `/idioms/${id}/outdated`,
+        method: 'POST',
+        body: Object.keys(payload).length ? payload : undefined,
+      }),
+    }),
+
+
   }),
 });
 
@@ -150,4 +170,6 @@ export const {
   useGetIdiomByIdQuery,
   useLazyGetIdiomsQuery,
   useAddIdiomMutation,
+  useAddCommentMutation,
+  useVoteOutdatedMutation, 
 } = api;

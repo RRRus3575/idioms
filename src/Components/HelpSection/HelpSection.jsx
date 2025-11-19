@@ -3,17 +3,34 @@ import Button from "../Button/Button"
 import  styles from "./HelpSection.module.css"
 import Modal from "../Modal/Modal"
 import AddIdiom from "../AddIdiom/AddIdiom"
+import { useAddIdiomMutation } from "@/store/api";
 
 export default function HelpSection() {
     const [isOpen, setIsOpen] = useState(false)
     const [addIdiom, setAddIdiom] = useState(false)
     const [donate, setDonate] = useState(false)
     const [improve, setImprove] = useState(false)
+    const [error, setError] = useState(null)
+    const [done, setDone] = useState(false)
+
+    const [addComment, {isLoading}] = useAddIdiomMutation()
+
+    const handleAddIdiom = async () => {
+        try {
+            setDone(true)
+            
+        } catch (e) {
+            console.error(e);
+            setError(e)
+        }
+    }
+
 
     useEffect(() => {
         const handleEsc = (e) => {
             if (e.key === "Escape") {
                 closeModal()
+                setError(null)
             }
         };
 
@@ -47,6 +64,8 @@ export default function HelpSection() {
         setAddIdiom(false);
         setDonate(false);
         setImprove(false);
+        setError(null)
+        setDone(false)
         document.body.style.overflow = '';
     };
 
@@ -125,7 +144,12 @@ export default function HelpSection() {
                     close={toggleAddIdiom}
                     width={630}
                     >
-                        <AddIdiom onClick={closeModal}/>
+                        <AddIdiom 
+                            onClick={closeModal}
+                            isLoading={isLoading}
+                            error={error}
+                            done={done}
+                            />
 
                     </Modal>
                )}

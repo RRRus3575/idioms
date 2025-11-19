@@ -5,10 +5,8 @@ import LanguageSelectWithSearch from "../LanguageSelectWithSearch/LanguageSelect
 import { LABELS } from "@/utils/lang";
 import Done from "../Done/Done";
 
-export default function AddIdiom ({onClick}) {
 
-    const [isLoading, setIsLoading] = useState(false)
-    const [done, setDone] = useState(true)
+export default function AddIdiom ({onClick, isLoading, error, done}) {
 
 
     const initialForm = {
@@ -102,10 +100,10 @@ export default function AddIdiom ({onClick}) {
                 </label>
                 <div className={styles.button}>
                     <Button
-                        text="Add idiom"
-                        colored={true}
-                        type="Submit"
-                        
+                        text={isLoading ? "Loading..." :  "Add idiom"}
+                        colored={!isLoading}
+                        type="submit"
+                        disabled={isLoading}
                     />
                 </div>
                 
@@ -119,6 +117,7 @@ export default function AddIdiom ({onClick}) {
                 text="We’ll verify the information and notify you about the result!"
                 buttonText="Back to Idiomo"
                 onClick={onClick}
+                iconId="checkbox"
             />
         )}
         </>
