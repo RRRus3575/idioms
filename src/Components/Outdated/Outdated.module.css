@@ -56,7 +56,9 @@
     padding: 15px;
 }
 @media (min-width: 775px) {
-
+    .modalwrap{
+        flex-direction: row;
+    }
     .container{
         max-width: 305px;
     }
