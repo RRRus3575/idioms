@@ -15,8 +15,9 @@ export default function HelpSection() {
 
     const [addComment, {isLoading}] = useAddIdiomMutation()
 
-    const handleAddIdiom = async () => {
+    const handleAddIdiom = async (data) => {
         try {
+            await addComment(data).unwrap();
             setDone(true)
             
         } catch (e) {
@@ -53,6 +54,7 @@ export default function HelpSection() {
             } else {
             // закрыто — возвращаем как было
             document.body.style.overflow = '';
+            setError(null)
             }
 
             return next;
@@ -149,6 +151,8 @@ export default function HelpSection() {
                             isLoading={isLoading}
                             error={error}
                             done={done}
+                            handleAddIdiom={handleAddIdiom}
+                            setError={setError}
                             />
 
                     </Modal>

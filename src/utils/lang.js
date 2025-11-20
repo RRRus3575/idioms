@@ -1,15 +1,14 @@
 // src/utils/lang.js
 
 // Разрешённые коды языков
-export const ALLOWED = ["en", "de", "it", "pt", "uk", "all"];
+export const ALLOWED = ["en", "de", "it", "pt", "uk"];
 
 export const LABELS = {
   en: "English",
   de: "German",
   it: "Italian",
   pt: "Portuguese",
-  uk: "Ukrainian",
-  all: "All languages",
+  uk: "Ukrainian"
 };
 
 export const SHORT = {
@@ -18,7 +17,6 @@ export const SHORT = {
   it: "It",
   pt: "Pt",
   uk: "Uk",
-  all: "All",
 };
 
 // 👇 общая нормализация языка (то же самое, что у тебя было в FormHero)

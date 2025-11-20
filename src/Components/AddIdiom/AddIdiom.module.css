@@ -50,7 +50,11 @@
     font-weight: 400;
 }
 
-
+.error{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
 
 
 
