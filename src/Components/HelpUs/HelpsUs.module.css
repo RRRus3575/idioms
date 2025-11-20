@@ -1,0 +1,21 @@
+.label{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.formcontainer{
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+
+.formitem{
+    width: 373px;
+}

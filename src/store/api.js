@@ -160,6 +160,14 @@ export const api = createApi({
       }),
     }),
 
+    sendSupport: builder.mutation({
+        query: (data) => ({
+          url: '/support',
+          method: 'POST',
+          body: data, // { message, email? }
+        }),
+      }),
+
 
   }),
 });
@@ -172,4 +180,5 @@ export const {
   useAddIdiomMutation,
   useAddCommentMutation,
   useVoteOutdatedMutation, 
+  useSendSupportMutation,
 } = api;

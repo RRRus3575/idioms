@@ -4,6 +4,7 @@ import  styles from "./HelpSection.module.css"
 import Modal from "../Modal/Modal"
 import AddIdiom from "../AddIdiom/AddIdiom"
 import { useAddIdiomMutation } from "@/store/api";
+import HelpUs from "../HelpUs/HelpUs"
 
 export default function HelpSection() {
     const [isOpen, setIsOpen] = useState(false)
@@ -170,8 +171,9 @@ export default function HelpSection() {
                {isOpen && improve && (
                 <Modal
                     close={toggleImprove}
+                    width={846}
                     >
-                        <div>improve</div>
+                        <HelpUs/>
 
                     </Modal>
                )}

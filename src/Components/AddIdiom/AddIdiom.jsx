@@ -135,8 +135,8 @@ export default function AddIdiom ({onClick, isLoading, error, done, handleAddIdi
         {error && (
             <div className={styles.error}>
                 <ErrorContainer
-                    title="Something went wrong"
-                    text="We couldn’t save your idiom. Please try again in a moment. If the problem persists, let us know"
+                    title="Ops... Something went wrong."
+                    text="Check your connection and reload the page."
                 />
                 <Button
                     text="Back to idiom"
