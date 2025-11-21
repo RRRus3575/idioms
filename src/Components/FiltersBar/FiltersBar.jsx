@@ -1,4 +1,5 @@
 import CategorySelect from "../CategorySelect/CategorySelect";
+import Checkbox from "../Checkbox/Checkbox";
 import SortSelect from "../SortSelect/SortSelect";
 import style from "./FiltersBar.module.css";
 import React from "react";
@@ -21,17 +22,17 @@ const FiltersBar = ({
       </div>
       <div className={style.wrapper} >
         <label className={style.checkboxLabel}>
-          <input
-            type="checkbox"
-            checked={!hideOutdated ? false : true}
-            onChange={onToggleOutdated}
-            className={style.checkboxInput}
+          <Checkbox
+              checked={!hideOutdated ? false : true}
+              onChange={onToggleOutdated}
+
           />
-          <span className={style.checkboxCustom}>
+
+          {/* <span className={style.checkboxCustom}> */}
             {/* <svg className={style.checkbox} width="16" height="16" aria-hidden="true">
               <use xlinkHref="/sprite.svg#checkbox" />
             </svg> */}
-          </span>
+          {/* </span> */}
           Don’t show outdated
         </label>
 

@@ -85,6 +85,15 @@ textarea, input{
   transition: 200ms ease-in-out border-color, 200ms ease-in-out background-color;
 }
 
+textarea{
+  resize: none;
+  height: 136px;
+}
+
+input{
+  height: 44px;
+}
+
 textarea:hover, input:hover{
   background-color: #F3ECFE;
   outline: 1px solid #9051F6;

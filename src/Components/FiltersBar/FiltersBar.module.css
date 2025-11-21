@@ -33,34 +33,7 @@
 }
 
 /* квадрат */
-.checkboxCustom {
-  width: 15px;
-  height: 15px;
-  border: 2px solid #660FF2;
-  display: inline-block;
-  border-radius: 4px;
-  position: relative;
-  background-color: transparent;
-  transition: all 0.2s ease;
-}
 
-/* когда чекнутый */
-.checkboxInput:checked + .checkboxCustom {
-  background: #660FF2;
-  border-color: #660FF2;
-}
-
-.checkboxInput:checked + .checkboxCustom::after {
-  content: "";
-  position: absolute;
-  left: 4px;
-  top: 1px;
-  width: 5px;
-  height: 8px;
-  border: solid #fff;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
 
 
 @media (min-width: 750px){
