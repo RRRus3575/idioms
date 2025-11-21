@@ -162,9 +162,9 @@ export const api = createApi({
 
     sendSupport: builder.mutation({
         query: (data) => ({
-          url: '/support',
+          url: '/support/feedback',
           method: 'POST',
-          body: data, // { message, email? }
+          body: data, 
         }),
       }),
 

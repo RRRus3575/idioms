@@ -7,7 +7,7 @@ import Done from "../Done/Done";
 import ErrorContainer from "@/Error/Error";
 
 
-export default function AddIdiom ({onClick, isLoading, error, done, handleAddIdiom, setError}) {
+export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setError}) {
 
 
     const initialForm = {
@@ -122,15 +122,7 @@ export default function AddIdiom ({onClick, isLoading, error, done, handleAddIdi
             </form>
 
         </div>)}
-        {done && (
-            <Done
-                title="Thanks for your help!"
-                text="We’ll verify the information and notify you about the result!"
-                buttonText="Back to Idiomo"
-                onClick={onClick}
-                iconId="checkbox"
-            />
-        )}
+
 
         {error && (
             <div className={styles.error}>

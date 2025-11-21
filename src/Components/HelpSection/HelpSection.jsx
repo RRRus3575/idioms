@@ -34,11 +34,12 @@ export default function HelpSection() {
 
     const handleSendSupport = async (data) => {
         try {
+
             await sendSupport(data).unwrap();
             setDone(true)
             
         } catch (e) {
-            console.error(e);
+            console.error(e.data.message);
             setError(e)
         }
     }
@@ -195,6 +196,9 @@ export default function HelpSection() {
                             isLoading={isSendingSupport}
                             handleSendSupport={handleSendSupport}
                             error={error}
+                            done={done}
+                            setError={setError}
+                            onClick={closeModal}
                         />
 
                     </Modal>
