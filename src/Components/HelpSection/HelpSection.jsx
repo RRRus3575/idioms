@@ -3,8 +3,9 @@ import Button from "../Button/Button"
 import  styles from "./HelpSection.module.css"
 import Modal from "../Modal/Modal"
 import AddIdiom from "../AddIdiom/AddIdiom"
-import { useAddIdiomMutation } from "@/store/api";
+import { useAddIdiomMutation, useSendSupportMutation } from "@/store/api";
 import HelpUs from "../HelpUs/HelpUs"
+import { useMediaQuery } from "react-responsive"
 
 export default function HelpSection() {
     const [isOpen, setIsOpen] = useState(false)
@@ -14,11 +15,26 @@ export default function HelpSection() {
     const [error, setError] = useState(null)
     const [done, setDone] = useState(false)
 
-    const [addComment, {isLoading}] = useAddIdiomMutation()
+    const isTablet = useMediaQuery({ maxWidth: 930 });
+
+    const [addComment, {isLoading: isAddingIdiom}] = useAddIdiomMutation()
 
     const handleAddIdiom = async (data) => {
         try {
             await addComment(data).unwrap();
+            setDone(true)
+            
+        } catch (e) {
+            console.error(e);
+            setError(e)
+        }
+    }
+
+    const [sendSupport, {isLoading: isSendingSupport}] = useSendSupportMutation()
+
+    const handleSendSupport = async (data) => {
+        try {
+            await sendSupport(data).unwrap();
             setDone(true)
             
         } catch (e) {
@@ -149,7 +165,7 @@ export default function HelpSection() {
                     >
                         <AddIdiom 
                             onClick={closeModal}
-                            isLoading={isLoading}
+                            isLoading={isAddingIdiom}
                             error={error}
                             done={done}
                             handleAddIdiom={handleAddIdiom}
@@ -171,9 +187,15 @@ export default function HelpSection() {
                {isOpen && improve && (
                 <Modal
                     close={toggleImprove}
-                    width={846}
+                    width={isTablet ? 500 : 846}
+                    isOpen={isOpen}
+
                     >
-                        <HelpUs/>
+                        <HelpUs
+                            isLoading={isSendingSupport}
+                            handleSendSupport={handleSendSupport}
+                            error={error}
+                        />
 
                     </Modal>
                )}

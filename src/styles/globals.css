@@ -7,6 +7,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--font-open-sans), sans-serif;
+  color: #495057;
 }
 
 code {
@@ -48,6 +49,8 @@ h2,
 h3,
 h4{
   font-family: var(--font-open-sans-condensed), sans-serif;
+  line-height: 1.1;
+  color: #343A40;
 }
 
 ul,

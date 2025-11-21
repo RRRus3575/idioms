@@ -8,13 +8,14 @@
 
 /* твой “квадратик” */
 .checkboxCustom {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   border: 2px solid #660ff2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 3px;
+  padding: 2px 1px;
   position: relative;
   background-color: transparent;
   transition: all 0.2s ease;
@@ -23,8 +24,6 @@
 
 /* сам svg */
 .checkboxIcon {
-  width: 9px;
-  height: 7px;
   opacity: 0;              /* по умолчанию спрятан */
   transition: opacity 0.2s ease;
 }
@@ -39,5 +38,6 @@
 .checkboxInput:checked + .checkboxCustom .checkboxIcon {
   opacity: 1;
   /* если надо белый чек – в спрайте или тут через fill */
-  fill: #fff;
+  color: #fff;
+  stroke: #fff;
 }

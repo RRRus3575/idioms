@@ -1,6 +1,8 @@
 .container{
     display: flex;
-    flex-direction: column;align-items: center;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
 }
 
 .label{
@@ -11,6 +13,13 @@
     font-size: 16px;
     line-height: 1;
     font-weight: 600;
+}
+
+.title{
+    margin-bottom: 8px;
+    margin-top: 60px;
+    font-size: 40px;
+
 }
 
 .textareablock{
@@ -36,3 +45,51 @@
     gap: 24px;
 }
 
+.terms{
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 393px;
+    flex-wrap: wrap;
+}
+
+.text{
+    font-size: 16px;
+    color: #495057;
+    margin-bottom: 40px;
+}
+
+.termslabel{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.termslink{
+    
+    color: #660FF2;
+}
+.red{
+    color: #FF383C;
+}
+@media (max-width: 930px){
+    .formcontainer{
+        flex-direction: column;
+    }
+    .title{
+        margin-top: 20px;
+        font-size: 36px;
+    }
+    .terms{
+        flex: 0 0 auto;
+    }
+
+}
+
+@media(max-width: 480px){
+    .textareablock, .formitem{
+        width: 100%;
+        padding: 0 8px;
+    }
+
+
+}

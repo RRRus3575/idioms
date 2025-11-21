@@ -1,6 +1,9 @@
 import styles from "./Checkbox.module.css";
+import { useId } from "react";
 
-export default function Checkbox({ checked, onChange }) {
+export default function Checkbox({ name, checked, onChange }) {
+
+
   return (
     <>
       <input
@@ -8,18 +11,18 @@ export default function Checkbox({ checked, onChange }) {
         checked={checked}
         onChange={onChange}
         className={`${styles.checkboxInput} visually-hidden`}
-        id="checkbox-id"
+        name={name}
       />
-      <label htmlFor="checkbox-id" className={styles.checkboxCustom}>
+      <span className={styles.checkboxCustom}>
         <svg
           className={styles.checkboxIcon}
-          width="16"
-          height="16"
+          width="15"
+          height="15"
           aria-hidden="true"
         >
           <use xlinkHref="/sprite.svg#checkbox" />
         </svg>
-      </label>
+      </span>
     </>
   );
 }

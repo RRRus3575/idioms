@@ -1,7 +1,24 @@
+import { useEffect } from "react";
 import Button from "../Button/Button"
 import styles from "./Modal.module.css"
 
-export default function Modal({ close, children, width}){
+export default function Modal({ isOpen, close, children, width}){
+
+    useEffect(() => {
+        if (!isOpen) return;
+
+        // запоминаем текущее значение, чтобы вернуть как было
+        const prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        // cleanup – сработает при размонтировании или когда isOpen станет false
+        return () => {
+            document.body.style.overflow = prevOverflow;
+        };
+    }, [isOpen]);
+
+    if (!isOpen) return null;
+
     const wStyle =
     width !== undefined
       ? { maxWidth: typeof width === "number" ? `${width}px` : width }
