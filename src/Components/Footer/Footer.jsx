@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./Footer.module.css";
+import Link from "next/link";
+
 
 const Footer = () => {
     return(
@@ -11,8 +13,8 @@ const Footer = () => {
           </svg>
         </a>
         <ul className={styles.wrapperpriv}>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of use </a></li>
+            <li><Link href="/legal/privacy">Privacy Policy</Link></li>
+            <li><Link href="/legal/terms">Terms of use </Link></li>
         </ul>
         </div>
            

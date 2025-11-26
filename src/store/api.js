@@ -168,6 +168,13 @@ export const api = createApi({
         }),
       }),
 
+      getTerms: builder.query({
+        query: ({ type, locate  }) => ({
+          url: `/terms`,
+          params: {type, locate}, 
+        }),
+      }),
+
 
   }),
 });
@@ -181,4 +188,5 @@ export const {
   useAddCommentMutation,
   useVoteOutdatedMutation, 
   useSendSupportMutation,
+  useGetTermsQuery,
 } = api;
