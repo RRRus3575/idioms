@@ -9,7 +9,7 @@ const CardSection = ({onFormSubmit}) => {
       <div>
         <ul className={style.cardlist}>
           <li className={style.cardleft}>
-            <svg className={style.image}>
+            <svg className={style.star}>
               <use xlinkHref={`/sprite.svg#star`} />
             </svg>
             <h3 className={style.title}>Rate & Discuss idioms</h3>
