@@ -5,6 +5,7 @@ import { useGetTermsQuery } from "@/store/api";
 import { useElementSize } from "@/hooks/useElementSize";
 import { useMemo } from "react";
 import { useRouter } from "next/router";
+import MainTerms from "@/Components/MainTerms/MainTerms";
 
 
 export default function LegalPage() {
@@ -39,23 +40,18 @@ export default function LegalPage() {
       </div>
 
       <main style={mainStyle}>
-        <div className="legal-wrapper">
+        <div>
 
-          {isLoading && <p>Loading…</p>}
-          {isError && <p>Something went wrong. Try again later.</p>}
 
-          {data?.url && (
-            <iframe
-                src={data.url}
-                style={{
-                width: "100%",
-                height: "80vh",
-                border: "none",
-                background: "transparent",
-                }}
-                loading="lazy"
+
+            <MainTerms 
+                data={data}
+                isLoading={isLoading}
+                isError={isError}
+                type={type}
             />
-            )}
+              
+
         </div>
       </main>
 

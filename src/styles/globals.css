@@ -177,6 +177,61 @@ link:hover, link:focus{
   overflow: hidden;
 }
 
+.doc {
+      max-width: 846px;
+      color: #212529;
+      font-size: 16px;
+      line-height: 1.4;
+      font-family: var(--font-open-sans), sans-serif;
+    }
+
+    /* Top right “Last updated” */
+    .updated {
+      float: right;
+      font-size: 14px;
+      line-height: 1.4;
+      opacity: .65;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      color: #343A40;
+      font-family: var(--font-open-sans), sans-serif;
+    }
+
+    .head-title{
+        font-size: 40px;
+        line-height: 1;
+        margin-bottom: 24px;
+        font-family: var(--font-open-sans), sans-serif;
+    }
+    .second-title{
+        margin-top: 24px;
+        margin-bottom: 8px;
+        font-size: 18px;
+        line-height: 1.2;
+        color: #6C757D;
+        font-family: var(--font-open-sans), sans-serif;
+    }
+
+    .doc h3{
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+
+    .list-terms { margin: 0 0 14px 1.25em; padding: 0; }
+    .list-terms  { list-style: disc; }
+    .mail-terms{ 
+        font-weight: 700; 
+        font-size: 16px;
+        color: #212529;
+    }
+    .list-terms  em { font-style: italic; }
+    .list-terms  a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+    .list-terms  hr { border: none; border-top: 1px solid color-mix(in oklab, CanvasText 20%, transparent); margin: 24px 0; }
+
+    .link-terms{
+      color: #660FF2;
+    }
 
 @media (max-width:380px){
   section{
@@ -189,6 +244,7 @@ link:hover, link:focus{
     padding: 48px 20px;
   }
 }
+
 
 @media (max-width:1440px){
   section{
