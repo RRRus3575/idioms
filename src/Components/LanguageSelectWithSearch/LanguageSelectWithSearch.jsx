@@ -7,6 +7,7 @@ export default function LanguageSelectWithSearch({
   onChange,
   placeholder = "Search language of the idiom…",
   clear,
+  validationErrors
 }) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -60,7 +61,7 @@ export default function LanguageSelectWithSearch({
         </svg>
 
         <input
-          className={styles.input}
+          className={`${styles.input} ${validationErrors.text ? styles.inputError : ""}`}
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);

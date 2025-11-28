@@ -163,6 +163,7 @@ export default function HelpSection() {
                 <Modal
                     close={toggleAddIdiom}
                     width={630}
+                    isOpen={isOpen}
                     >
                         <AddIdiom 
                             onClick={closeModal}

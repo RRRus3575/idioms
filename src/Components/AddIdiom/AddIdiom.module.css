@@ -65,7 +65,7 @@
         width: 100%;
     }
 
-    .wrap > .label {
+    .wrap > label {
         width: calc((100% - 24px) / 2);
     }
 

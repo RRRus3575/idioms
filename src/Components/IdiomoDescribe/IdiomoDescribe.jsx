@@ -46,7 +46,7 @@ export default function IdiomoDescribe({idiom}){
                 {idiom.synonyms.length > 0 ? (
                     <ul className={styles.list}>
                         {idiom.synonyms.map((item) => {
-                            const href = `/idioms/${encodeURIComponent(item.slug)}--${encodeURIComponent(item.id)}`
+                            const href = `/idioms/${encodeURIComponent(item.slug)}--${encodeURIComponent(item.idiomId)}`
 
                             return (
                             <li key={item.id} className={`${styles.item} ${styles.violet}`}>
@@ -63,7 +63,7 @@ export default function IdiomoDescribe({idiom}){
                 {idiom.antonyms.length > 0 ? (
                     <ul className={styles.list}>
                         {idiom.antonyms.map((item) => {
-                            const href = `/idioms/${encodeURIComponent(item.slug)}--${encodeURIComponent(item.id)}`
+                            const href = `/idioms/${encodeURIComponent(item.slug)}--${encodeURIComponent(item.idiomId)}`
 
                             return (
                             <li key={item.id} className={`${styles.item} ${styles.violet}`}>

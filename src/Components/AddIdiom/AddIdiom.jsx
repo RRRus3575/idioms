@@ -5,10 +5,12 @@ import LanguageSelectWithSearch from "../LanguageSelectWithSearch/LanguageSelect
 import { LABELS } from "@/utils/lang";
 import Done from "../Done/Done";
 import ErrorContainer from "@/Error/Error";
+import Input from "../Input/Input";
 
 
 export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setError}) {
 
+    const [validationErrors, setValidationErrors] = useState({});
 
     const initialForm = {
         text: "",
@@ -18,11 +20,27 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
         otherInfo: "",
     };
 
+    const validateForm = (data) => {
+        const newErrors = {};
+
+        if (!data.text.trim()) {
+            newErrors.text = "This field is required";
+        }
+
+        if (!data.language) {
+            newErrors.language = "This field is required";
+        }
+
+        return newErrors;
+    };
+
+
 
 
     const clearLanguage = () => {
-        setFormData.language = ""
-    }
+        setFormData((prev) => ({ ...prev, language: "" }));
+    };
+
 
     const [formData, setFormData] = useState(initialForm)
 
@@ -37,6 +55,10 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
             ...prev,
             [name]: value,
         }))
+        setValidationErrors((prev) => ({
+            ...prev,
+            [name]: undefined,
+        }));
     }
 
     const backToForm = () =>{
@@ -45,6 +67,13 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const validationErrors = validateForm(formData);
+        if (Object.keys(validationErrors).length > 0) {
+            setValidationErrors(validationErrors);
+            return; // не отправляем форму
+        }
+
         try {
             const result = await handleAddIdiom(formData);
             if(result){ setFormData(initialForm);} // сюда попадём только если всё ок
@@ -61,14 +90,21 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
             <p className={styles.text}>Fill in the form and wait till the idiom appears on the platform.</p>
             <form className={styles.form} onSubmit={handleSubmit} >
                 <div className={styles.wrap}>
-                    <label className={styles.label}>
+                    {/* <label className={styles.label}>
                         Idiom*
                         <input 
                             name="text"
                             onChange={handleChange}
                             value={formData.text || ""}
+                            className={validationErrors.text ? styles.inputError : ""}
                         />
-                    </label>
+                    </label> */}
+                    <Input
+                        label="Idiom*"
+                        name="text"
+                        onChange={handleChange}
+
+                    />
                     <label className={styles.label}>
                         Language*
                     <LanguageSelectWithSearch
@@ -77,7 +113,8 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
                         onChange={(lang) =>
                             setFormData((prev) => ({ ...prev, language: lang }))
                             }  
-                        clear={clearLanguage}             
+                        clear={clearLanguage}   
+                        validationErrors={validationErrors}
                         />
                     </label>
                 </div>
