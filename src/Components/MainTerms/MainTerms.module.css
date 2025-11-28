@@ -1,6 +1,10 @@
-.main{
+/* .main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* padding: 48px 10px; */
+
+} */
+
+.section{
+    max-width: 846px;
 }

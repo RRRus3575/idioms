@@ -1,3 +1,4 @@
+import Link from "next/link"
 import styles from "./IdiomoDescribe.module.css"
 
 export default function IdiomoDescribe({idiom}){
@@ -14,8 +15,8 @@ export default function IdiomoDescribe({idiom}){
                 {idiom.analogs.length > 0 ? (
                     <ul className={styles.list}>
                         {idiom.analogs.map((item)=>(
-                            <li key ={item.id} className={styles.item}>
-                                {item.phrase}
+                            <li key ={item.id} className={styles.item} lang={item.language}>
+                                <strong>{item.language}</strong>{item.phrase}
                             </li>
                         ))}
                     </ul>
@@ -44,11 +45,15 @@ export default function IdiomoDescribe({idiom}){
                 <h3 className={styles.title}>Synonyms</h3>
                 {idiom.synonyms.length > 0 ? (
                     <ul className={styles.list}>
-                        {idiom.synonyms.map((item)=>(
-                            <li key ={item.id} className={`${styles.item} ${styles.violet}`}>
-                                {item.phrase}
+                        {idiom.synonyms.map((item) => {
+                            const href = `/idioms/${encodeURIComponent(item.slug)}--${encodeURIComponent(item.idiomId)}?lang=${encodeURIComponent(safeLang)}`
+
+                            return (
+                            <li key={item.id} className={`${styles.item} ${styles.violet}`}>
+                                <Link href={href}>{item.phrase}</Link>
                             </li>
-                        ))}
+                            )
+                        })}
                     </ul>
                 ) : (<p>No equivalent found yet</p>)} 
             </div>
@@ -57,11 +62,15 @@ export default function IdiomoDescribe({idiom}){
                 <h3 className={styles.title}>Antonyms</h3>
                 {idiom.antonyms.length > 0 ? (
                     <ul className={styles.list}>
-                        {idiom.antonyms.map((item)=>(
-                            <li key ={item.id} className={`${styles.item} ${styles.violet}`}>
-                                {item.phrase}
+                        {idiom.antonyms.map((item) => {
+                            const href = `/idioms/${encodeURIComponent(item.slug)}--${encodeURIComponent(item.idiomId)}?lang=${encodeURIComponent(safeLang)}`
+
+                            return (
+                            <li key={item.id} className={`${styles.item} ${styles.violet}`}>
+                                <Link href={href}>{item.phrase}</Link>
                             </li>
-                        ))}
+                            )
+                        })}
                     </ul>
                 ) : (<p>No equivalent found yet</p>)} 
             </div>

@@ -151,6 +151,7 @@ button{
 section {
   padding-top: 80px;
   padding-bottom: 120px;
+  margin: 0 auto;   /* чтобы контент центрировался */
 }
 option:first-child {
   border-radius: 8px 8px 0 0;

@@ -1,0 +1,145 @@
+
+
+.breadcrumbsSkeleton {
+  max-width: 100%;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Обёртка документа примерно как .doc */
+.doc {
+  max-width: 846px;     
+  border-radius: 12px;
+  padding: 16px 16px 24px;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+}
+
+
+/* Анимация "мигания" skeleton */
+@keyframes skeletonPulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+/* Базовый вид всех “серых палочек” */
+.crumbShort,
+.crumbSep,
+.crumbLong,
+.updatedSkeleton,
+.titleSkeleton,
+.paragraphSkeleton,
+.paragraphSkeletonShort,
+.sectionTitleSkeleton,
+.listItemSkeleton {
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.35); /* slate-ish */
+  animation: skeletonPulse 1.4s ease-in-out infinite;
+}
+
+/* --- skeleton для breadcrumbs --- */
+
+.crumbShort,
+.crumbSep,
+.crumbLong {
+  display: inline-block;  /* или block */
+  height: 12px;
+}
+
+
+/* “Home” */
+.crumbShort {
+  width: 60px;
+}
+
+/* разделитель */
+.crumbSep {
+  width: 10px;
+}
+
+/* “Privacy / Terms” */
+.crumbLong {
+  width: 80px;
+}
+
+/* маленькая полосочка справа (Last updated) */
+.updatedSkeleton {
+  width: 140px;
+  height: 12px;
+  margin-left: auto;
+  margin-bottom: 16px;
+}
+
+/* Заголовок */
+.titleSkeleton {
+  width: 70%;
+  height: 26px;
+  margin-bottom: 18px;
+}
+
+/* Обычный абзац */
+.paragraphSkeleton {
+  width: 100%;
+  height: 14px;
+  margin-bottom: 10px;
+}
+
+.paragraphSkeletonShort {
+  width: 80%;
+  height: 14px;
+  margin-bottom: 10px;
+}
+
+/* Блок секции */
+.block {
+  margin-top: 18px;
+}
+
+/* Заголовок секции */
+.sectionTitleSkeleton {
+  width: 50%;
+  height: 18px;
+  margin-bottom: 12px;
+}
+
+/* Пункты списка */
+.listItemSkeleton {
+  width: 90%;
+  height: 12px;
+  margin-bottom: 8px;
+}
+
+/* Адаптивчики */
+@media (min-width: 768px) {
+  .main {
+    padding: 24px 24px 56px;
+  }
+
+  .doc {
+    padding: 24px 24px 32px;
+    border-radius: 16px;
+  }
+
+  .titleSkeleton {
+    height: 30px;
+  }
+
+  .sectionTitleSkeleton {
+    width: 40%;
+  }
+
+  .paragraphSkeleton,
+  .paragraphSkeletonShort {
+    height: 16px;
+  }
+}

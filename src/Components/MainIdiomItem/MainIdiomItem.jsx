@@ -33,7 +33,7 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                     {isLoading && (<LoaderIdiomaPage/>)}
                     {idiom && <div className={styles.head} >
                         <div className={styles.headtext}>
-                            <h2 className={styles.title} >{idiom?.text}</h2>
+                            <h2 className={styles.title} lang={idiom.language}>{idiom?.text}</h2>
                             <div className={styles.wraphead}>
                                 <button
                                     aria-label="reproduction of an idiom by voice"

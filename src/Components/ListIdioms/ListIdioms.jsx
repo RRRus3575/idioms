@@ -39,7 +39,7 @@ export default function ListIdioms({ idioms = [], lang }) {
             <div className={styles.wrapperright}>
               <div className={styles.titleblock}>
                 <Link prefetch={false} href={href} className={styles.titleLink} aria-label={`Open idiom ${text}`}>
-                  <h3 className={styles.title}>{text}</h3>
+                  <h3 className={styles.title} lang={language} >{text}</h3>
                 </Link>
 
                 <button type="button" className={styles.button}
@@ -62,7 +62,7 @@ export default function ListIdioms({ idioms = [], lang }) {
                   <h4 className={styles.blocktitle}>Analogs</h4>
                   <ul>
                     {analogs.map(({ id: aid, language, phrase }) => (
-                      <li key={aid || `${language}-${phrase}`}>
+                      <li key={aid || `${language}-${phrase}`} lang={language}>
                         <em className={styles.violet}>{language}:</em> “{phrase}”
                       </li>
                     ))}

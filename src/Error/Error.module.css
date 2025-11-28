@@ -1,5 +1,6 @@
 .notFound{
     margin-top: 64px;
+    max-width: 846px;
     display: flex;
     flex-direction: column;
     align-items: center;
