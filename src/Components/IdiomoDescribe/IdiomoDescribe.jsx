@@ -16,7 +16,7 @@ export default function IdiomoDescribe({idiom}){
                     <ul className={styles.list}>
                         {idiom.analogs.map((item)=>(
                             <li key ={item.id} className={styles.item} lang={item.language}>
-                                <strong>{item.language}</strong>{item.phrase}
+                                <strong>{item.language}: </strong>{item.phrase}
                             </li>
                         ))}
                     </ul>
@@ -46,11 +46,11 @@ export default function IdiomoDescribe({idiom}){
                 {idiom.synonyms.length > 0 ? (
                     <ul className={styles.list}>
                         {idiom.synonyms.map((item) => {
-                            const href = `/idioms/${encodeURIComponent(item.slug)}--${encodeURIComponent(item.idiomId)}?lang=${encodeURIComponent(safeLang)}`
+                            const href = `/idioms/${encodeURIComponent(item.slug)}--${encodeURIComponent(item.id)}`
 
                             return (
                             <li key={item.id} className={`${styles.item} ${styles.violet}`}>
-                                <Link href={href}>{item.phrase}</Link>
+                                <Link href={href} className={styles.link}>{item.text}</Link>
                             </li>
                             )
                         })}
@@ -63,11 +63,11 @@ export default function IdiomoDescribe({idiom}){
                 {idiom.antonyms.length > 0 ? (
                     <ul className={styles.list}>
                         {idiom.antonyms.map((item) => {
-                            const href = `/idioms/${encodeURIComponent(item.slug)}--${encodeURIComponent(item.idiomId)}?lang=${encodeURIComponent(safeLang)}`
+                            const href = `/idioms/${encodeURIComponent(item.slug)}--${encodeURIComponent(item.id)}`
 
                             return (
                             <li key={item.id} className={`${styles.item} ${styles.violet}`}>
-                                <Link href={href}>{item.phrase}</Link>
+                                <Link href={href} className={styles.link}>{item.text}</Link>
                             </li>
                             )
                         })}

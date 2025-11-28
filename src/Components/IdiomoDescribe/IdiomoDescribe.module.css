@@ -5,6 +5,7 @@
 .title{
     font-size: 18px;
     color: #6C757D;
+    margin-bottom: 8px;
 }
 
 .list{
@@ -19,4 +20,11 @@
 
 .violet{
     color: #660FF2;
+    border: 1px solid transparent;
+    transition: border-color 300ms ease-in-out;
+}
+
+.violet:hover .link, .violet:focus .link{
+    outline: none;
+    border-bottom: 1px solid #660FF2;
 }
