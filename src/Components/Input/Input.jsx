@@ -1,17 +1,18 @@
 import styles from "./Input.module.css"
 
 export default function Input ({onChange, error, label, value, name, sup}) {
+    const fieldError = error?.[name];
 
     return(
         <label className={styles.label}>
-            {label} {sup && <sup className={styles.sup}>{sup}</sup>}
+            <span>{label} {sup && <sup className={styles.sup}>{sup}</sup>}</span>
             <input
                 onChange={onChange}
-                className={`${styles.input} ${error?.text ? styles.inputError : ""}`}
+                className={`${styles.input} ${fieldError ? styles.inputError : ""}`}
                 value={value}
                 name={name}
             />
-            {error?.text &&<p className={styles.errorText}>{error.text}</p>}
+            {fieldError &&<p className={styles.errorText}>{fieldError}</p>}
         </label>
     )
 }

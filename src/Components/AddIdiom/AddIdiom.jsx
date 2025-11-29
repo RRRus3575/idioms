@@ -90,15 +90,6 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
             <p className={styles.text}>Fill in the form and wait till the idiom appears on the platform.</p>
             <form className={styles.form} onSubmit={handleSubmit} >
                 <div className={styles.wrap}>
-                    {/* <label className={styles.label}>
-                        Idiom*
-                        <input 
-                            name="text"
-                            onChange={handleChange}
-                            value={formData.text || ""}
-                            className={validationErrors.text ? styles.inputError : ""}
-                        />
-                    </label> */}
                     <Input
                         label="Idiom*"
                         name="text"
@@ -119,23 +110,22 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
                     </label>
                 </div>
 
-                <label className={styles.label}>
-                    <span>Meaning <sup className={styles.sup}>(optional)</sup> </span>
-                    <input 
+                    <Input
+                        label="Meaning"
+                        sup="(optional)"
                         name="meaning"
                         onChange={handleChange}
                         value={formData.meaning || ""}
                     />
-                </label>
 
-                <label className={styles.label}>
-                    <span>Examples of usage <sup className={styles.sup}>(optional)</sup> </span>
-                    <input 
-                        name="examples" 
+                    <Input
+                        label="Examples of usage"
+                        sup="(optional)"
+                        name="examples"
                         onChange={handleChange}
                         value={formData.examples || ""}
                     />
-                </label>
+
 
                 <label className={styles.label}>
                     <span>Other information <sup className={styles.sup}>(optional)</sup> </span>
@@ -146,6 +136,7 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
                         value={formData.otherInfo || ""}
                     />
                 </label>
+
                 <div className={styles.button}>
                     <Button
                         text={isLoading ? "Loading..." :  "Add idiom"}
