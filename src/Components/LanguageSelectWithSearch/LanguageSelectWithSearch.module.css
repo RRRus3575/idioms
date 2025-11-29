@@ -5,6 +5,7 @@
 .input {
   padding-left: 44px;
   padding-right: 40px;
+  margin-bottom: 8px;
 }
 
 .search {
@@ -73,4 +74,13 @@
   transform:  rotate(180deg); /* вверх */
 }
 
+.errorText{
+    color: #FF383C;
+    font-size: 12px;
+    line-height: 1;
+    margin-left: 8px;
+}
 
+.inputError{
+    outline: 1px solid #FF383C;
+}

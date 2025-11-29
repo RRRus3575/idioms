@@ -11,10 +11,15 @@
     color: #FF383C;
     font-size: 12px;
     line-height: 1;
+    margin-left: 8px;
 }
 
 .sup{
     color: #6C757D;
     font-size: 12px;
     font-weight: 400;
+}
+
+.inputError{
+    outline: 1px solid #FF383C;
 }

@@ -96,15 +96,20 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
                         name="text"
                         onChange={handleChange}
                         value={formData.text || ""}
+                        error={validationErrors}
                     />
                     <label className={styles.label}>
                         Language*
                     <LanguageSelectWithSearch
                         options={languageOptions}
                         value={formData.language}   
-                        onChange={(lang) =>
-                            setFormData((prev) => ({ ...prev, language: lang }))
-                            }  
+                        onChange={(lang) => {
+                            setFormData((prev) => ({ ...prev, language: lang }));
+                            setValidationErrors((prev) => ({
+                                ...prev,
+                                language: undefined,
+                            }));
+                        }}
                         clear={clearLanguage}   
                         validationErrors={validationErrors}
                         />

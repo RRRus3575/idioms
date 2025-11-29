@@ -14,6 +14,8 @@ export default function LanguageSelectWithSearch({
   const [search, setSearch] = useState("");
   const rootRef = useRef(null);
 
+      console.log("error", validationErrors)
+
   // синхронизируем текст в инпуте с выбранным значением
   useEffect(() => {
     const current = options.find((o) => o.value === value);
@@ -62,7 +64,7 @@ export default function LanguageSelectWithSearch({
         </svg>
 
         <input
-          className={`${styles.input} ${validationErrors.text ? styles.inputError : ""}`}
+          className={`${styles.input} ${validationErrors.language ? styles.inputError : ""}`}
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
@@ -71,6 +73,8 @@ export default function LanguageSelectWithSearch({
           onFocus={() => setOpen(true)}
           placeholder={placeholder}
         />
+
+        {validationErrors.language && <p className={styles.errorText}>{validationErrors.language}</p>}
 
         {/* если есть текст — показываем плюс/крестик */}
         {hasText ? (
