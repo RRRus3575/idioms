@@ -2,6 +2,7 @@ import styles from "./Input.module.css"
 
 export default function Input ({onChange, error, label, value, name, sup}) {
     const fieldError = error?.[name];
+    console.log(fieldError)
 
     return(
         <label className={styles.label}>
@@ -12,7 +13,7 @@ export default function Input ({onChange, error, label, value, name, sup}) {
                 value={value}
                 name={name}
             />
-            {fieldError &&<p className={styles.errorText}>{fieldError}</p>}
+            {fieldError && <p className={styles.errorText}>{fieldError}</p>}
         </label>
     )
 }

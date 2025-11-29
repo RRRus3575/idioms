@@ -69,6 +69,7 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
         e.preventDefault();
 
         const validationErrors = validateForm(formData);
+        console.log(validationErrors)
         if (Object.keys(validationErrors).length > 0) {
             setValidationErrors(validationErrors);
             return; // не отправляем форму
