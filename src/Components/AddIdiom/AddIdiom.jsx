@@ -103,7 +103,7 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
                         label="Idiom*"
                         name="text"
                         onChange={handleChange}
-
+                        value={formData.text || ""}
                     />
                     <label className={styles.label}>
                         Language*
