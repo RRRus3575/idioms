@@ -5,7 +5,7 @@ export default function Checkbox({ name, checked, onChange }) {
 
 
   return (
-    <>
+    <div className={styles.container}>
       <input
         type="checkbox"
         checked={checked}
@@ -23,6 +23,6 @@ export default function Checkbox({ name, checked, onChange }) {
           <use xlinkHref="/sprite.svg#checkbox" />
         </svg>
       </span>
-    </>
+    </div>
   );
 }

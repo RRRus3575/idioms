@@ -32,7 +32,7 @@ export default function HelpUs ({onClick, isLoading, error, handleSendSupport, d
         }
 
         if (!data.agreePrivacyPolicy) {
-            newErrors.email = "This field is required";
+            newErrors.agreePrivacyPolicy = "This field is required";
         }
 
         return newErrors;
@@ -122,14 +122,20 @@ export default function HelpUs ({onClick, isLoading, error, handleSendSupport, d
                 </div>
                 <div className={styles.formcontainer}>
                     <div className={styles.terms}>
-                        <label className={styles.termslabel}>
-                        <Checkbox name="agreePrivacyPolicy" onChange={handleChangeCheckbox} error={validationErrors}/>
-                            <p>I agree with Idiomo’s <span className={styles.termslink}>Privacy Policy</span><span className={styles.red}>*</span></p>
-                            {validationErrors.agreePrivacyPolicy &&<p>{validationErrors.agreePrivacyPolicy}</p>}
+                        <label >
+                            <div className={styles.termslabel}>
+                                <Checkbox name="agreePrivacyPolicy" onChange={handleChangeCheckbox} error={validationErrors}/>
+                                <div className={styles.agreeblock}>
+                                    <p>I agree with Idiomo’s <span className={styles.termslink}>Privacy Policy</span><span className={styles.red}>*</span></p>
+                                    {validationErrors.agreePrivacyPolicy &&<p className={styles.errorValidate}>{validationErrors.agreePrivacyPolicy}</p>}
+                                </div>
+                            </div>
+                        
+                            
                         </label>
                         <label className={styles.termslabel}>
                             <Checkbox name="agreeMarketing" onChange={handleChangeCheckbox}/>
-                            I agree to receive occasional updates from Idiomo.
+                            <p>I agree to receive occasional updates from Idiomo.</p>
                         </label>
                     </div>
                     <Button

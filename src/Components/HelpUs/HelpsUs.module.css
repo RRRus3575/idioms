@@ -63,6 +63,7 @@
 .terms{
     display: flex;
     flex-direction: column;
+    gap: 8px;
     flex: 0 0 393px;
     flex-wrap: wrap;
 }
@@ -79,12 +80,39 @@
     gap: 8px;
 }
 
+.termslabel{
+    display: flex;
+    align-items: first baseline;
+    gap: 8px;
+}
+
+.termslabel p {
+  margin: 0;             /* чтобы лишние отступы не съезжали верстку */
+  line-height: 1.4;      /* по вкусу */
+}
+
 .termslink{
     
     color: #660FF2;
 }
-.red{
+.red, .errorValidate{
     color: #FF383C;
+}
+
+.termslabel p {
+  margin: 0;
+  line-height: 1;
+}
+
+.agreeblock{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.errorValidate{
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .error{
