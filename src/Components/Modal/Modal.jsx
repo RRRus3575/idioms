@@ -7,13 +7,11 @@ export default function Modal({ isOpen, close, children, width}){
     useEffect(() => {
         if (!isOpen) return;
 
-        // запоминаем текущее значение, чтобы вернуть как было
-        const prevOverflow = document.body.style.overflow;
         document.body.style.overflow = "hidden";
 
         // cleanup – сработает при размонтировании или когда isOpen станет false
         return () => {
-            document.body.style.overflow = prevOverflow;
+            document.body.style.overflow = "auto";
         };
     }, [isOpen]);
 

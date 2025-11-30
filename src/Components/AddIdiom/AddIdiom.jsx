@@ -8,7 +8,7 @@ import ErrorContainer from "@/Error/Error";
 import Input from "../Input/Input";
 
 
-export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setError}) {
+export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setError, onClick}) {
 
     const [validationErrors, setValidationErrors] = useState({});
 
@@ -55,10 +55,11 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
             ...prev,
             [name]: value,
         }))
-        setValidationErrors((prev) => ({
-            ...prev,
-            [name]: undefined,
-        }));
+        setValidationErrors((prev) => {
+            const { [name]: _, ...rest } = prev;
+            return rest;
+        });
+
     }
 
     const backToForm = () =>{
@@ -69,7 +70,6 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
         e.preventDefault();
 
         const validationErrors = validateForm(formData);
-        console.log(validationErrors)
         if (Object.keys(validationErrors).length > 0) {
             setValidationErrors(validationErrors);
             return; // не отправляем форму
@@ -105,10 +105,10 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
                         value={formData.language}   
                         onChange={(lang) => {
                             setFormData((prev) => ({ ...prev, language: lang }));
-                            setValidationErrors((prev) => ({
-                                ...prev,
-                                language: undefined,
-                            }));
+                            setValidationErrors((prev) => {
+                                const { language: _, ...rest } = prev;
+                                return rest;
+                            });
                         }}
                         clear={clearLanguage}   
                         validationErrors={validationErrors}
@@ -157,6 +157,15 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
 
         </div>)}
 
+        {done && (
+            <Done
+                title="Thanks for your help!"
+                text="We’ll verify the information and notify you about the result!"
+                buttonText="Back to Idiomo"
+                onClick={onClick}
+                iconId="checkbox"
+                />
+            )}
 
         {error && (
             <div className={styles.error}>

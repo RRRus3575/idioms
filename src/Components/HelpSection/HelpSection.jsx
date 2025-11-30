@@ -13,7 +13,9 @@ export default function HelpSection() {
     const [donate, setDonate] = useState(false)
     const [improve, setImprove] = useState(false)
     const [error, setError] = useState(null)
-    const [done, setDone] = useState(false)
+    const [doneImprove, setDoneImprove] = useState(false)
+    const [doneAddIdiom, setDoneAddIdiom] = useState(false)
+
 
     const isTablet = useMediaQuery({ maxWidth: 930 });
 
@@ -22,10 +24,9 @@ export default function HelpSection() {
     const handleAddIdiom = async (data) => {
         try {
             await addComment(data).unwrap();
-            setDone(true)
+            setDoneAddIdiom(true)
             
         } catch (e) {
-            console.error(e);
             setError(e)
         }
     }
@@ -36,10 +37,9 @@ export default function HelpSection() {
         try {
 
             await sendSupport(data).unwrap();
-            setDone(true)
+            setDoneImprove(true)
             
         } catch (e) {
-            console.error(e.data.message);
             setError(e)
         }
     }
@@ -85,7 +85,8 @@ export default function HelpSection() {
         setDonate(false);
         setImprove(false);
         setError(null)
-        setDone(false)
+        setDoneImprove(false)
+        setDoneAddIdiom(false)
         document.body.style.overflow = '';
     };
 
@@ -169,7 +170,7 @@ export default function HelpSection() {
                             onClick={closeModal}
                             isLoading={isAddingIdiom}
                             error={error}
-                            done={done}
+                            done={doneAddIdiom}
                             handleAddIdiom={handleAddIdiom}
                             setError={setError}
                             />
@@ -197,7 +198,7 @@ export default function HelpSection() {
                             isLoading={isSendingSupport}
                             handleSendSupport={handleSendSupport}
                             error={error}
-                            done={done}
+                            done={doneImprove}
                             setError={setError}
                             onClick={closeModal}
                         />
