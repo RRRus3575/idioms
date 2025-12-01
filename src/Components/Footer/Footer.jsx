@@ -13,8 +13,8 @@ const Footer = () => {
           </svg>
         </a>
         <ul className={styles.wrapperpriv}>
-            <li><Link href="/legal/privacy">Privacy Policy</Link></li>
-            <li><Link href="/legal/terms">Terms of use </Link></li>
+            <li><Link href="/legal/privacy" className={styles.link}>Privacy Policy</Link></li>
+            <li><Link href="/legal/terms" className={styles.link}>Terms of use </Link></li>
         </ul>
         </div>
            

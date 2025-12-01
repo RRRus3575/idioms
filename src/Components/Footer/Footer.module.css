@@ -22,6 +22,11 @@
   .wrap ul{
     flex-shrink: 0;
   }
+  .link:hover{
+    border-bottom: 1px solid #660FF2;
+
+  }
+
 @media(max-with: 380px) {
   .footer{
     padding: 10px;

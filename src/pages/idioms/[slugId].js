@@ -36,6 +36,14 @@ export default function IdiomPage() {
     { refetchOnMountOrArgChange: true }
   );
 
+  const isTransitionBetweenIdioms = Boolean(id && idiom && idiom.id !== id);
+
+  const showLoader =
+    isLoading ||                 // первый заход на страницу
+    (isFetching && isTransitionBetweenIdioms); // переход к другой идиоме
+
+  const idiomForRender = showLoader ? null : idiom;
+
   const backHref = typeof from === "string" && from.startsWith("/search") ? from : null;
 
   return (
@@ -44,9 +52,9 @@ export default function IdiomPage() {
       <div style={mainStyle}>
         <MainIdiomItem
           key={id}
-          isLoading={isLoading || (!idiom && isFetching)}
+          isLoading={showLoader}
           isError={isError}
-          idiom={idiom ?? null}     
+          idiom={idiomForRender}     
           backHref={backHref}
         />
       </div>

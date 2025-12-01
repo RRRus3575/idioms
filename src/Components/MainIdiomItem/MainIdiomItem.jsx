@@ -3,7 +3,6 @@ import CommentBlock from "../Comment/Comment";
 import HelpSection from "../HelpSection/HelpSection";
 import IdiomoDescribe from "../IdiomoDescribe/IdiomoDescribe";
 import LoaderIdiomaPage from "../LoaderIdiomaPage/LoaderIdiomaPage";
-import Modal from "../Modal/Modal";
 import Outdated from "../Outdated/Outdated";
 import styles from "./MainIdiomItem.module.css"
 import { isYoungerThanNDays } from "@/utils/date";

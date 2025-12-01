@@ -26,7 +26,7 @@ export default function ListIdioms({ idioms = [], lang }) {
 
   return (
     <ul className={styles.list}>
-      {idioms.map(({ id, text, localization = {}, analogs = [] }) => {
+      {idioms.map(({ id, text, localization = {}, analogs = [], language }) => {
         const slug = slugify(text || "");
 
         const href = id

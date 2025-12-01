@@ -38,7 +38,7 @@ const IdiomsBlock = () => {
   const totalPages  = data?.totalPages ?? 1;
   const currentPage = data?.currentPage ?? page;
   const canLoadMore = currentPage < totalPages;
-
+  console.log("items", items)
   const showInitialSkeleton =
   (isLoading && page === 1) ||
   (isFetching && page === 1 && items.length === 0);
@@ -70,7 +70,7 @@ const IdiomsBlock = () => {
       {showInitialSkeleton && currentPage === 1 && <LoaderIdioms/>}
       {isError && <p>Failed to load idioms</p>}
 
-      {!showInitialSkeleton && !isError && (
+      {!showInitialSkeleton && !isError && items.length > 0 && (
         <>
           <div>
             <ListIdioms idioms={items} />

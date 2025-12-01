@@ -234,6 +234,10 @@ link:hover, link:focus{
       color: #660FF2;
     }
 
+    .link-terms:hover{
+      border-bottom: 1px solid #660FF2;
+    }
+
 @media (max-width:380px){
   section{
     padding: 48px 10px;
