@@ -30,7 +30,11 @@
     border-color: #9051F6;
 }
 
-.inactive, .button:hover.inactive{
+.inactive{
+    background-color: #CED4DA;
+}
+
+.button.inactive, .button:hover.inactive{
     border-color: #CED4DA;
     color: #fff ;
     background-color: #CED4DA;
