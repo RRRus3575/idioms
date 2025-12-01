@@ -7,10 +7,17 @@
 
 /* по умолчанию – desktop */
 .desktop { display: block; }
+.tablet  { display: none; }
 .mobile  { display: none; }
 
-/* показываем mobile-версию на узких экранах */
-@media (max-width: 640px){
+/* планшет 641–1024px */
+@media (max-width: 1024px){
   .desktop { display: none; }
+  .tablet  { display: block; }
+}
+
+/* мобильный ≤ 640px */
+@media (max-width: 640px){
+  .tablet  { display: none; }
   .mobile  { display: block; }
 }

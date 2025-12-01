@@ -5,7 +5,7 @@ import styles from "./LoaderIdiomaPage.module.css";
 export default function LoaderIdiomaPage() {
   return (
     <div className={styles.container}>
-      {/* Desktop */}
+      {/* Desktop ≥ 1025px */}
       <div className={styles.desktop}>
         <ContentLoader
           speed={1.2}
@@ -67,13 +67,81 @@ export default function LoaderIdiomaPage() {
         </ContentLoader>
       </div>
 
-      {/* Mobile */}
+      {/* Tablet 641–1024px */}
+      <div className={styles.tablet}>
+        <ContentLoader
+          speed={1.2}
+          backgroundColor="#e7e7e7"
+          foregroundColor="#f3f3f3"
+          viewBox="0 0 640 840"
+          width="100%"
+          height={840}
+        >
+          {/* чуть более узкая сетка под планшет */}
+          {/* breadcrumbs */}
+          <rect x="0" y="0" rx="3" ry="3" width="160" height="10" />
+          {/* title + icons + badge (в две строки поуже) */}
+          <rect x="0"   y="24" rx="6" ry="6" width="380" height="30" />
+          <rect x="0"   y="60" rx="6" ry="6" width="260" height="22" />
+          <rect x="500" y="30" rx="6" ry="6" width="24" height="24" />
+          <rect x="536" y="30" rx="6" ry="6" width="24" height="24" />
+          <rect x="0"   y="92" rx="10" ry="10" width="110" height="22" />
+
+          {/* meaning */}
+          <rect x="0" y="128" rx="4" ry="4" width="90"  height="12" />
+          <rect x="0" y="148" rx="4" ry="4" width="560" height="12" />
+          <rect x="0" y="168" rx="4" ry="4" width="520" height="12" />
+
+          {/* analogs */}
+          <rect x="0" y="200" rx="4" ry="4" width="80" height="12" />
+          <rect x="0"   y="222" rx="4" ry="4" width="170" height="10" />
+          <rect x="180" y="222" rx="4" ry="4" width="380" height="10" />
+          <rect x="0"   y="242" rx="4" ry="4" width="170" height="10" />
+          <rect x="180" y="242" rx="4" ry="4" width="340" height="10" />
+          <rect x="0"   y="262" rx="4" ry="4" width="170" height="10" />
+          <rect x="180" y="262" rx="4" ry="4" width="360" height="10" />
+          <rect x="0"   y="282" rx="4" ry="4" width="170" height="10" />
+          <rect x="180" y="282" rx="4" ry="4" width="320" height="10" />
+
+          {/* show more */}
+          <rect x="0" y="308" rx="8" ry="8" width="96" height="14" />
+          <rect x="100" y="310" rx="5" ry="5" width="10" height="10" />
+
+          {/* examples */}
+          <rect x="0" y="344" rx="4" ry="4" width="80" height="12" />
+          <rect x="0"  y="366" rx="6" ry="6" width="6"  height="6" />
+          <rect x="14" y="362" rx="4" ry="4" width="560" height="12" />
+          <rect x="0"  y="388" rx="6" ry="6" width="6"  height="6" />
+          <rect x="14" y="384" rx="4" ry="4" width="520" height="12" />
+          <rect x="0"  y="410" rx="6" ry="6" width="6"  height="6" />
+          <rect x="14" y="406" rx="4" ry="4" width="460" height="12" />
+
+          {/* origin */}
+          <rect x="0" y="442" rx="4" ry="4" width="60" height="12" />
+          <rect x="0" y="462" rx="4" ry="4" width="560" height="12" />
+          <rect x="0" y="482" rx="4" ry="4" width="520" height="12" />
+          <rect x="0" y="502" rx="4" ry="4" width="460" height="12" />
+
+          {/* synonyms */}
+          <rect x="0" y="538" rx="4" ry="4" width="80"  height="12" />
+          <rect x="0" y="558" rx="4" ry="4" width="240" height="12" />
+          <rect x="0" y="578" rx="4" ry="4" width="220" height="12" />
+          <rect x="0" y="598" rx="4" ry="4" width="260" height="12" />
+
+          {/* antonyms */}
+          <rect x="0" y="634" rx="4" ry="4" width="82"  height="12" />
+          <rect x="0" y="654" rx="4" ry="4" width="260" height="12" />
+          <rect x="0" y="674" rx="4" ry="4" width="200" height="12" />
+          <rect x="0" y="694" rx="4" ry="4" width="240" height="12" />
+        </ContentLoader>
+      </div>
+
+      {/* Mobile ≤ 640px */}
       <div className={styles.mobile}>
         <ContentLoader
           speed={1.2}
           backgroundColor="#e7e7e7"
           foregroundColor="#f3f3f3"
-          /* узкая разметка под мобильный (≈ 360px ширина) */
           viewBox="0 0 360 1100"
           width="100%"
           height={1100}
@@ -92,7 +160,7 @@ export default function LoaderIdiomaPage() {
           <rect x="0" y="112" rx="4" ry="4" width="320" height="12" />
           <rect x="0" y="132" rx="4" ry="4" width="300" height="12" />
 
-          {/* Analogs (каждая строка — язык + текст, узкие ширины) */}
+          {/* Analogs */}
           <rect x="0" y="164" rx="4" ry="4" width="70"  height="12" />
           <rect x="0" y="186" rx="4" ry="4" width="90"  height="10" />
           <rect x="100" y="186" rx="4" ry="4" width="240" height="10" />
@@ -108,7 +176,7 @@ export default function LoaderIdiomaPage() {
           <rect x="0" y="280" rx="8" ry="8" width="92" height="14" />
           <rect x="98" y="282" rx="5" ry="5" width="10" height="10" />
 
-          {/* Examples (мобильные короткие строки) */}
+          {/* Examples */}
           <rect x="0" y="314" rx="4" ry="4" width="80" height="12" />
           <rect x="0"  y="336" rx="6" ry="6" width="6" height="6" />
           <rect x="14" y="332" rx="4" ry="4" width="320" height="12" />
