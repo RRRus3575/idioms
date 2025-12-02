@@ -27,6 +27,11 @@
     width: 18px;
     background-color: transparent;
     fill: #495057;
+    transition: fill 300ms ease-in-out;
+}
+
+.button:hover,.button:focus{
+    fill: #9051F6;
 }
 .block{
     margin-bottom: 14px;
