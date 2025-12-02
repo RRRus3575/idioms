@@ -45,11 +45,11 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                                     </svg>
                                 </button>
 
-                                <button className={styles.button} aria-label="add to favorites" type="button">
+                                {/* <button className={styles.button} aria-label="add to favorites" type="button">
                                     <svg width="20" height="20">
                                         <use xlinkHref="/sprite.svg#bookmark" />
                                     </svg>
-                                </button>
+                                </button> */}
                             </div>                
                         </div>
                         {recently && (<div className={styles.recently} ><p>recently added</p></div>)}
@@ -58,7 +58,7 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                 </div>
             </section>
 
-            {idiom && (
+            {/* {idiom && (
                 <section>
                     <div className={styles.container}>
                         <h2 className="visually-hidden">Feedback and comments</h2>
@@ -68,7 +68,7 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                             </div>
                         </div>
                 </section>
-            )}
+            )} */}
             <HelpSection/>                  
         </main>
 
