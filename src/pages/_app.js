@@ -16,9 +16,9 @@ const openSans = localFont({
 export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <main className={openSans.className}>
+      <div className={openSans.className}>
         <Component {...pageProps} />
-      </main>
+      </div>
     </Provider>
   );
 }
