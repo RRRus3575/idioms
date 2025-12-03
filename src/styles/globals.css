@@ -238,12 +238,6 @@ link:hover, link:focus{
       border-bottom: 1px solid #660FF2;
     }
 
-@media (max-width:380px){
-  section{
-    padding: 48px 10px;
-  }
-}
-
 @media (max-width:750px){
   section{
     padding: 48px 20px;
@@ -254,5 +248,11 @@ link:hover, link:focus{
 @media (max-width:1440px){
   section{
     padding: 80px 20px;
+  }
+}
+
+@media (max-width:480px){
+  section{
+    padding: 48px 10px;
   }
 }
