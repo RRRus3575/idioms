@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import styles from "./Header.module.css";
+import styles from "./header.module.css";
 import FormHeader from "../Form-header/Form-header";
 import Link from "next/link";
 
