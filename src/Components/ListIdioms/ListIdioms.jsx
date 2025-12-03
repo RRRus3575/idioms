@@ -47,9 +47,9 @@ export default function ListIdioms({ idioms = [], lang }) {
                   <svg width="16" height="16"><use xlinkHref="/sprite.svg#sound" /></svg>
                 </button>
 
-                <button type="button" className={styles.button} aria-label="add to favorites">
+                {/* <button type="button" className={styles.button} aria-label="add to favorites">
                   <svg width="16" height="16"><use xlinkHref="/sprite.svg#bookmark" /></svg>
-                </button>
+                </button> */}
               </div>
 
               <div className={styles.block}>
