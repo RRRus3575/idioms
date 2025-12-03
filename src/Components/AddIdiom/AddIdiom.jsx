@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../Button/Button"
 import styles from "./AddIdiom.module.css"
 import LanguageSelectWithSearch from "../LanguageSelectWithSearch/LanguageSelectWithSearch";
-import { LABELS } from "@/utils/lang";
+import { ALL_LANGUAGES } from "@/utils/lang";
 import Done from "../Done/Done";
 import ErrorContainer from "@/Error/Error";
 import Input from "../Input/Input";
@@ -44,7 +44,7 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
 
     const [formData, setFormData] = useState(initialForm)
 
-    const languageOptions = Object.entries(LABELS).map(([value, label]) => ({
+    const languageOptions = Object.entries(ALL_LANGUAGES).map(([value, label]) => ({
         value,
         label,
     }));
