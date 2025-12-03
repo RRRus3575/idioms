@@ -23,7 +23,7 @@ export default function IdiomoDescribe({idiom}){
                 ) : (<p>No equivalent found yet</p>)} 
             </div>
 
-            <div className={styles.block}> 
+            {/* <div className={styles.block}> 
                 <h3 className={styles.title}>Examples</h3>
                 {idiom.examples.length > 0 ? (
                     <ul className={styles.list}>
@@ -34,7 +34,7 @@ export default function IdiomoDescribe({idiom}){
                         ))}
                     </ul>
                 ) : (<p>No equivalent found yet</p>)} 
-            </div>
+            </div> */}
 
             <div className={styles.block}>
                 <h3 className={styles.title}>Origin</h3>

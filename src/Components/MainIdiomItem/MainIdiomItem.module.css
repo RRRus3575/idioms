@@ -29,6 +29,11 @@
     align-items: center;
     fill: #495057;
 }
+
+.button:hover,.button:focus{
+    fill: #9051F6;
+}
+
 .head{
     display: flex;
     flex-direction: column;

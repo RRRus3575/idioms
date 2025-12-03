@@ -6,6 +6,7 @@ import LoaderIdiomaPage from "../LoaderIdiomaPage/LoaderIdiomaPage";
 import Outdated from "../Outdated/Outdated";
 import styles from "./MainIdiomItem.module.css"
 import { isYoungerThanNDays } from "@/utils/date";
+import { speak } from "@/utils/speech";
 
 
 const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
@@ -14,11 +15,6 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
 
     const recently = isYoungerThanNDays(idiom?.createdAt);
 
-    const speak = (text) => {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = "en-US";
-        speechSynthesis.speak(utterance);
-    };
 
     return(
         <main className={styles.main}>
@@ -36,7 +32,7 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                             <div className={styles.wraphead}>
                                 <button
                                     aria-label="reproduction of an idiom by voice"
-                                    onClick={() => speak(idiom.text)}
+                                    onClick={() => speak(idiom?.text, idiom?.language)} 
                                     className={styles.button}
                                     type="button"
                                     >
