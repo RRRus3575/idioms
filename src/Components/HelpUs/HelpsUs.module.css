@@ -80,6 +80,9 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    color: #495057;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .termslabel{
