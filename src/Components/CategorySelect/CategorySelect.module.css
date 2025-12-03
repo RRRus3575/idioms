@@ -36,6 +36,7 @@
   align-items: center;
   justify-content: center;
   transition: fill 300ms ease;
+  transform: rotate(45deg);
 }
 .trigger {
   width: 184px;

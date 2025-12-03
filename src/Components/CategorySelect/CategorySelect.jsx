@@ -85,7 +85,7 @@ function CategorySelect({ value = [], onChange, language, onClearAll }) {
             {c.name}
             <span className={styles.close}>
               <svg className={styles.cross} width="16" height="16" aria-hidden>
-                <use xlinkHref="/sprite.svg#close" />
+                <use xlinkHref="/sprite.svg#plus" />
               </svg>
             </span>
           </button>
