@@ -22,7 +22,7 @@ const Hero = ({ onFormSubmit }) => {
       <div>
         <FormHero onFormSubmit={onFormSubmit} />
         <p className={styles.text}>
-          More than 10k idioms are available on this language
+          More than 10k idioms are available on the platform
         </p>
       </div>
     </section>

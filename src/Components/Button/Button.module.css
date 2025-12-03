@@ -8,6 +8,7 @@
     background-color: transparent;
     color: #660FF2;
     border-radius: 80px;
+    font-weight: 600;
     transition: background-color 200ms ease-in-out, color 200ms ease-in-out, border-color 200ms ease-in-out;
 }
 

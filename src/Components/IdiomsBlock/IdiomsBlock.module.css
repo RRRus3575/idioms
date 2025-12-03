@@ -21,9 +21,14 @@
     border: none;
     padding-top: 8px;
     padding-bottom: 8px;
-
-    
+    transition: background-color 250ms ease-in-out, color 250ms ease-in-out;
 }
+
+.tabButton:hover{
+    background-color: #F3ECFE;
+    color: #212529;
+}
+
 .active{
     background-color: #660FF2;
     color: #FFFFFF;
