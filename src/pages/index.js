@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router"; // Pages Router
 
-import Header from "@/components/Header/Header";
+import Header from "@/Сomponents/Header/Header";
 import MainHome from "@/Components/MainHome/MainHome";
-import Footer from "@/components/Footer/Footer";
+import Footer from "@/Сomponents/Footer/Footer";
 
 const HomePage = () => {
   const router = useRouter();
