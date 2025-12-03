@@ -26,6 +26,16 @@
   display: flex;
   gap: 8px;
 }
+
+.button{
+  color: #6C757D;
+  transition: color 300ms ease-in-out;
+}
+
+.button:hover, .button:focus{
+  color: #343A40;
+}
+
 @media (max-width: 480px){
   .header {
     padding: 12px 10px;
