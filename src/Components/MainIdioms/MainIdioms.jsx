@@ -4,7 +4,7 @@ import { useGetCategoriesQuery, useGetIdiomsQuery } from "@/store/api";
 import FormHero from "../FormHero/FormHero";
 import FiltersBar from "../FiltersBar/FiltersBar";
 import ButtonShowMore from "../ButtonShowMore/ButtonShowMore";
-import ListIdioms from "../ListIdioms/listIdioms";
+import ListIdioms from "../ListIdioms/ListIdioms";
 import { toLangCode } from "@/utils/lang";
 import style from "./MainIdioms.module.css";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";

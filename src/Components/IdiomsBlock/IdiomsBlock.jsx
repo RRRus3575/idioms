@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import style from "./IdiomsBlock.module.css";
-import ListIdioms from "../ListIdioms/listIdioms";
+import ListIdioms from "../ListIdioms/ListIdioms";
 import { useGetIdiomsQuery } from "@/store/api";
 import ButtonShowMore from "../ButtonShowMore/ButtonShowMore";
 import LoaderIdioms from "../LoaderIdioms/LoaderIdioms";
