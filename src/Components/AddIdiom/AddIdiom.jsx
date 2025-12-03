@@ -97,6 +97,7 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
                         onChange={handleChange}
                         value={formData.text || ""}
                         error={validationErrors}
+                        placeholder="Tap idiom, you want to add, here"
                     />
                     <label className={styles.label}>
                         Language*
@@ -122,6 +123,7 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
                         name="meaning"
                         onChange={handleChange}
                         value={formData.meaning || ""}
+                        placeholder="Enter the meaning of idiom"
                     />
 
                     <Input
@@ -130,6 +132,7 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
                         name="examples"
                         onChange={handleChange}
                         value={formData.examples || ""}
+                        placeholder="Enter some examples - how to use the idiom in context"
                     />
 
 
@@ -140,6 +143,7 @@ export default function AddIdiom ({ isLoading, error, done, handleAddIdiom, setE
                         name="otherInfo" 
                         onChange={handleChange}
                         value={formData.otherInfo || ""}
+                        placeholder="Enter any other information about the idiom"
                     />
                 </label>
 

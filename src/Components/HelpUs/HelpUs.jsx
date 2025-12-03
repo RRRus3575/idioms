@@ -5,6 +5,7 @@ import Checkbox from "../Checkbox/Checkbox"
 import ErrorContainer from "@/Error/Error";
 import Done from "../Done/Done";
 import Input from "../Input/Input";
+import { isValidEmail } from "@/utils/valifationInput";
 
 
 export default function HelpUs ({onClick, isLoading, error, handleSendSupport, done, setError}) {
@@ -29,6 +30,10 @@ export default function HelpUs ({onClick, isLoading, error, handleSendSupport, d
 
         if (!data.email.trim()) {
             newErrors.email = "This field is required";
+        }
+
+        if (!isValidEmail(formData.email)) {
+            newErrors.email = "Please enter a valid email address"
         }
 
         if (!data.agreePrivacyPolicy) {
@@ -100,6 +105,7 @@ export default function HelpUs ({onClick, isLoading, error, handleSendSupport, d
                             onChange={handleChangeInput}
                             value={formData.name || ""}
                             error={validationErrors}
+                            placeholder="Ruslan"
                         />
 
                         <Input
@@ -108,6 +114,7 @@ export default function HelpUs ({onClick, isLoading, error, handleSendSupport, d
                             onChange={handleChangeInput}
                             value={formData.email || ""}
                             error={validationErrors}
+                            placeholder="ruslanphasal@email.com"
                         />
                     </div>
                     <label className={`${styles.label} ${styles.textareablock}`}>
@@ -116,6 +123,7 @@ export default function HelpUs ({onClick, isLoading, error, handleSendSupport, d
                         onChange={handleChangeInput} 
                         value={formData.message}
                         name="message"
+                        placeholder="Enter your suggestions to improve the platform here"
                         />
                     </label>
 

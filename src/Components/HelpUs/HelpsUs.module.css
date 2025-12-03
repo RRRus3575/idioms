@@ -30,8 +30,10 @@
 
 .textareablock textarea {
   flex: 1;
-  min-height: 120px;    /* чтобы не схлопывалась совсем */
+  min-height: 120px; 
+  font-weight: 400;  
 }
+
 
 .form{
     display: flex;

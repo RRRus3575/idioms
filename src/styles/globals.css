@@ -88,6 +88,14 @@ textarea, input{
   transition: 200ms ease-in-out border-color, 200ms ease-in-out background-color;
 }
 
+textarea::placeholder, input::placeholder{
+  color: #6C757D;
+  font-size: 14px;
+  line-height: 1.4;
+  font-size: 14px;
+  font-weight: 400;
+}
+
 textarea{
   resize: none;
   height: 136px;

@@ -1,6 +1,6 @@
 import styles from "./Input.module.css"
 
-export default function Input ({onChange, error, label, value, name, sup}) {
+export default function Input ({onChange, error, label, value, name, sup, placeholder}) {
     const fieldError = error?.[name];
     console.log("error :", fieldError)
 
@@ -12,6 +12,7 @@ export default function Input ({onChange, error, label, value, name, sup}) {
                 className={`${styles.input} ${fieldError ? styles.inputError : ""}`}
                 value={value}
                 name={name}
+                placeholder={placeholder}
             />
             {fieldError && <p className={styles.errorText}>{fieldError}</p>}
         </label>
