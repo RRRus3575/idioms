@@ -251,7 +251,7 @@ link:hover, link:focus{
   }
 }
 
-@media (max-width:5000px){
+@media (max-width:500px){
   section{
     padding: 48px 10px;
   }
