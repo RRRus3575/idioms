@@ -3,7 +3,7 @@ import { useRouter } from "next/router"; // Pages Router
 
 import Header from "@/Components/Header/Header";
 import MainHome from "@/Components/MainHome/MainHome";
-import Footer from "@/Components/Footer/Footer";
+import Footer from "../Components/Footer/Footer.jsx";
 
 const HomePage = () => {
   const router = useRouter();
