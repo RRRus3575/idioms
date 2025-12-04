@@ -66,21 +66,22 @@ const IdiomsBlock = () => {
           Recent search
         </button>
       </div>
+    
+      
 
-      {showInitialSkeleton && currentPage === 1 && <LoaderIdioms/>}
-      {isError && <p>Failed to load idioms</p>}
-
-      {!showInitialSkeleton && !isError && items.length > 0 && (
+       
         <>
           <div>
-            <ListIdioms idioms={items} />
+            {showInitialSkeleton && currentPage === 1 && <LoaderIdioms/>}
+            {isError && <p>Failed to load idioms</p>}
+            {!showInitialSkeleton && !isError && items.length > 0 && <ListIdioms idioms={items} />}
           </div>
 
-          {totalPages > 1 && currentPage !== totalPages && (
+          {!showInitialSkeleton && !isError && items.length > 0 && totalPages > 1 && currentPage !== totalPages && (
             <ButtonShowMore isFetching={isFetching} canLoadMore={canLoadMore} handleLoadMore={handleLoadMore} />
           )}
         </>
-      )}
+      
     </section>
   );
 };
