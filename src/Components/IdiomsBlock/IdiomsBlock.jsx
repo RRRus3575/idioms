@@ -5,6 +5,7 @@ import ListIdioms from "../ListIdioms/ListIdioms";
 import { useGetIdiomsQuery } from "@/store/api";
 import ButtonShowMore from "../ButtonShowMore/ButtonShowMore";
 import LoaderIdioms from "../LoaderIdioms/LoaderIdioms";
+import ErrorContainer from "@/Error/Error";
 
 const PAGE_SIZE = 20;
 
@@ -73,7 +74,9 @@ const IdiomsBlock = () => {
         <>
           <div>
             {showInitialSkeleton && currentPage === 1 && <LoaderIdioms/>}
-            {isError && <p>Failed to load idioms</p>}
+            {isError && (
+                      <ErrorContainer title="Oops! Something went wrong" text="Try searching again — it might work next time"/>
+                    )}
             {!showInitialSkeleton && !isError && items.length > 0 && <ListIdioms idioms={items} />}
           </div>
 
