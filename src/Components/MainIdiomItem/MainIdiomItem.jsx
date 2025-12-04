@@ -1,3 +1,4 @@
+import ErrorContainer from "@/Error/Error";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import CommentBlock from "../Comment/Comment";
 import HelpSection from "../HelpSection/HelpSection";
@@ -25,6 +26,9 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                         currentLabel={idiom?.text || "Idiom"}
                         backHref={backHref} 
                     />
+                    {isError && (
+                        <ErrorContainer title="Oops! Something went wrong" text="Try searching again — it might work next time"/>
+                    )}
                     {isLoading && (<LoaderIdiomaPage/>)}
                     {idiom && <div className={styles.head} >
                         <div className={styles.headtext}>
