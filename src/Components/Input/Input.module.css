@@ -5,6 +5,37 @@
     font-size: 16px;
     font-weight: 600;
     width: 100%;
+
+}
+
+.inputContainer{
+    position: relative;
+}
+.clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 0;
+}
+
+.image {
+  transform: rotate(45deg);
+  fill: #6b7280;
+}
+
+.image:hover {
+  fill: #212529;
 }
 
 .errorText{
