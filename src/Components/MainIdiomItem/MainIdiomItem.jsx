@@ -7,11 +7,14 @@ import LoaderIdiomaPage from "../LoaderIdiomaPage/LoaderIdiomaPage";
 import Outdated from "../Outdated/Outdated";
 import styles from "./MainIdiomItem.module.css"
 import { isYoungerThanNDays } from "@/utils/date";
-import { speak } from "@/utils/speech";
+import { canSpeak, speak } from "@/utils/speech";
 
 
 const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
     console.log(idiom)
+
+
+
 
 
     const recently = isYoungerThanNDays(idiom?.createdAt);
@@ -34,7 +37,7 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                         <div className={styles.headtext}>
                             <h2 className={styles.title} lang={idiom.language}>{idiom?.text}</h2>
                             <div className={styles.wraphead}>
-                                <button
+                                {canSpeak() && (<button
                                     aria-label="reproduction of an idiom by voice"
                                     onClick={() => speak(idiom?.text, idiom?.language)} 
                                     className={styles.button}
@@ -43,7 +46,7 @@ const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
                                     <svg width="20" height="20">
                                         <use xlinkHref="/sprite.svg#sound" />
                                     </svg>
-                                </button>
+                                </button>)}
 
                                 {/* <button className={styles.button} aria-label="add to favorites" type="button">
                                     <svg width="20" height="20">

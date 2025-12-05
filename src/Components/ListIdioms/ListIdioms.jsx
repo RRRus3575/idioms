@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./ListIdioms.module.css";
-import { speak } from "@/utils/speech";
+import { canSpeak, speak } from "@/utils/speech";
 
 const slugify = (s = "") =>
   s.normalize("NFKD")
@@ -42,7 +42,7 @@ export default function ListIdioms({ idioms = [], lang }) {
                   <h3 className={styles.title} lang={language}>{text}</h3>
                 </Link>
 
-                <button
+                {canSpeak() && (<button
                   type="button"
                   className={styles.button}
                   onClick={() => speak(text, language)} // тут всё магия
@@ -51,7 +51,7 @@ export default function ListIdioms({ idioms = [], lang }) {
                   <svg width="16" height="16">
                     <use xlinkHref="/sprite.svg#sound" />
                   </svg>
-                </button>
+                </button>)}
               </div>
 
               <div className={styles.block}>
