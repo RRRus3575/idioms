@@ -46,9 +46,22 @@ export default function IdiomPage() {
 
   const backHref = typeof from === "string" && from.startsWith("/search") ? from : null;
 
+  const handleFormSubmit = ({ idiom, language, categoryIds = [], sort = "az" }) => {
+    router.push({
+      pathname: "/search",
+      query: {
+        q: idiom || "",
+        lang: language || "english",
+        categories: categoryIds.join(","), 
+        sort,                              
+        hideOutdated: "0",                 
+      },
+    });
+  };
+
   return (
     <div key={router.asPath} className="page-container">
-      <div ref={headerRef}><Header /></div>
+      <div ref={headerRef}><Header onFormSubmit={handleFormSubmit}/></div>
       <div style={mainStyle}>
         <MainIdiomItem
           key={id}
