@@ -8,7 +8,7 @@ export default function Document() {
         {/* Светлая иконка */}
         <link
           rel="icon"
-          type="image/png"
+          type="image/svg"
           href="/favicon_light_theme.svg"
           media="(prefers-color-scheme: light)"
         />
