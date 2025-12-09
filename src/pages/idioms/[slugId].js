@@ -59,8 +59,39 @@ export default function IdiomPage() {
     });
   };
 
+    // ====== SEO meta ======
+  const baseUrl = "https://idiomoland.com"; // вынеси в конфиг, если нужно
+  const idiomText = idiomForRender?.text || idiomForRender?.title || "English idiom";
+  const meaning =
+    idiomForRender?.meaning ||
+    idiomForRender?.translation ||
+    "Learn the meaning, usage and translation of this English idiom.";
+  const pageTitle = `${idiomText} – English idiom meaning | Idiomo`;
+
+  const canonicalUrl = `${baseUrl}${router.asPath.split("?")[0]}`;
+  const ogImage = idiomForRender?.imageUrl || `${baseUrl}/og-image-idiom.png`;
+
   return (
     <div key={router.asPath} className="page-container">
+    <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={meaning} />
+
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={meaning} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={ogImage} />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={meaning} />
+        <meta name="twitter:image" content={ogImage} />
+      </Head>
       <div ref={headerRef}><Header onFormSubmit={handleFormSubmit}/></div>
       <div style={mainStyle}>
         <MainIdiomItem

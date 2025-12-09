@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Footer from "@/Components/Footer/Footer";
 import Header from "@/Components/Header/Header";
 import MainIdioms from "@/Components/MainIdioms/MainIdioms";
@@ -36,6 +37,39 @@ const Search = () => {
   };
 
   return (
+    <>
+      <Head>
+        <title>Search English idioms – Idiomo</title>
+        <meta
+          name="description"
+          content="Search English idioms by meaning, translation, and topic. Use filters, sorting, and up-to-date usage examples."
+        />
+
+        {/* Uncomment this if you don't want search engines to index search results */}
+        {/* <meta name="robots" content="noindex,follow" /> */}
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Search English idioms – Idiomo" />
+        <meta
+          property="og:description"
+          content="Find the right English idiom by keywords, categories, and language."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://idiomoland.com/search" />
+        {/* <meta property="og:image" content="https://idiomoland.com/og-image-search.png" /> */}
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Search English idioms – Idiomo" />
+        <meta
+          name="twitter:description"
+          content="Fast search and filtering for English idioms."
+        />
+        {/* <meta name="twitter:image" content="https://idiomoland.com/og-image-search.png" /> */}
+
+        <link rel="canonical" href="https://idiomoland.com/search" />
+      </Head>
+
     <div className="pagecontainer">
       <div ref={headerRef}><Header onFormSubmit={handleFormSubmit} /></div>
 
@@ -45,6 +79,8 @@ const Search = () => {
 
       <div ref={footerRef}><Footer /></div>
     </div>
+    </>
+
   );
 };
 
