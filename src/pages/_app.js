@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        {/* Basic SEO */}
+        {/* Basic SEO t*/}
         <title>{title}</title>
         <meta name="description" content={description} />
         <meta
