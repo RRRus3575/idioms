@@ -8,14 +8,14 @@ export default function Document() {
         {/* Светлая иконка */}
         <link
           rel="icon"
-          type="image/svg"
+          type="image/svg+xml"
           href="/favicon_light_theme.svg"
           media="(prefers-color-scheme: light)"
         />
         {/* Тёмная иконка */}
         <link
           rel="icon"
-          type="image/svg"
+          type="image/svg+xml"
           href="/favicon_dark_theme.svg"
           media="(prefers-color-scheme: dark)"
         />
