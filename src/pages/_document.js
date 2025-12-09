@@ -15,7 +15,7 @@ export default function Document() {
         {/* Тёмная иконка */}
         <link
           rel="icon"
-          type="image/png"
+          type="image/svg"
           href="/favicon_dark_theme.svg"
           media="(prefers-color-scheme: dark)"
         />
