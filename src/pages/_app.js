@@ -4,6 +4,7 @@ import { store } from "../store/store";
 import "@/styles/globals.css";
 import localFont from "next/font/local";
 
+
 const openSans = localFont({
   src: [
     { path: "../fonts/OpenSans-Regular.ttf", weight: "400", style: "normal" },

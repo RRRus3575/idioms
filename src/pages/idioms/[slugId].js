@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { useRouter } from "next/router";
 import { skipToken } from "@reduxjs/toolkit/query";
 import Header from "@/Components/Header/Header";
+import Head from "next/head";              // ← вот этого не хватает
 import Footer from "@/Components/Footer/Footer";
 import { useElementSize } from "@/hooks/useElementSize";
 import { useGetIdiomByIdQuery } from "@/store/api";

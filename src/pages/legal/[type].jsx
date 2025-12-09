@@ -4,6 +4,7 @@ import Header from "@/Components/Header/Header";
 import { useGetTermsQuery } from "@/store/api";
 import { useElementSize } from "@/hooks/useElementSize";
 import { useMemo } from "react";
+import Head from "next/head";              // ← вот этого не хватает
 import { useRouter } from "next/router";
 import MainTerms from "@/Components/MainTerms/MainTerms";
 
