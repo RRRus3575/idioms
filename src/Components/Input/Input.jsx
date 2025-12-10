@@ -2,7 +2,7 @@ import styles from "./Input.module.css"
 
 export default function Input ({onChange, error, label, value, name, sup, placeholder, data}) {
     const fieldError = error?.[name];
-    console.log("error :", fieldError)
+
 
     const clearIdiom = () => {
         if (!onChange) return;

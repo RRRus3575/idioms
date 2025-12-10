@@ -30,7 +30,6 @@ export default function Outdated({idiom}) {
             setIsDone(true);          // показать "успешно"
             // setIsOpen(false);      // или сразу закрыть модалку, если нужно
         } catch (e) {
-            console.error(e);
             setError(e)
         }
     };

@@ -14,7 +14,6 @@ export default function LanguageSelectWithSearch({
   const [search, setSearch] = useState("");
   const rootRef = useRef(null);
 
-      console.log("error", validationErrors)
 
   // синхронизируем текст в инпуте с выбранным значением
   useEffect(() => {

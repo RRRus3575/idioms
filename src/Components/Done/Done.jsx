@@ -2,7 +2,6 @@ import Button from "../Button/Button"
 import styles from "./Done.module.css"
 
 export default function Done ({title, text, buttonText, onClick, iconId, disabled}) {
-    console.log("Done disabled =", disabled);
     return(
          <div className={styles.done}>
                 <svg className={styles.check}>

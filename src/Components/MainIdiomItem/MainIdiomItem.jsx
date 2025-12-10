@@ -11,7 +11,7 @@ import { canSpeak, speak } from "@/utils/speech";
 
 
 const MainIdiomItem = ({isLoading, isError, idiom, backHref}) => {
-    console.log(idiom)
+
 
 
 
