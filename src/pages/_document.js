@@ -5,20 +5,8 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* Светлая иконка */}
-        <link
-          rel="icon"
-          type="image/svg+xml"
-          href="/favicon_light_theme.svg"
-          media="(prefers-color-scheme: light)"
-        />
-        {/* Тёмная иконка */}
-        <link
-          rel="icon"
-          type="image/svg+xml"
-          href="/favicon_dark_theme.svg"
-          media="(prefers-color-scheme: dark)"
-        />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="color-scheme" content="light dark" />
       </Head>
       <body>
         <Main />
