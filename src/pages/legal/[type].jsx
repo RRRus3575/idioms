@@ -57,6 +57,20 @@ export default function LegalPage() {
 
   const canonicalUrl = `${baseUrl}${current.path}`;
 
+
+  const handleFormSubmit = ({ idiom, language, categoryIds = [], sort = "az" }) => {
+    router.push({
+      pathname: "/search",
+      query: {
+        q: idiom || "",
+        lang: language || "english",
+        categories: categoryIds.join(","), 
+        sort,                              
+        hideOutdated: "0",                 
+      },
+    });
+  };
+
   return (
     <div className="pagecontainer">
       <Head>
@@ -76,7 +90,7 @@ export default function LegalPage() {
         <meta name="twitter:description" content={current.description} />
       </Head>
       <div ref={headerRef}>
-        <Header />
+        <Header onFormSubmit={handleFormSubmit}/>
       </div>
 
       <main style={mainStyle}>
