@@ -6,7 +6,6 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="color-scheme" content="light dark" />
       </Head>
       <body>
         <Main />
