@@ -71,7 +71,7 @@ export default function IdiomPage() {
 
   const canonicalUrl = `${baseUrl}${router.asPath.split("?")[0]}`;
   const ogImage = idiomForRender?.imageUrl || `${baseUrl}/og-image-idiom.png`;
-
+console.log(data)
   return (
     <div key={router.asPath} className="page-container">
     <Head>
