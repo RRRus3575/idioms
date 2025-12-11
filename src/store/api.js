@@ -1,21 +1,191 @@
 // store/api.js
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { setCredentials, logout } from './authSlice'; // путь подправь под свой проект
 
 const toIdsParam = (ids) =>
   Array.isArray(ids) ? ids.filter(Boolean).join(',') : (ids || undefined);
 
+// --- базовый fetchBaseQuery ---
+const rawBaseQuery = fetchBaseQuery({
+  baseUrl: process.env.NEXT_PUBLIC_API_URL,
+  credentials: 'include',
+  prepareHeaders: (headers, { getState }) => {
+    const token = getState()?.auth?.token;
+    if (token) headers.set('Authorization', `Bearer ${token}`);
+    return headers;
+  },
+});
+
+// --- обёртка с авто-рефрешем access по refresh-cookie ---
+const baseQueryWithReauth = async (args, api, extraOptions) => {
+  let result = await rawBaseQuery(args, api, extraOptions);
+
+  // если бек вернул 401 — пробуем освежить access
+  if (result.error && result.error.status === 401) {
+    const refreshResult = await rawBaseQuery(
+      { url: '/auth/refresh', method: 'POST' },
+      api,
+      extraOptions
+    );
+
+    if (refreshResult.data?.access) {
+      // сохранили новый access в authSlice
+      api.dispatch(
+        setCredentials({
+          token: refreshResult.data.access,
+          accessTtl: refreshResult.data.accessTtl,
+        })
+      );
+
+      // повторяем оригинальный запрос
+      result = await rawBaseQuery(args, api, extraOptions);
+    } else {
+      // рефреш не удался — вылогиниваем
+      api.dispatch(logout());
+    }
+  }
+
+  return result;
+};
+
 export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_URL,
-    credentials: 'include',
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState()?.auth?.token;
-      if (token) headers.set('Authorization', `Bearer ${token}`);
-      return headers;
-    },
-  }),
+  baseQuery: baseQueryWithReauth,
+  tagTypes: ['Auth'], // если хочешь пометить авторизационные штуки
   endpoints: (builder) => ({
+
+    // ================= AUTH =================
+
+    register: builder.mutation({
+      query: (body) => ({
+        url: '/auth/register',
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    login: builder.mutation({
+      query: ({ email, password }) => ({
+        url: '/auth/login',
+        method: 'POST',
+        body: { email, password },
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          // бек: { access, accessTtl, user: { id, email, role } }
+          dispatch(
+            setCredentials({
+              user: data.user,
+              token: data.access,
+              accessTtl: data.accessTtl,
+            })
+          );
+        } catch {
+          // ошибки возьмёшь из error в компоненте
+        }
+      },
+      invalidatesTags: ['Auth'],
+    }),
+
+    getCurrentUser: builder.query({
+      query: () => ({
+        url: '/auth/current',
+        method: 'GET',
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          // data: { id, email, name, role, isVerified }
+          dispatch(
+            setCredentials({
+              user: data,
+            })
+          );
+        } catch {
+          // 401 и прочее обработает baseQueryWithReauth
+        }
+      },
+      providesTags: ['Auth'],
+    }),
+
+    logoutUser: builder.mutation({
+      query: () => ({
+        url: '/auth/logout',
+        method: 'POST',
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } finally {
+          dispatch(logout());
+        }
+      },
+      invalidatesTags: ['Auth'],
+    }),
+
+    googleLogin: builder.mutation({
+      query: ({ idToken }) => ({
+        url: '/auth/goggle', // у тебя так в роутере названо
+        method: 'POST',
+        body: { idToken },
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          // { access, accessTtl, user }
+          dispatch(
+            setCredentials({
+              user: data.user,
+              token: data.access,
+              accessTtl: data.accessTtl,
+            })
+          );
+        } catch {}
+      },
+      invalidatesTags: ['Auth'],
+    }),
+
+    forgotPassword: builder.mutation({
+      query: (body) => ({
+        url: '/auth/forgotPassword',
+        method: 'POST',
+        body, // { email }
+      }),
+    }),
+
+    resetPassword: builder.mutation({
+      query: (body) => ({
+        url: '/auth/resetPassword',
+        method: 'POST',
+        body, // { token, newPassword }
+      }),
+    }),
+
+    changePassword: builder.mutation({
+      query: (body) => ({
+        url: '/auth/changePassword',
+        method: 'POST',
+        body, // { currentPassword, newPassword }
+      }),
+    }),
+
+    requestEmailChange: builder.mutation({
+      query: (body) => ({
+        url: '/auth/requestEmailChange',
+        method: 'POST',
+        body, // { newEmail }
+      }),
+    }),
+
+    confirmEmailChange: builder.query({
+      query: (token) => ({
+        url: `/auth/confirmEmailChange/${token}`,
+        method: 'GET',
+      }),
+    }),
+
+    // ================ ТВОИ СТАРЫЕ ЭНДПОИНТЫ ==================
 
     // --- CATEGORIES ---
     getCategories: builder.query({
@@ -23,7 +193,6 @@ export const api = createApi({
         const language = args && typeof args === 'object' ? args.language : undefined;
         return { url: '/idioms/categories', params: language ? { language } : undefined };
       },
-      // сортируем и строки, и объекты { id, name }
       transformResponse: (data = []) =>
         [...data].sort((a, b) =>
           String(a?.name ?? a).localeCompare(String(b?.name ?? b))
@@ -39,11 +208,11 @@ export const api = createApi({
           language,
           favorite = false,
           query,
-          categories,                 // массив/строка id категорий
+          categories,
           languageVersion = 'en',
           sort = 'az',
           hideOutdated = false,
-          ids,                        // массив/строка id идиом (необяз.)
+          ids,
         } = args;
 
         const fav       = (favorite === true || favorite === 'true') ? 'true' : 'false';
@@ -59,7 +228,7 @@ export const api = createApi({
             language,
             favorite: fav,
             query,
-            categories: catsParam,  // ← ВАЖНО: реально уходит на бекенд
+            categories: catsParam,
             languageVersion,
             sort,
             hideOutdated: (hideOutdated === true || hideOutdated === 'true') ? 'true' : 'false',
@@ -68,7 +237,6 @@ export const api = createApi({
         };
       },
 
-      // ключ кэша: учитываем categories (а не categoryIds)
       serializeQueryArgs: ({ endpointName, queryArgs = {} }) => {
         const {
           language,
@@ -85,7 +253,7 @@ export const api = createApi({
           language,
           favorite: String(favorite),
           query,
-          categories: toIdsParam(categories) || null,   // ← ВАЖНО
+          categories: toIdsParam(categories) || null,
           languageVersion,
           sort,
           hideOutdated: String(hideOutdated),
@@ -93,7 +261,6 @@ export const api = createApi({
         })}`;
       },
 
-      // склейка страниц (когда ключ один и это не byIds)
       merge: (currentCache = {}, newData = {}, { arg }) => {
         const isByIds = Boolean(toIdsParam(arg?.ids));
         if (!currentCache.result || isByIds) {
@@ -109,8 +276,6 @@ export const api = createApi({
         currentCache.totalIdioms = newData.totalIdioms;
       },
 
-      // при byIds — рефетч по смене ids; иначе — по page/limit
-      // (смена фильтров меняет cache key → новый запрос сам)
       forceRefetch({ currentArg, previousArg }) {
         const nowIds  = toIdsParam(currentArg?.ids);
         const prevIds = toIdsParam(previousArg?.ids);
@@ -124,13 +289,10 @@ export const api = createApi({
     }),
 
     getIdiomById: builder.query({
-      // бэк: GET /idioms/:id
       query: ({ id, language }) => ({
         url: `/idioms/${id}`,
-        // если бэку нужен язык — прокидываем, иначе можно убрать:
         params: language ? { language } : undefined,
       }),
-      // чтобы при каждом новом id показывался свежий лоадинг
       keepUnusedDataFor: 0,
     }),
 
@@ -143,7 +305,6 @@ export const api = createApi({
     }),
 
     addComment: builder.mutation({
-      // ожидаем объект { id, ...commentData }
       query: ({ id, ...commentData }) => ({
         url: `/idioms/${id}/comment`,
         method: 'POST',
@@ -152,7 +313,6 @@ export const api = createApi({
     }),
 
     voteOutdated: builder.mutation({
-      // { id, ...payload } – если бэку нужно тело (reason и т.п.)
       query: ({ id, ...payload }) => ({
         url: `/idioms/${id}/outdated`,
         method: 'POST',
@@ -161,32 +321,44 @@ export const api = createApi({
     }),
 
     sendSupport: builder.mutation({
-        query: (data) => ({
-          url: '/support/feedback',
-          method: 'POST',
-          body: data, 
-        }),
+      query: (data) => ({
+        url: '/support/feedback',
+        method: 'POST',
+        body: data,
       }),
+    }),
 
-      getTerms: builder.query({
-        query: ({ type, locate  }) => ({
-          url: `/terms`,
-          params: {type, locate}, 
-        }),
+    getTerms: builder.query({
+      query: ({ type, locate }) => ({
+        url: `/terms`,
+        params: { type, locate },
       }),
-
+    }),
 
   }),
 });
 
 export const {
+  // AUTH hooks
+  useRegisterMutation,
+  useLoginMutation,
+  useGetCurrentUserQuery,
+  useLogoutUserMutation,
+  useGoogleLoginMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
+  useChangePasswordMutation,
+  useRequestEmailChangeMutation,
+  useConfirmEmailChangeQuery,
+
+  // IDIOMS hooks
   useGetCategoriesQuery,
   useGetIdiomsQuery,
-  useGetIdiomByIdQuery,
   useLazyGetIdiomsQuery,
+  useGetIdiomByIdQuery,
   useAddIdiomMutation,
   useAddCommentMutation,
-  useVoteOutdatedMutation, 
+  useVoteOutdatedMutation,
   useSendSupportMutation,
   useGetTermsQuery,
 } = api;
