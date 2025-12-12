@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useLoginMutation } from '@/store/api';
 import { useSelector } from 'react-redux';
+import GoogleAuthButton from '../GoogleAuthButton/GoogleAuthButton';
 
-export function LoginForm() {
+export function LoginForm({setIsForgotPassword}) {
   const [form, setForm] = useState({ email: '', password: '' });
   const [login, { isLoading, error }] = useLoginMutation();
   const user = useSelector((s) => s.auth.user);
@@ -28,6 +29,8 @@ export function LoginForm() {
       />
       {error && <p>{error.data?.message || 'Error'}</p>}
       <button disabled={isLoading}>{isLoading ? '...' : 'Login'}</button>
+      <button onClick={setIsForgotPassword}>Forgot password?</button>
+      <GoogleAuthButton/>
     </form>
   );
 }

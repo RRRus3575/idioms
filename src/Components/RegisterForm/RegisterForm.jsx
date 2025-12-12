@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRegisterMutation } from '@/store/api';
+import GoogleAuthButton from '../GoogleAuthButton/GoogleAuthButton';
 
 const RegisterForm = () => {
   const [form, setForm] = useState({
@@ -154,6 +155,8 @@ const RegisterForm = () => {
           >
             {isLoading ? 'Signing up...' : 'Sign up'}
           </button>
+
+          <GoogleAuthButton/>
 
           <p className="signup-login">
             I already have an account.{' '}

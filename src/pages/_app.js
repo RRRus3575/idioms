@@ -1,8 +1,11 @@
 import { Provider } from "react-redux";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import Head from "next/head";
 import { store } from "../store/store";
 import "@/styles/globals.css";
 import localFont from "next/font/local";
+
+const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 
 
 const openSans = localFont({
@@ -50,11 +53,14 @@ export default function App({ Component, pageProps }) {
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={image} />
       </Head>
-      <Provider store={store}>
-      <div className={openSans.className}>
-        <Component {...pageProps} />
-      </div>
-    </Provider>
+      <GoogleOAuthProvider clientId={clientId}>
+        <Provider store={store}>
+          <div className={openSans.className}>
+            <Component {...pageProps} />
+          </div>
+        </Provider>
+      </GoogleOAuthProvider>
+      
     </>
 
   );
