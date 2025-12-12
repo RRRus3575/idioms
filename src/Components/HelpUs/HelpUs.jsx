@@ -6,6 +6,7 @@ import ErrorContainer from "@/Error/Error";
 import Done from "../Done/Done";
 import Input from "../Input/Input";
 import { isValidEmail } from "@/utils/valifationInput";
+import Link from "next/link";
 
 
 export default function HelpUs ({onClick, isLoading, error, handleSendSupport, done, setError}) {
@@ -134,7 +135,7 @@ export default function HelpUs ({onClick, isLoading, error, handleSendSupport, d
                             <div className={styles.termslabel}>
                                 <Checkbox name="agreePrivacyPolicy" onChange={handleChangeCheckbox} error={validationErrors}/>
                                 <div className={styles.agreeblock}>
-                                    <p>I agree with Idiomo’s <span className={styles.termslink}>Privacy Policy</span><span className={styles.red}> *</span></p>
+                                    <p>I agree with Idiomo’s <Link href="/legal/privacy" className={styles.termslink}>Privacy Policy</Link><span className={styles.red}> *</span></p>
                                     {validationErrors.agreePrivacyPolicy &&<p className={styles.errorValidate}>{validationErrors.agreePrivacyPolicy}</p>}
                                 </div>
                             </div>
